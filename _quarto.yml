@@ -4,8 +4,8 @@ project:
   execute-dir: project
 
 book:
-  title: "Introduction to Bioinformatics for Malaria Molecular Surveillance"
-  subtitle: "International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module"
+  title: "Pathogen genomics"
+  subtitle: "Advanced bioinformatics course - FA5 2026"
 
   author:
     - name: Pieter Moris
@@ -15,35 +15,31 @@ book:
       affiliations:
         - name: Institute of Tropical Medicine Antwerp
           url: https://www.itg.be
+    - name: Wim Cuypers
+      orcid: 0000-0002-1895-3526
+      # url:
+      # email:
+      affiliations:
+        - name: University of Antwerp
+          url: https://www.uantwerpen.be/en
+    - name: Pieter Monsieurs
+      orcid: 0000-0003-2214-6652
+      # url:
+      # email:
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+
+  # TODO: Pieter, Betty, Eline, Selien, Katlijn, Oren
+
   date: "2024-05-02"
   date-format: long
-
-  # description: ...
-  # abstract: ...
-  # references: ...
-  # cover-image: cover.png
-  # downloads: [pdf,epub]
 
   license: "CC BY 4.0"
 
   chapters:
     - index.qmd
-    # - content/intro.qmd
-    - part: "Introduction to the Unix shell"
-      chapters:
-        - content/unix/1-unix-intro.qmd
-        - content/unix/2-unix-setup.qmd
-        - content/unix/3-unix-enter-the-shell.qmd
-        - content/unix/4-unix-navigation.qmd
-        - content/unix/5-unix-files-and-dirs.qmd
-        - content/unix/6-unix-more-commands.qmd
-        - content/unix/7-unix-redirection.qmd
-        - content/unix/8-unix-variables-loops-scripts.qmd
-    - part: "Introduction to R"
-      chapters:
-        - content/r/r-intro.qmd
-        - content/r/r-resources.qmd
-    - part: "Processing genomic data"
+    - part: "From reads to variants"
       chapters:
         - content/genomics/setup.qmd
         - content/genomics/pipeline-overview.qmd
@@ -51,6 +47,7 @@ book:
         - content/genomics/qc.qmd
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
+    - content/phylogenetics.qmd
     #   - part: "Bioinformatics file formats and tools"
     #   # chapters:
     #     # - content/bioinf/bioinf-file-formats.qmd
@@ -81,8 +78,8 @@ book:
     # parts can either be a stand-alone file with intro
     # or just a name for only grouping files below
 
-  appendices:
-    - content/unix/appendix-unix.qmd
+  # appendices:
+  #   - content/unix/appendix-unix.qmd
 
   # references: https://quarto.org/docs/books/book-structure.html#references
 
@@ -91,7 +88,7 @@ book:
 
   page-footer:
     left: |
-      &copy; [Pieter Moris](https://pmoris.github.io) - [Institute of Tropical Medicine Antwerp - Malariology Unit](https://research.itg.be/en/organisations/malariology), 2024.
+      &copy; [Pieter Moris](https://pmoris.github.io), [Pieter Monsieurs](https://orcid.org/0000-0003-2214-6652), [Oren Tzfadia](https://orcid.org/0000-0002-7096-8063) ([Institute of Tropical Medicine Antwerp](https://www.itg.be/en)), [Wim Cuypers](https://orcid.org/0000-0002-1895-3526) ([University of Antwerp](https://www.uantwerpen.be/en/)), 2026.
     center: |
       Unless otherwise noted, all content on this site is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
       [![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){fig-alt="CC" height=1.2em}](https://creativecommons.org/licenses/by/4.0/) [![](https://mirrors.creativecommons.org/presskit/icons/by.svg){fig-alt="BY" height=1.2em}](https://creativecommons.org/licenses/by/4.0/)
@@ -114,27 +111,15 @@ book:
     # background: dark
     logo: content/assets/ITM-logo_col_rgb.png
     logo-alt: Logo of Institute of Tropical Medicine Antwerp
+    # TODO: update
     # logo-href: https://research.itg.be/en/organisations/malariology # make logo return to the root of the page
 
-  # navbar:
-  #   search: false
-  # https://quarto.org/docs/websites/website-navigation.html#hybrid-navigation
-
-  # page-footer:
-  #     center:
-  #       - text: "About"
-  #         href: about.qmd
-  #       - text: "License"
-  #         href: license.qmd
-  #       - text: "Trademark"
-  #         href: trademark.qmd
 
   favicon: content/assets/ITM-symbol_col_rgb.png
   # twitter-card: true
-  site-url: https://pmoris.github.io/FiMAB-bioinformatics/
-  repo-url: https://github.com/pmoris/FiMAB-bioinformatics
+  site-url: https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026
+  repo-url: https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/
   repo-actions: [source, issue]
-  # sharing: [twitter, facebook]
 
 # comments:
 #   hypothesis: true
@@ -163,48 +148,11 @@ format:
       # If there is no navbar or sidebar present, the toggle will appear in the top right corner of the page.
     highlight-style: arrow # monokai nord dracula arrow
     mainfont: "Atkinson Hyperlegible Next"
-    # mainfont: "Source Sans 3"
-    # mainfont: 'Mulish'
-    # mainfont: 'Lato'
     monofont: "Fira Code"
     linestretch: 1.5
     code-fold: true
     html-math-method: katex
     lightbox: true
-    # page-layout: full
-  # PrettyPDF-pdf:
-  #   documentclass: scrreprt
-  #   keep-tex: true
-  #   include-in-header:
-  #     text: |
-  #       \usepackage{fvextra}
-  #       \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
-  #   include-before-body:
-  #     text: |
-  #       \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
-  #         showspaces = false,
-  #         showtabs = false,
-  #         breaksymbolleft={},
-  #         breaklines
-  #       }
-  # pdf:
-  #   # documentclass: scrreprt
-  #   documentclass: scrbook
-  #   keep-tex: true
-  # include-in-header:
-  #   text: |
-  #     \usepackage{fvextra}
-  #     \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
-  # include-before-body:
-  #   text: |
-  #     \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
-  #       showspaces = false,
-  #       showtabs = false,
-  #       breaksymbolleft={},
-  #       breaklines
-  #     }
-  # epub:
-  #   toc: true
 
 strip-comments: true
 
