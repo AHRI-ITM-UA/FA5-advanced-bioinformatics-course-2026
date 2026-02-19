@@ -1,21 +1,16 @@
 # About {.unnumbered}
 
-Welcome to the Bioinformatics Module of the Fighting Malaria Across Borders (FiMAB) [International Training Programme](https://www.vliruos.be/get-funded/calls/international-training-programme-2024), created by the [Institute of Tropical Medicine Antwerp](https://www.itg.be/en/) (ITM) in collaboration with the [University of Antwerp](https://www.uantwerpen.be/en/), and supported by [VLIR-UOS](https://www.vliruos.be/en). Its primary goal is to support the implementation of targeted sequencing assays (in particular, AmpliSeq) to strengthen malaria molecular surveillance and help guide national control programmes. In conjunction with laboratory training, this bioinformatics course is intended to allow young academics around the globe to become familiar with molecular surveillance as a key activity to monitor transmission, sources of epidemics and the emergence and spread of drug resistance mutations in the _Plasmodium_ parasite through sequencing approaches.
+Welcome to the advanced bioinformatics course on pathogen genomics, created by a collaboration between researchers from the [Armauer Hansen Research Institute](https://ahri.gov.et/), the [Institute of Tropical Medicine Antwerp](https://www.itg.be/en/) and the [University of Antwerp](https://www.uantwerpen.be/en/), and supported by the [FA5 programme](https://www.itg.be/en/study/collaboration).
+
+This is a continuation of the [FA5 2025 introductory course](https://cuypers-wim.github.io/FA5-bioinformatics/) and continues in its goals of supporting the implementation of sequencing bioinformatics to strengthen molecular surveillance and pathogen research.
 
 ## Scope of the course
 
-This course aims to provide an overview of the key bioinformatics concepts related to performing molecular surveillance in _Plasmodium_. It is divided into the following sections:
+This course aims to provide an overview of key bioinformatics concepts related to pathogen genomics, followed by hands-on analysis of the participant's own sequencing data. The course is divided into the following sections:
 
-1. Introduction to the Unix shell
-2. Introduction to R
-3. Overview of genomics pipeline
-4. Population genetics and molecular surveillance in _Plasmodium_ (separate materials on ITM course page)
+1. ...
+2. ...
 
-Section 1-2 are online self-paced modules, whereas the others will include classroom lectures and practical sessions. Evaluation exercises will be conducted on [the ITM course page](https://campus.itg.be/course/view.php?id=217).
-
-## Computational thinking
-
-We hope that this course can teach you a few computational thinking and problem solving skills that will help you along your bioinformatics journey. The learning curve in computational biology can be quite steep at times and the path is littered with arcane commands and obtuse syntax, but as you practice the concepts introduced in this course on your own, your command-line efficiency will improve and you will start to spot similarities across different types of environments and languages. Through this course, we hope to arm you with the necessary skills to make tasks like running custom analysis scripts or installing bioinformatics software seem a little less daunting, and enough knowledge and experience to be able to explore more advanced topics on your own.
 
 # Re-using these materials and how to cite us [![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){fig-alt="CC" height=1em}](https://creativecommons.org/licenses/by/4.0/) [![](https://mirrors.creativecommons.org/presskit/icons/by.svg){fig-alt="BY" height=1em}](https://creativecommons.org/licenses/by/4.0/) {.unnumbered}
 
@@ -25,6 +20,8 @@ This (loosely-speaking) means that you are free to copy, redistribute or adapt a
 
 # Acknowledgements {.unnumbered}
 
-Development of these materials was supported by [VLIR-UOS](https://www.vliruos.be), the [Institute of Tropical Medicine](https://www.itg.be/en) and the [University of Antwerp](https://www.uantwerpen.be/en/).
+These materials were based on previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0) and the [FA5 2025 introductory course](https://cuypers-wim.github.io/FA5-bioinformatics/) (same team - licensed under CC BY 4.0).
 
-The entire Fighting Malaria Across Borders (FiMAB) International Training Programme was made possible by a team of ITM instructors ([Dr. Johanna Helena Kattenberg](https://orcid.org/0000-0002-2971-5136) - malaria molecular surveillance and population genetics; [Mathijs Mutsaers](https://orcid.org/0000-0002-7633-6438) - main organiser and lab training; Ramses Deyaert - lab training) and guest lecturers ([Dr. Anita Ghansah](https://orcid.org/0000-0003-4639-1249) - applications of molecular surveillance; [Dr. Conor Meehan](https://orcid.org/0000-0003-0724-8343) - [introduction to phylogenetics](https://conmeehan.github.io/PathogenDataCourse/IntroToPhylogenetics); [Dr. Jody Phelan](https://orcid.org/0000-0001-8323-7019) - [malaria genomic analyses](https://jodyphelan.github.io/malaria-training/)), as well as the VLIR-UOS [Interational Training Progamme 2024](https://www.vliruos.be/get-funded/calls/international-training-programme-2024) funding and the [University of Antwerp](https://www.uantwerpen.be/) as an organising partner.
+Development of these materials was supported by ......... the [Institute of Tropical Medicine](https://www.itg.be/en) and the [University of Antwerp](https://www.uantwerpen.be/en/).
+
+The course was made possible by a cross-institute team of instructors:
