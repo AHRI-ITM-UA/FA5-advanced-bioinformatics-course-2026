@@ -1,1 +1,1 @@
-Sitemap: https://pmoris.github.io/FiMAB-bioinformatics/sitemap.xml
+Sitemap: https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/sitemap.xml

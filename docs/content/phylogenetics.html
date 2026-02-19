@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Pathogen genomics</title>
+<title>6&nbsp; Introduction to phylogenetics – Pathogen genomics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +65,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/phylogenetics.html" rel="prev">
+<link href="../content/references.html" rel="next">
+<link href="../content/genomics/variant-calling.html" rel="prev">
 <link href="../content/assets/ITM-symbol_col_rgb.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -268,7 +285,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/phylogenetics.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -361,13 +378,13 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/phylogenetics.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/phylogenetics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/references.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -376,8 +393,104 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#fa5-ethiopia-2026---genomic-analysis-exercise" id="toc-fa5-ethiopia-2026---genomic-analysis-exercise" class="nav-link active" data-scroll-target="#fa5-ethiopia-2026---genomic-analysis-exercise"><span class="header-section-number">6.1</span> FA5 Ethiopia 2026 - Genomic Analysis Exercise</a></li>
+  <li><a href="#exercise-exploring-trypanosome-genomic-variation" id="toc-exercise-exploring-trypanosome-genomic-variation" class="nav-link" data-scroll-target="#exercise-exploring-trypanosome-genomic-variation"><span class="header-section-number">7</span> Exercise: Exploring Trypanosome Genomic Variation</a>
+  <ul>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective"><span class="header-section-number">7.1</span> Objective</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset"><span class="header-section-number">7.2</span> Dataset</a></li>
+  </ul></li>
+  <li><a href="#part-1-quality-control" id="toc-part-1-quality-control" class="nav-link" data-scroll-target="#part-1-quality-control"><span class="header-section-number">8</span> Part 1: Quality Control</a>
+  <ul>
+  <li><a href="#task-1.1" id="toc-task-1.1" class="nav-link" data-scroll-target="#task-1.1"><span class="header-section-number">8.1</span> Task 1.1</a>
+  <ul class="collapse">
+  <li><a href="#hint" id="toc-hint" class="nav-link" data-scroll-target="#hint"><span class="header-section-number">8.1.1</span> Hint</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">8.1.2</span> Questions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-2-mapping-and-bam-processing" id="toc-part-2-mapping-and-bam-processing" class="nav-link" data-scroll-target="#part-2-mapping-and-bam-processing"><span class="header-section-number">9</span> Part 2: Mapping and BAM Processing</a>
+  <ul>
+  <li><a href="#task-2.1" id="toc-task-2.1" class="nav-link" data-scroll-target="#task-2.1"><span class="header-section-number">9.1</span> Task 2.1</a>
+  <ul class="collapse">
+  <li><a href="#hint-1" id="toc-hint-1" class="nav-link" data-scroll-target="#hint-1"><span class="header-section-number">9.1.1</span> Hint</a></li>
+  </ul></li>
+  <li><a href="#task-2.2" id="toc-task-2.2" class="nav-link" data-scroll-target="#task-2.2"><span class="header-section-number">9.2</span> Task 2.2</a>
+  <ul class="collapse">
+  <li><a href="#hint-2" id="toc-hint-2" class="nav-link" data-scroll-target="#hint-2"><span class="header-section-number">9.2.1</span> Hint</a></li>
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1"><span class="header-section-number">9.2.2</span> Questions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-3-variant-calling" id="toc-part-3-variant-calling" class="nav-link" data-scroll-target="#part-3-variant-calling"><span class="header-section-number">10</span> Part 3: Variant Calling</a>
+  <ul>
+  <li><a href="#task-3.1" id="toc-task-3.1" class="nav-link" data-scroll-target="#task-3.1"><span class="header-section-number">10.1</span> Task 3.1</a>
+  <ul class="collapse">
+  <li><a href="#hint-3" id="toc-hint-3" class="nav-link" data-scroll-target="#hint-3"><span class="header-section-number">10.1.1</span> Hint</a></li>
+  </ul></li>
+  <li><a href="#task-3.2" id="toc-task-3.2" class="nav-link" data-scroll-target="#task-3.2"><span class="header-section-number">10.2</span> Task 3.2</a></li>
+  <li><a href="#task-3.3" id="toc-task-3.3" class="nav-link" data-scroll-target="#task-3.3"><span class="header-section-number">10.3</span> Task 3.3</a>
+  <ul class="collapse">
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2"><span class="header-section-number">10.3.1</span> Questions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-4-phylogenetic-analysis" id="toc-part-4-phylogenetic-analysis" class="nav-link" data-scroll-target="#part-4-phylogenetic-analysis"><span class="header-section-number">11</span> Part 4: Phylogenetic Analysis</a>
+  <ul>
+  <li><a href="#task-4.1" id="toc-task-4.1" class="nav-link" data-scroll-target="#task-4.1"><span class="header-section-number">11.1</span> Task 4.1</a>
+  <ul class="collapse">
+  <li><a href="#hint-4" id="toc-hint-4" class="nav-link" data-scroll-target="#hint-4"><span class="header-section-number">11.1.1</span> Hint</a></li>
+  </ul></li>
+  <li><a href="#task-4.2" id="toc-task-4.2" class="nav-link" data-scroll-target="#task-4.2"><span class="header-section-number">11.2</span> Task 4.2</a>
+  <ul class="collapse">
+  <li><a href="#hint-5" id="toc-hint-5" class="nav-link" data-scroll-target="#hint-5"><span class="header-section-number">11.2.1</span> Hint</a></li>
+  <li><a href="#questions-3" id="toc-questions-3" class="nav-link" data-scroll-target="#questions-3"><span class="header-section-number">11.2.2</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#task-4.3" id="toc-task-4.3" class="nav-link" data-scroll-target="#task-4.3"><span class="header-section-number">11.3</span> Task 4.3</a>
+  <ul class="collapse">
+  <li><a href="#subtasks" id="toc-subtasks" class="nav-link" data-scroll-target="#subtasks"><span class="header-section-number">11.3.1</span> Subtasks</a></li>
+  <li><a href="#hint-think-in-terms-of-flags" id="toc-hint-think-in-terms-of-flags" class="nav-link" data-scroll-target="#hint-think-in-terms-of-flags"><span class="header-section-number">11.3.2</span> Hint (Think in Terms of Flags)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-5-pca-analysis" id="toc-part-5-pca-analysis" class="nav-link" data-scroll-target="#part-5-pca-analysis"><span class="header-section-number">12</span> Part 5: PCA Analysis</a>
+  <ul>
+  <li><a href="#task-5.1" id="toc-task-5.1" class="nav-link" data-scroll-target="#task-5.1"><span class="header-section-number">12.1</span> Task 5.1</a>
+  <ul class="collapse">
+  <li><a href="#hint-6" id="toc-hint-6" class="nav-link" data-scroll-target="#hint-6"><span class="header-section-number">12.1.1</span> Hint</a></li>
+  </ul></li>
+  <li><a href="#task-5.2" id="toc-task-5.2" class="nav-link" data-scroll-target="#task-5.2"><span class="header-section-number">12.2</span> Task 5.2</a>
+  <ul class="collapse">
+  <li><a href="#hint-7" id="toc-hint-7" class="nav-link" data-scroll-target="#hint-7"><span class="header-section-number">12.2.1</span> Hint</a></li>
+  <li><a href="#questions-4" id="toc-questions-4" class="nav-link" data-scroll-target="#questions-4"><span class="header-section-number">12.2.2</span> Questions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-6-admixture-analysis" id="toc-part-6-admixture-analysis" class="nav-link" data-scroll-target="#part-6-admixture-analysis"><span class="header-section-number">13</span> Part 6: ADMIXTURE Analysis</a>
+  <ul>
+  <li><a href="#task-6.1" id="toc-task-6.1" class="nav-link" data-scroll-target="#task-6.1"><span class="header-section-number">13.1</span> Task 6.1</a>
+  <ul class="collapse">
+  <li><a href="#hint-8" id="toc-hint-8" class="nav-link" data-scroll-target="#hint-8"><span class="header-section-number">13.1.1</span> Hint</a></li>
+  </ul></li>
+  <li><a href="#task-6.2" id="toc-task-6.2" class="nav-link" data-scroll-target="#task-6.2"><span class="header-section-number">13.2</span> Task 6.2</a>
+  <ul class="collapse">
+  <li><a href="#questions-5" id="toc-questions-5" class="nav-link" data-scroll-target="#questions-5"><span class="header-section-number">13.2.1</span> Questions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-7-ibd-network-analysis" id="toc-part-7-ibd-network-analysis" class="nav-link" data-scroll-target="#part-7-ibd-network-analysis"><span class="header-section-number">14</span> Part 7: IBD Network Analysis</a>
+  <ul>
+  <li><a href="#task-7.1" id="toc-task-7.1" class="nav-link" data-scroll-target="#task-7.1"><span class="header-section-number">14.1</span> Task 7.1</a>
+  <ul class="collapse">
+  <li><a href="#hint-9" id="toc-hint-9" class="nav-link" data-scroll-target="#hint-9"><span class="header-section-number">14.1.1</span> Hint</a></li>
+  </ul></li>
+  <li><a href="#task-7.2" id="toc-task-7.2" class="nav-link" data-scroll-target="#task-7.2"><span class="header-section-number">14.2</span> Task 7.2</a>
+  <ul class="collapse">
+  <li><a href="#hint-10" id="toc-hint-10" class="nav-link" data-scroll-target="#hint-10"><span class="header-section-number">14.2.1</span> Hint</a></li>
+  <li><a href="#questions-6" id="toc-questions-6" class="nav-link" data-scroll-target="#questions-6"><span class="header-section-number">14.2.2</span> Questions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips"><span class="header-section-number">15</span> Tips</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/phylogenetics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -385,7 +498,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span id="sec-phylo" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></h1>
 </div>
 
 
@@ -402,127 +515,293 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-sequence-analysis-quality-control" class="csl-entry" role="listitem">
-Batut, Bérénice, Maria Doyle, Alexandre Cormier, Anthony Bretaudeau,
-Laura Leroi, Erwan Corre, Stéphanie Robin, gallantries, and Cameron
-Hyde. <span>“Quality Control (Galaxy Training Materials).”</span> <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html</a>.
+<section id="fa5-ethiopia-2026---genomic-analysis-exercise" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="fa5-ethiopia-2026---genomic-analysis-exercise"><span class="header-section-number">6.1</span> FA5 Ethiopia 2026 - Genomic Analysis Exercise</h2>
+<hr>
+</section>
+<section id="exercise-exploring-trypanosome-genomic-variation" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Exercise: Exploring Trypanosome Genomic Variation</h1>
+<section id="objective" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="objective"><span class="header-section-number">7.1</span> Objective</h2>
+<p>Students will perform a full genomic analysis pipeline from raw FASTQ reads to population structure, including mapping, variant calling, phylogenetics, PCA, ADMIXTURE, and IBD network analysis. This exercise emphasizes understanding each step and interpreting results.</p>
+</section>
+<section id="dataset" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="dataset"><span class="header-section-number">7.2</span> Dataset</h2>
+<ul>
+<li>Subset of Trypanosome FASTQ files: <code>*_R1.fastq.gz</code> and <code>*_R2.fastq.gz</code></li>
+<li>Reference genome: <code>L. donovani BPK282.fasta</code></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="part-1-quality-control" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Part 1: Quality Control</h1>
+<section id="task-1.1" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="task-1.1"><span class="header-section-number">8.1</span> Task 1.1</h2>
+<p>Run FastQC and MultiQC on raw FASTQ files.</p>
+<section id="hint" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="hint"><span class="header-section-number">8.1.1</span> Hint</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastqc/</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/<span class="pp">*</span>.fastq.gz <span class="at">-o</span> results/fastqc/</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> results/fastqc/ <span class="at">-o</span> results/fastqc/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="questions" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="questions"><span class="header-section-number">8.1.2</span> Questions</h3>
+<ol type="1">
+<li>Which samples show low-quality scores?</li>
+<li>Are there adapters that need trimming?</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-2-mapping-and-bam-processing" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Part 2: Mapping and BAM Processing</h1>
+<section id="task-2.1" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="task-2.1"><span class="header-section-number">9.1</span> Task 2.1</h2>
+<p>Align reads to the reference genome using BWA-MEM.</p>
+<section id="hint-1" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="hint-1"><span class="header-section-number">9.1.1</span> Hint</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-R</span> <span class="st">"@RG\tID:sample\tSM:sample\tPL:ILLUMINA"</span> <span class="at">-t</span> 4 ref_genome.fasta R1.fastq.gz R2.fastq.gz <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-o</span> sample.bam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="task-2.2" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="task-2.2"><span class="header-section-number">9.2</span> Task 2.2</h2>
+<p>Filter BAMs by mapping quality, remove duplicates, and keep only properly paired reads.</p>
+<section id="hint-2" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="hint-2"><span class="header-section-number">9.2.1</span> Hint</h3>
+<ul>
+<li>Mapping quality: <code>samtools view -q 30</code></li>
+<li>Remove duplicates: <code>picard MarkDuplicates REMOVE_DUPLICATES=true</code></li>
+<li>Proper pairs: <code>samtools view -f 0x2</code></li>
+</ul>
+</section>
+<section id="questions-1" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">9.2.2</span> Questions</h3>
+<ol type="1">
+<li>How many reads remain after filtering? Check with <code>samtools flagstat</code>.</li>
+<li>Which step caused the largest read loss?</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-3-variant-calling" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Part 3: Variant Calling</h1>
+<section id="task-3.1" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="task-3.1"><span class="header-section-number">10.1</span> Task 3.1</h2>
+<p>Use GATK HaplotypeCaller to generate GVCFs for each sample.</p>
+<section id="hint-3" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="hint-3"><span class="header-section-number">10.1.1</span> Hint</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> HaplotypeCaller <span class="at">-R</span> ref_genome.fasta <span class="at">-I</span> sample.proper.bam <span class="at">-O</span> sample.g.vcf.gz <span class="at">-ERC</span> GVCF</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="task-3.2" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="task-3.2"><span class="header-section-number">10.2</span> Task 3.2</h2>
+<p>Combine GVCFs and run GenotypeGVCFs to get a joint VCF.</p>
+</section>
+<section id="task-3.3" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="task-3.3"><span class="header-section-number">10.3</span> Task 3.3</h2>
+<ol type="1">
+<li>Ensure only high-quality SNPs are retained (QUAL &gt; 30).</li>
+<li>Confirm variants are biallelic.</li>
+</ol>
+<section id="questions-2" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="questions-2"><span class="header-section-number">10.3.1</span> Questions</h3>
+<ol type="1">
+<li>How many SNPs pass your filters?</li>
+<li>Why do we keep only biallelic SNPs?</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-4-phylogenetic-analysis" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Part 4: Phylogenetic Analysis</h1>
+<section id="task-4.1" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="task-4.1"><span class="header-section-number">11.1</span> Task 4.1</h2>
+<p>Convert the filtered VCF file into an alignment format suitable for phylogenetic tree construction (FASTA or PHYLIP).</p>
+<section id="hint-4" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="hint-4"><span class="header-section-number">11.1.1</span> Hint</h3>
+<ul>
+<li>Use a tool that converts VCF to sequence alignment format.</li>
+<li>Make sure to specify:
+<ul>
+<li>The <strong>input VCF file</strong></li>
+<li>The <strong>output alignment format</strong> (FASTA or PHYLIP)</li>
+<li>The desired <strong>output filename</strong></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="task-4.2" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="task-4.2"><span class="header-section-number">11.2</span> Task 4.2</h2>
+<p>Build a phylogenetic tree using a Maximum Likelihood approach. You can start with using the IQ-tree software, as this is the easiest to handle, i.e.&nbsp;not much parameters to define yourself</p>
+<section id="hint-5" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="hint-5"><span class="header-section-number">11.2.1</span> Hint</h3>
+<p>Look for options such as: - <code>-m MFP</code> (ModelFinder Plus) - <code>-bb</code> for ultrafast bootstrap - <code>-alrt</code> for SH-aLRT support - <code>-nt AUTO</code> for automatic threading - <code>-s</code> to specify the alignment file</p>
+</section>
+<section id="questions-3" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="questions-3"><span class="header-section-number">11.2.2</span> Questions</h3>
+<ol type="1">
+<li>Which clusters are strongly supported (bootstrap &gt;70)?</li>
+<li>Compare the tree topology with PCA results (later).</li>
+</ol>
+</section>
+</section>
+<section id="task-4.3" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="task-4.3"><span class="header-section-number">11.3</span> Task 4.3</h2>
+<p>Infer a rapid tree using an approximate method.</p>
+<section id="subtasks" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="subtasks"><span class="header-section-number">11.3.1</span> Subtasks</h3>
+<ol type="1">
+<li>Run FastTree on the same alignment.</li>
+<li>Compare topology with the IQ-TREE result.</li>
+<li>Identify poorly supported branches.</li>
+</ol>
+</section>
+<section id="hint-think-in-terms-of-flags" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="hint-think-in-terms-of-flags"><span class="header-section-number">11.3.2</span> Hint (Think in Terms of Flags)</h3>
+<p>Consider: - <code>-gtr</code> for nucleotide substitution model - <code>-gamma</code> for rate heterogeneity - <code>-nt</code> for nucleotide data</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-5-pca-analysis" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Part 5: PCA Analysis</h1>
+<section id="task-5.1" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="task-5.1"><span class="header-section-number">12.1</span> Task 5.1</h2>
+<p>Convert the filtered VCF to PLINK format and perform quality control filtering.</p>
+<section id="hint-6" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="hint-6"><span class="header-section-number">12.1.1</span> Hint</h3>
+<ul>
+<li>Convert VCF to binary PLINK format.</li>
+<li>Apply SNP-level filters:
+<ul>
+<li>Remove SNPs with high missingness.</li>
+<li>Remove SNPs with low minor allele frequency (MAF).</li>
+</ul></li>
+<li>Apply individual-level filtering:
+<ul>
+<li>Remove individuals with high missingness.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="task-5.2" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="task-5.2"><span class="header-section-number">12.2</span> Task 5.2</h2>
+<p>Perform LD pruning and compute principal components.</p>
+<section id="hint-7" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="hint-7"><span class="header-section-number">12.2.1</span> Hint</h3>
+<ul>
+<li>Perform linkage disequilibrium pruning using a sliding window approach.</li>
+<li>Extract the pruned SNP set.</li>
+<li>Run PCA and request multiple principal components (e.g., 10 PCs).</li>
+</ul>
+</section>
+<section id="questions-4" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="questions-4"><span class="header-section-number">12.2.2</span> Questions</h3>
+<ol type="1">
+<li>How do samples cluster along PC1 and PC2?</li>
+<li>Do clusters correspond to metadata (country, strain)?</li>
+<li>Compare your results with the PCA analysis</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-6-admixture-analysis" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Part 6: ADMIXTURE Analysis</h1>
+<section id="task-6.1" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="task-6.1"><span class="header-section-number">13.1</span> Task 6.1</h2>
+<p>Run ADMIXTURE for several values of K and determine the optimal number of ancestral populations.</p>
+<section id="hint-8" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="hint-8"><span class="header-section-number">13.1.1</span> Hint</h3>
+<ul>
+<li>Use the LD-pruned PLINK dataset as input (.bed file).</li>
+<li>Enable <strong>cross-validation</strong>.</li>
+<li>Run multiple K values (e.g.&nbsp;2–10).</li>
+<li>Capture the output in log files.</li>
+<li>Extract the <strong>CV error</strong> from each run. (using <code>grep CV</code>)</li>
+</ul>
+</section>
+</section>
+<section id="task-6.2" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="task-6.2"><span class="header-section-number">13.2</span> Task 6.2</h2>
+<p>Visualize ancestry proportions in R using stacked barplots.</p>
+<section id="questions-5" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="questions-5"><span class="header-section-number">13.2.1</span> Questions</h3>
+<ol type="1">
+<li>Which K has the lowest CV error?</li>
+<li>Are there admixed individuals? Which populations contribute to admixture?</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-7-ibd-network-analysis" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Part 7: IBD Network Analysis</h1>
+<section id="task-7.1" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="task-7.1"><span class="header-section-number">14.1</span> Task 7.1</h2>
+<p>Compute pairwise Identity-By-Descent (IBD) estimates.</p>
+<section id="hint-9" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="hint-9"><span class="header-section-number">14.1.1</span> Hint</h3>
+<ul>
+<li>Use the pruned PLINK dataset.</li>
+<li>Compute pairwise relatedness estimates.</li>
+<li>Identify the column corresponding to <strong>PI_HAT</strong>.</li>
+</ul>
+</section>
+</section>
+<section id="task-7.2" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="task-7.2"><span class="header-section-number">14.2</span> Task 7.2</h2>
+<p>Construct an IBD network in R.</p>
+<section id="hint-10" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="hint-10"><span class="header-section-number">14.2.1</span> Hint</h3>
+<ul>
+<li>Filter pairs above a meaningful PI_HAT threshold (e.g., &gt;0.125).</li>
+<li>Build a network graph where:
+<ul>
+<li>Nodes represent samples</li>
+<li>Edges represent relatedness</li>
+<li>Edge weight reflects PI_HAT</li>
+</ul></li>
+</ul>
+</section>
+<section id="questions-6" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="questions-6"><span class="header-section-number">14.2.2</span> Questions</h3>
+<ol type="1">
+<li>Which samples are most closely related?</li>
+<li>Do IBD clusters correspond to PCA or phylogenetic clusters?</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="tips" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Tips</h1>
+<ul>
+<li>Check intermediate files with <code>samtools flagstat</code>, <code>bcftools stats</code>, or <code>plink --freq</code>.</li>
+<li>Use consistent file naming: <code>_rmdup.proper.bam</code>, <code>_filtered.vcf.gz</code>, <code>_QC.pruned</code>.</li>
+<li>Visualize results at each step: PCA scatterplots, ADMIXTURE barplots, phylogenetic trees.</li>
+<li>Phylogenetics, PCA, ADMIXTURE, and IBD complement each other — each provides different insight into population structure.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="ref-ClevaLab_2022_blog" class="csl-entry" role="listitem">
-ClevaLab. 2022a. <span>“A Step-by-Step Guide to NGS.”</span> <a href="https://www.clevalab.com/post/a-step-by-step-guide-to-ngs">https://www.clevalab.com/post/a-step-by-step-guide-to-ngs</a>.
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Further reading
 </div>
-<div id="ref-ClevaLab_2022_yt" class="csl-entry" role="listitem">
-———. 2022b. <span>“Next Generation Sequencing - a Step-by-Step Guide to
-DNA Sequencing.”</span> <em>YouTube</em>. <a href="https://www.youtube.com/watch?v=WKAUtJQ69n8">https://www.youtube.com/watch?v=WKAUtJQ69n8</a>.
 </div>
-<div id="ref-Hiltemann_2023" class="csl-entry" role="listitem">
-Hiltemann, Saskia, Helena Rasche, Simon Gladman, Hans-Rudolf Hotz,
-Delphine Larivière, Daniel Blankenberg, Pratik D. Jagtap, et al. 2023.
-<span>“Galaxy Training: A Powerful Framework for Teaching!”</span>
-Edited by Francis Ouellette. <em><span>PLoS Comput Biol</span>
-Computational Biology</em> 19 (1): e1010752. <a href="https://doi.org/10.1371/journal.pcbi.1010752">https://doi.org/10.1371/journal.pcbi.1010752</a>.
-</div>
-<div id="ref-Illumina_multiplex" class="csl-entry" role="listitem">
-Illumina. 2008. <span>“Multiplexed Sequencing with the Illumina Genome
-Analyzer System.”</span> <a href="https://www.illumina.com/documents/products/datasheets/datasheet_sequencing_multiplex.pdf">https://www.illumina.com/documents/products/datasheets/datasheet_sequencing_multiplex.pdf</a>.
-</div>
-<div id="ref-Illumina_overview_video" class="csl-entry" role="listitem">
-———. 2016. <span>“Overview of Illumina Sequencing by Synthesis
-Workflow.”</span> <em>YouTube</em>. <a href="https://www.youtube.com/watch?v=fCd6B5HRaZ8">https://www.youtube.com/watch?v=fCd6B5HRaZ8</a>.
-</div>
-<div id="ref-Illumina_2017" class="csl-entry" role="listitem">
-———. 2017. <span>“An Introduction to Next-Generation Sequencing
-Technology.”</span> <a href="https://www.illumina.com/content/dam/illumina-marketing/documents/products/illumina_sequencing_introduction.pdf">https://www.illumina.com/content/dam/illumina-marketing/documents/products/illumina_sequencing_introduction.pdf</a>.
-</div>
-<div id="ref-Illumina_insert_2020" class="csl-entry" role="listitem">
-———. 2020. <span>“How Short Inserts Affect Sequencing
-Performance.”</span> <a href="https://support.illumina.com/ko-kr/bulletins/2020/12/how-short-inserts-affect-sequencing-performance.html">https://support.illumina.com/ko-kr/bulletins/2020/12/how-short-inserts-affect-sequencing-performance.html</a>.
-</div>
-<div id="ref-Illumina_ngs_video" class="csl-entry" role="listitem">
-———. 2021a. <span>“Learn about Illumina’s Next-Generation Sequencing
-Workflow.”</span> <em>YouTube</em>. <a href="https://www.youtube.com/watch?v=oIJaA6h2bFM">https://www.youtube.com/watch?v=oIJaA6h2bFM</a>.
-</div>
-<div id="ref-Illumina_index_2017" class="csl-entry" role="listitem">
-———. 2021b. <span>“Indexed Sequencing on Illumina Systems.”</span> <a href="https://support-docs.illumina.com/SHARE/IndexedSeq/indexed-sequencing.pdf">https://support-docs.illumina.com/SHARE/IndexedSeq/indexed-sequencing.pdf</a>.
-</div>
-<div id="ref-NGS_terminology" class="csl-entry" role="listitem">
-———. n.d. <span>“Next-Generation Sequencing Glossary.”</span> <em>NGS
-Terminology</em>. <a href="https://www.illumina.com/science/technology/next-generation-sequencing/beginners/glossary.html">https://www.illumina.com/science/technology/next-generation-sequencing/beginners/glossary.html</a>.
-</div>
-<div id="ref-kattenberg_malaria_2023" class="csl-entry" role="listitem">
-Kattenberg, Johanna Helena, Carlos Fernandez-Miñope, Norbert J. Van
-Dijk, Lidia Llacsahuanga Allcca, Pieter Guetens, Hugo O. Valdivia,
-Jean-Pierre Van Geertruyden, et al. 2023. <span>“Malaria Molecular
-Surveillance in the Peruvian Amazon with a Novel Highly Multiplexed
-Plasmodium Falciparum <span>AmpliSeq</span> Assay.”</span> Edited by
-Gemma Moncunill. <em>Microbiology Spectrum</em> 11 (2): e00960–22. <a href="https://doi.org/10.1128/spectrum.00960-22">https://doi.org/10.1128/spectrum.00960-22</a>.
-</div>
-<div id="ref-kattenberg_novel_2022" class="csl-entry" role="listitem">
-Kattenberg, Johanna Helena, Hong Van Nguyen, Hieu Luong Nguyen, Erin
-Sauve, Ngoc Thi Hong Nguyen, Ana Chopo-Pizarro, Hidayat Trimarsanto, et
-al. 2022. <span>“Novel Highly-Multiplexed <span>AmpliSeq</span> Targeted
-Assay for Plasmodium Vivax Genetic Surveillance Use Cases at Multiple
-Geographical Scales.”</span> <em>Frontiers in Cellular and Infection
-Microbiology</em> 12 (August): 953187. <a href="https://doi.org/10.3389/fcimb.2022.953187">https://doi.org/10.3389/fcimb.2022.953187</a>.
-</div>
-<div id="ref-launen_2017" class="csl-entry" role="listitem">
-Launen, Loren. 2017. <span>“Illumina Sequencing (for Dummies).”</span>
-<a href="https://kscbioinformatics.wordpress.com/2017/02/13/illumina-sequencing-for-dummies-samples-are-sequenced/">https://kscbioinformatics.wordpress.com/2017/02/13/illumina-sequencing-for-dummies-samples-are-sequenced/</a>.
-</div>
-<div id="ref-ledergerber_base-calling_2011" class="csl-entry" role="listitem">
-Ledergerber, C., and C. Dessimoz. 2011. <span>“Base-Calling for
-Next-Generation Sequencing Platforms.”</span> <em>Briefings in
-Bioinformatics</em> 12 (5): 489–97. <a href="https://doi.org/10.1093/bib/bbq077">https://doi.org/10.1093/bib/bbq077</a>.
-</div>
-<div id="ref-malariagen_pf7_2023" class="csl-entry" role="listitem">
-MalariaGEN, Muzamil Mahdi Abdel Hamid, Mohamed Hassan Abdelraheem,
-Desmond Omane Acheampong, Ambroise Ahouidi, Mozam Ali, Jacob
-Almagro-Garcia, et al. 2023. <span>“Pf7: An Open Dataset of Plasmodium
-Falciparum Genome Variation in 20,000 Worldwide Samples.”</span>
-<em>Wellcome Open Research</em> 8 (January): 22. <a href="https://doi.org/10.12688/wellcomeopenres.18681.1">https://doi.org/10.12688/wellcomeopenres.18681.1</a>.
-</div>
-<div id="ref-piper_hbctrainingintro_2022" class="csl-entry" role="listitem">
-Piper, Mary E., Meeta Mistry, Jihe Liu, William J. Gammerdinger, and
-Radhika S. Khetani. 2022.
-<span>“Hbctraining/Intro-to-Rnaseq-Hpc-Salmon-Flipped: Introduction to
-<span>RNA</span>-Seq Using Salmon Lessons from <span>HCBC</span> (First
-Release),”</span> January. <a href="https://doi.org/10.5281/ZENODO.5833880">https://doi.org/10.5281/ZENODO.5833880</a>.
-</div>
-<div id="ref-rausch_EMBL-EBI_2022" class="csl-entry" role="listitem">
-Rausch, Tobias. 2022. <span>“Methods in Genomic Variant Calling.”</span>
-EMBL-EBI. <a href="https://doi.org/10.6019/TOL.GenomicVariantCalling-w.2022.00001.1 ">https://doi.org/10.6019/TOL.GenomicVariantCalling-w.2022.00001.1
-</a>.
-</div>
-<div id="ref-rochette_causes_2023" class="csl-entry" role="listitem">
-Rochette, Nicolas C., Angel G. Rivera‐Colón, Jessica Walsh, Thomas J.
-Sanger, Shane C. Campbell‐Staton, and Julian M. Catchen. 2023. <span>“On
-the Causes, Consequences, and Avoidance of <span>&lt;</span>Span
-Style="font-Variant:small-Caps;"<span>&gt;</span><span>PCR</span><span>&lt;</span>/Span<span>&gt;</span>
-Duplicates: Towards a Theory of Library Complexity.”</span>
-<em>Molecular Ecology Resources</em> 23 (6): 1299–1318. <a href="https://doi.org/10.1111/1755-0998.13800">https://doi.org/10.1111/1755-0998.13800</a>.
-</div>
-<div id="ref-rodriguez_chemistry_2023" class="csl-entry" role="listitem">
-Rodriguez, Raphaël, and Yamuna Krishnan. 2023. <span>“The Chemistry of
-Next-Generation Sequencing.”</span> <em>Nature Biotechnology</em> 41
-(12): 1709–15. <a href="https://doi.org/10.1038/s41587-023-01986-3">https://doi.org/10.1038/s41587-023-01986-3</a>.
-</div>
-<div id="ref-shendure_dna_2017" class="csl-entry" role="listitem">
-Shendure, Jay, Shankar Balasubramanian, George M. Church, Walter
-Gilbert, Jane Rogers, Jeffery A. Schloss, and Robert H. Waterston. 2017.
-<span>“<span>DNA</span> Sequencing at 40: Past, Present and
-Future.”</span> <em>Nature</em> 550 (7676): 345–53. <a href="https://doi.org/10.1038/nature24286">https://doi.org/10.1038/nature24286</a>.
-</div>
-<div id="ref-biomedicalhub_genomics" class="csl-entry" role="listitem">
-University of Exeter DNA sequencing service. <span>“Introduction to
-Genomics.”</span> <a href="https://biomedicalhub.github.io/genomics/01-part1-introduction.html">https://biomedicalhub.github.io/genomics/01-part1-introduction.html</a>.
-</div>
-<div id="ref-sequence-analysis-mapping" class="csl-entry" role="listitem">
-Wolff, Joachim, Bérénice Batut, and Helena Rasche. <span>“Mapping
-(Galaxy Training Materials).”</span> <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html</a>.
+<div class="callout-body-container callout-body">
+<p>For more information on phylogenetics, we highly recommend these course notes by Prof.&nbsp;Conor Meehan <a href="https://conmeehan.github.io/PathogenDataCourse/IntroToPhylogenetics">https://conmeehan.github.io/PathogenDataCourse/IntroToPhylogenetics</a>.</p>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -940,11 +1219,14 @@ Wolff, Joachim, Bérénice Batut, and Helena Rasche. <span>“Mapping
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/phylogenetics.html" class="pagination-link" aria-label="Introduction to phylogenetics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span>
+      <a href="../content/genomics/variant-calling.html" class="pagination-link" aria-label="Variant calling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variant calling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../content/references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -955,7 +1237,7 @@ Wolff, Joachim, Bérénice Batut, and Helena Rasche. <span>“Mapping
 </div>   
     <div class="nav-footer-center">
 <p>Unless otherwise noted, all content on this site is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height:1.2em" alt="CC"></a> <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height:1.2em" alt="BY"></a></p>
-<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/references.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/phylogenetics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
