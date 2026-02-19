@@ -16,6 +16,10 @@ identifiers:
   - type: url
     value: 'https://github.com/pmoris/FiMAB-bioinformatics/releases/tag/2024.05'
     description: GitHub release URL
+  - type: doi
+    value: 10.5281/zenodo.18701255
+    description: >-
+      Release of course materials as they were taught in April 2024.
 repository-code: "https://github.com/pmoris/FiMAB-bioinformatics"
 url: "https://pmoris.github.io/FiMAB-bioinformatics/"
 abstract: >-

@@ -1,4 +1,4 @@
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-green.svg)](https://creativecommons.org/licenses/by/4.0/) [![DOI](https://zenodo.org/badge/727651304.svg)](https://zenodo.org/badge/latestdoi/727651304)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-green.svg)](https://creativecommons.org/licenses/by/4.0/) [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255)
 
 # Fighting Malaria Across Borders (FiMAB) - Bioinformatics Module
 
