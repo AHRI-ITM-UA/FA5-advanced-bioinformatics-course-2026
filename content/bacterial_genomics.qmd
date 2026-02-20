@@ -1,0 +1,10 @@
+# From Reads to Population Structure
+
+
+Today, you will take on the role of a microbial genomics investigator and analyse bacterial isolates obtained from patients in Ethiopia. The samples originate from stool specimens collected from young patients presenting with severe gastrointestinal symptoms.
+
+Because of concerns about possible invasive bacterial infection in these young patients, several were treated empirically with antibiotics. For all patients, first-line treatment with was not effective, and therapy was switched to either ceftriaxone or ciprofloxacin. However, in one case, ciprofloxacin also failed, and the patient was subsequently treated with azithromycin, which successfully resolved the infection.
+
+Given the possibility of a localized outbreak affecting multiple patients, you were asked to investigate whether these cases are epidemiologically linked. After culturing the bacteria in the laboratory, all isolates were identified as Salmonella. Phenotypic antimicrobial susceptibility testing showed resistance to selected antibiotics in vitro.
+
+Whole-genome sequencing was subsequently performed at AHRI using both Illumina and Oxford Nanopore Technologies platforms. Your task in this exercise is to analyse these genomic data, starting from the raw sequencing reads. You will assess data quality, confirm species identity, infer serotype, explore antimicrobial resistance determinants, and investigate genetic relatedness among isolates. Ultimately, you will evaluate whether these cases represent a single outbreak strain, and consider whether the lineage is likely endemic to Ethiopia or potentially imported.
