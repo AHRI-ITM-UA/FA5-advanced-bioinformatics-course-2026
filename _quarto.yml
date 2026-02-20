@@ -48,6 +48,7 @@ book:
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
     - content/phylogenetics.qmd
+    - content/bacterial_genomics.qmd
     #   - part: "Bioinformatics file formats and tools"
     #   # chapters:
     #     # - content/bioinf/bioinf-file-formats.qmd
