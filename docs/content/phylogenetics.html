@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Introduction to phylogenetics – Pathogen genomics</title>
+<title>7&nbsp; Introduction to phylogenetics – Pathogen genomics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/bacterial_genomics.html" rel="next">
-<link href="../content/genomics/variant-calling.html" rel="prev">
+<link href="../content/references.html" rel="next">
+<link href="../content/bacterial_genomics/bacterial_genomics.html" rel="prev">
 <link href="../content/assets/ITM-symbol_col_rgb.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -285,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/phylogenetics.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/phylogenetics.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -374,18 +374,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variant calling</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/bacterial_genomics/bacterial_genomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The <em>Salmonella</em> Concord mystery: a genomic investigation of a potential outbreak in Ethiopia</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/phylogenetics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/bacterial_genomics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">From Reads to Population Structure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -404,97 +404,97 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#fa5-ethiopia-2026---genomic-analysis-exercise" id="toc-fa5-ethiopia-2026---genomic-analysis-exercise" class="nav-link active" data-scroll-target="#fa5-ethiopia-2026---genomic-analysis-exercise"><span class="header-section-number">6.1</span> FA5 Ethiopia 2026 - Genomic Analysis Exercise</a></li>
-  <li><a href="#exercise-exploring-trypanosome-genomic-variation" id="toc-exercise-exploring-trypanosome-genomic-variation" class="nav-link" data-scroll-target="#exercise-exploring-trypanosome-genomic-variation"><span class="header-section-number">7</span> Exercise: Exploring Trypanosome Genomic Variation</a>
+  <li><a href="#fa5-ethiopia-2026---genomic-analysis-exercise" id="toc-fa5-ethiopia-2026---genomic-analysis-exercise" class="nav-link active" data-scroll-target="#fa5-ethiopia-2026---genomic-analysis-exercise"><span class="header-section-number">7.1</span> FA5 Ethiopia 2026 - Genomic Analysis Exercise</a></li>
+  <li><a href="#exercise-exploring-trypanosome-genomic-variation" id="toc-exercise-exploring-trypanosome-genomic-variation" class="nav-link" data-scroll-target="#exercise-exploring-trypanosome-genomic-variation"><span class="header-section-number">8</span> Exercise: Exploring Trypanosome Genomic Variation</a>
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective"><span class="header-section-number">7.1</span> Objective</a></li>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset"><span class="header-section-number">7.2</span> Dataset</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective"><span class="header-section-number">8.1</span> Objective</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset"><span class="header-section-number">8.2</span> Dataset</a></li>
   </ul></li>
-  <li><a href="#part-1-quality-control" id="toc-part-1-quality-control" class="nav-link" data-scroll-target="#part-1-quality-control"><span class="header-section-number">8</span> Part 1: Quality Control</a>
+  <li><a href="#part-1-quality-control" id="toc-part-1-quality-control" class="nav-link" data-scroll-target="#part-1-quality-control"><span class="header-section-number">9</span> Part 1: Quality Control</a>
   <ul>
-  <li><a href="#task-1.1" id="toc-task-1.1" class="nav-link" data-scroll-target="#task-1.1"><span class="header-section-number">8.1</span> Task 1.1</a>
+  <li><a href="#task-1.1" id="toc-task-1.1" class="nav-link" data-scroll-target="#task-1.1"><span class="header-section-number">9.1</span> Task 1.1</a>
   <ul class="collapse">
-  <li><a href="#hint" id="toc-hint" class="nav-link" data-scroll-target="#hint"><span class="header-section-number">8.1.1</span> Hint</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">8.1.2</span> Questions</a></li>
+  <li><a href="#hint" id="toc-hint" class="nav-link" data-scroll-target="#hint"><span class="header-section-number">9.1.1</span> Hint</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">9.1.2</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-2-mapping-and-bam-processing" id="toc-part-2-mapping-and-bam-processing" class="nav-link" data-scroll-target="#part-2-mapping-and-bam-processing"><span class="header-section-number">9</span> Part 2: Mapping and BAM Processing</a>
+  <li><a href="#part-2-mapping-and-bam-processing" id="toc-part-2-mapping-and-bam-processing" class="nav-link" data-scroll-target="#part-2-mapping-and-bam-processing"><span class="header-section-number">10</span> Part 2: Mapping and BAM Processing</a>
   <ul>
-  <li><a href="#task-2.1" id="toc-task-2.1" class="nav-link" data-scroll-target="#task-2.1"><span class="header-section-number">9.1</span> Task 2.1</a>
+  <li><a href="#task-2.1" id="toc-task-2.1" class="nav-link" data-scroll-target="#task-2.1"><span class="header-section-number">10.1</span> Task 2.1</a>
   <ul class="collapse">
-  <li><a href="#hint-1" id="toc-hint-1" class="nav-link" data-scroll-target="#hint-1"><span class="header-section-number">9.1.1</span> Hint</a></li>
+  <li><a href="#hint-1" id="toc-hint-1" class="nav-link" data-scroll-target="#hint-1"><span class="header-section-number">10.1.1</span> Hint</a></li>
   </ul></li>
-  <li><a href="#task-2.2" id="toc-task-2.2" class="nav-link" data-scroll-target="#task-2.2"><span class="header-section-number">9.2</span> Task 2.2</a>
+  <li><a href="#task-2.2" id="toc-task-2.2" class="nav-link" data-scroll-target="#task-2.2"><span class="header-section-number">10.2</span> Task 2.2</a>
   <ul class="collapse">
-  <li><a href="#hint-2" id="toc-hint-2" class="nav-link" data-scroll-target="#hint-2"><span class="header-section-number">9.2.1</span> Hint</a></li>
-  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1"><span class="header-section-number">9.2.2</span> Questions</a></li>
+  <li><a href="#hint-2" id="toc-hint-2" class="nav-link" data-scroll-target="#hint-2"><span class="header-section-number">10.2.1</span> Hint</a></li>
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1"><span class="header-section-number">10.2.2</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-3-variant-calling" id="toc-part-3-variant-calling" class="nav-link" data-scroll-target="#part-3-variant-calling"><span class="header-section-number">10</span> Part 3: Variant Calling</a>
+  <li><a href="#part-3-variant-calling" id="toc-part-3-variant-calling" class="nav-link" data-scroll-target="#part-3-variant-calling"><span class="header-section-number">11</span> Part 3: Variant Calling</a>
   <ul>
-  <li><a href="#task-3.1" id="toc-task-3.1" class="nav-link" data-scroll-target="#task-3.1"><span class="header-section-number">10.1</span> Task 3.1</a>
+  <li><a href="#task-3.1" id="toc-task-3.1" class="nav-link" data-scroll-target="#task-3.1"><span class="header-section-number">11.1</span> Task 3.1</a>
   <ul class="collapse">
-  <li><a href="#hint-3" id="toc-hint-3" class="nav-link" data-scroll-target="#hint-3"><span class="header-section-number">10.1.1</span> Hint</a></li>
+  <li><a href="#hint-3" id="toc-hint-3" class="nav-link" data-scroll-target="#hint-3"><span class="header-section-number">11.1.1</span> Hint</a></li>
   </ul></li>
-  <li><a href="#task-3.2" id="toc-task-3.2" class="nav-link" data-scroll-target="#task-3.2"><span class="header-section-number">10.2</span> Task 3.2</a></li>
-  <li><a href="#task-3.3" id="toc-task-3.3" class="nav-link" data-scroll-target="#task-3.3"><span class="header-section-number">10.3</span> Task 3.3</a>
+  <li><a href="#task-3.2" id="toc-task-3.2" class="nav-link" data-scroll-target="#task-3.2"><span class="header-section-number">11.2</span> Task 3.2</a></li>
+  <li><a href="#task-3.3" id="toc-task-3.3" class="nav-link" data-scroll-target="#task-3.3"><span class="header-section-number">11.3</span> Task 3.3</a>
   <ul class="collapse">
-  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2"><span class="header-section-number">10.3.1</span> Questions</a></li>
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2"><span class="header-section-number">11.3.1</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-4-phylogenetic-analysis" id="toc-part-4-phylogenetic-analysis" class="nav-link" data-scroll-target="#part-4-phylogenetic-analysis"><span class="header-section-number">11</span> Part 4: Phylogenetic Analysis</a>
+  <li><a href="#part-4-phylogenetic-analysis" id="toc-part-4-phylogenetic-analysis" class="nav-link" data-scroll-target="#part-4-phylogenetic-analysis"><span class="header-section-number">12</span> Part 4: Phylogenetic Analysis</a>
   <ul>
-  <li><a href="#task-4.1" id="toc-task-4.1" class="nav-link" data-scroll-target="#task-4.1"><span class="header-section-number">11.1</span> Task 4.1</a>
+  <li><a href="#task-4.1" id="toc-task-4.1" class="nav-link" data-scroll-target="#task-4.1"><span class="header-section-number">12.1</span> Task 4.1</a>
   <ul class="collapse">
-  <li><a href="#hint-4" id="toc-hint-4" class="nav-link" data-scroll-target="#hint-4"><span class="header-section-number">11.1.1</span> Hint</a></li>
+  <li><a href="#hint-4" id="toc-hint-4" class="nav-link" data-scroll-target="#hint-4"><span class="header-section-number">12.1.1</span> Hint</a></li>
   </ul></li>
-  <li><a href="#task-4.2" id="toc-task-4.2" class="nav-link" data-scroll-target="#task-4.2"><span class="header-section-number">11.2</span> Task 4.2</a>
+  <li><a href="#task-4.2" id="toc-task-4.2" class="nav-link" data-scroll-target="#task-4.2"><span class="header-section-number">12.2</span> Task 4.2</a>
   <ul class="collapse">
-  <li><a href="#hint-5" id="toc-hint-5" class="nav-link" data-scroll-target="#hint-5"><span class="header-section-number">11.2.1</span> Hint</a></li>
-  <li><a href="#questions-3" id="toc-questions-3" class="nav-link" data-scroll-target="#questions-3"><span class="header-section-number">11.2.2</span> Questions</a></li>
+  <li><a href="#hint-5" id="toc-hint-5" class="nav-link" data-scroll-target="#hint-5"><span class="header-section-number">12.2.1</span> Hint</a></li>
+  <li><a href="#questions-3" id="toc-questions-3" class="nav-link" data-scroll-target="#questions-3"><span class="header-section-number">12.2.2</span> Questions</a></li>
   </ul></li>
-  <li><a href="#task-4.3" id="toc-task-4.3" class="nav-link" data-scroll-target="#task-4.3"><span class="header-section-number">11.3</span> Task 4.3</a>
+  <li><a href="#task-4.3" id="toc-task-4.3" class="nav-link" data-scroll-target="#task-4.3"><span class="header-section-number">12.3</span> Task 4.3</a>
   <ul class="collapse">
-  <li><a href="#subtasks" id="toc-subtasks" class="nav-link" data-scroll-target="#subtasks"><span class="header-section-number">11.3.1</span> Subtasks</a></li>
-  <li><a href="#hint-think-in-terms-of-flags" id="toc-hint-think-in-terms-of-flags" class="nav-link" data-scroll-target="#hint-think-in-terms-of-flags"><span class="header-section-number">11.3.2</span> Hint (Think in Terms of Flags)</a></li>
+  <li><a href="#subtasks" id="toc-subtasks" class="nav-link" data-scroll-target="#subtasks"><span class="header-section-number">12.3.1</span> Subtasks</a></li>
+  <li><a href="#hint-think-in-terms-of-flags" id="toc-hint-think-in-terms-of-flags" class="nav-link" data-scroll-target="#hint-think-in-terms-of-flags"><span class="header-section-number">12.3.2</span> Hint (Think in Terms of Flags)</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-5-pca-analysis" id="toc-part-5-pca-analysis" class="nav-link" data-scroll-target="#part-5-pca-analysis"><span class="header-section-number">12</span> Part 5: PCA Analysis</a>
+  <li><a href="#part-5-pca-analysis" id="toc-part-5-pca-analysis" class="nav-link" data-scroll-target="#part-5-pca-analysis"><span class="header-section-number">13</span> Part 5: PCA Analysis</a>
   <ul>
-  <li><a href="#task-5.1" id="toc-task-5.1" class="nav-link" data-scroll-target="#task-5.1"><span class="header-section-number">12.1</span> Task 5.1</a>
+  <li><a href="#task-5.1" id="toc-task-5.1" class="nav-link" data-scroll-target="#task-5.1"><span class="header-section-number">13.1</span> Task 5.1</a>
   <ul class="collapse">
-  <li><a href="#hint-6" id="toc-hint-6" class="nav-link" data-scroll-target="#hint-6"><span class="header-section-number">12.1.1</span> Hint</a></li>
+  <li><a href="#hint-6" id="toc-hint-6" class="nav-link" data-scroll-target="#hint-6"><span class="header-section-number">13.1.1</span> Hint</a></li>
   </ul></li>
-  <li><a href="#task-5.2" id="toc-task-5.2" class="nav-link" data-scroll-target="#task-5.2"><span class="header-section-number">12.2</span> Task 5.2</a>
+  <li><a href="#task-5.2" id="toc-task-5.2" class="nav-link" data-scroll-target="#task-5.2"><span class="header-section-number">13.2</span> Task 5.2</a>
   <ul class="collapse">
-  <li><a href="#hint-7" id="toc-hint-7" class="nav-link" data-scroll-target="#hint-7"><span class="header-section-number">12.2.1</span> Hint</a></li>
-  <li><a href="#questions-4" id="toc-questions-4" class="nav-link" data-scroll-target="#questions-4"><span class="header-section-number">12.2.2</span> Questions</a></li>
+  <li><a href="#hint-7" id="toc-hint-7" class="nav-link" data-scroll-target="#hint-7"><span class="header-section-number">13.2.1</span> Hint</a></li>
+  <li><a href="#questions-4" id="toc-questions-4" class="nav-link" data-scroll-target="#questions-4"><span class="header-section-number">13.2.2</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-6-admixture-analysis" id="toc-part-6-admixture-analysis" class="nav-link" data-scroll-target="#part-6-admixture-analysis"><span class="header-section-number">13</span> Part 6: ADMIXTURE Analysis</a>
+  <li><a href="#part-6-admixture-analysis" id="toc-part-6-admixture-analysis" class="nav-link" data-scroll-target="#part-6-admixture-analysis"><span class="header-section-number">14</span> Part 6: ADMIXTURE Analysis</a>
   <ul>
-  <li><a href="#task-6.1" id="toc-task-6.1" class="nav-link" data-scroll-target="#task-6.1"><span class="header-section-number">13.1</span> Task 6.1</a>
+  <li><a href="#task-6.1" id="toc-task-6.1" class="nav-link" data-scroll-target="#task-6.1"><span class="header-section-number">14.1</span> Task 6.1</a>
   <ul class="collapse">
-  <li><a href="#hint-8" id="toc-hint-8" class="nav-link" data-scroll-target="#hint-8"><span class="header-section-number">13.1.1</span> Hint</a></li>
+  <li><a href="#hint-8" id="toc-hint-8" class="nav-link" data-scroll-target="#hint-8"><span class="header-section-number">14.1.1</span> Hint</a></li>
   </ul></li>
-  <li><a href="#task-6.2" id="toc-task-6.2" class="nav-link" data-scroll-target="#task-6.2"><span class="header-section-number">13.2</span> Task 6.2</a>
+  <li><a href="#task-6.2" id="toc-task-6.2" class="nav-link" data-scroll-target="#task-6.2"><span class="header-section-number">14.2</span> Task 6.2</a>
   <ul class="collapse">
-  <li><a href="#questions-5" id="toc-questions-5" class="nav-link" data-scroll-target="#questions-5"><span class="header-section-number">13.2.1</span> Questions</a></li>
+  <li><a href="#questions-5" id="toc-questions-5" class="nav-link" data-scroll-target="#questions-5"><span class="header-section-number">14.2.1</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-7-ibd-network-analysis" id="toc-part-7-ibd-network-analysis" class="nav-link" data-scroll-target="#part-7-ibd-network-analysis"><span class="header-section-number">14</span> Part 7: IBD Network Analysis</a>
+  <li><a href="#part-7-ibd-network-analysis" id="toc-part-7-ibd-network-analysis" class="nav-link" data-scroll-target="#part-7-ibd-network-analysis"><span class="header-section-number">15</span> Part 7: IBD Network Analysis</a>
   <ul>
-  <li><a href="#task-7.1" id="toc-task-7.1" class="nav-link" data-scroll-target="#task-7.1"><span class="header-section-number">14.1</span> Task 7.1</a>
+  <li><a href="#task-7.1" id="toc-task-7.1" class="nav-link" data-scroll-target="#task-7.1"><span class="header-section-number">15.1</span> Task 7.1</a>
   <ul class="collapse">
-  <li><a href="#hint-9" id="toc-hint-9" class="nav-link" data-scroll-target="#hint-9"><span class="header-section-number">14.1.1</span> Hint</a></li>
+  <li><a href="#hint-9" id="toc-hint-9" class="nav-link" data-scroll-target="#hint-9"><span class="header-section-number">15.1.1</span> Hint</a></li>
   </ul></li>
-  <li><a href="#task-7.2" id="toc-task-7.2" class="nav-link" data-scroll-target="#task-7.2"><span class="header-section-number">14.2</span> Task 7.2</a>
+  <li><a href="#task-7.2" id="toc-task-7.2" class="nav-link" data-scroll-target="#task-7.2"><span class="header-section-number">15.2</span> Task 7.2</a>
   <ul class="collapse">
-  <li><a href="#hint-10" id="toc-hint-10" class="nav-link" data-scroll-target="#hint-10"><span class="header-section-number">14.2.1</span> Hint</a></li>
-  <li><a href="#questions-6" id="toc-questions-6" class="nav-link" data-scroll-target="#questions-6"><span class="header-section-number">14.2.2</span> Questions</a></li>
+  <li><a href="#hint-10" id="toc-hint-10" class="nav-link" data-scroll-target="#hint-10"><span class="header-section-number">15.2.1</span> Hint</a></li>
+  <li><a href="#questions-6" id="toc-questions-6" class="nav-link" data-scroll-target="#questions-6"><span class="header-section-number">15.2.2</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips"><span class="header-section-number">15</span> Tips</a></li>
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips"><span class="header-section-number">16</span> Tips</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/phylogenetics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -504,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-phylo" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></h1>
+<h1 class="title"><span id="sec-phylo" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></h1>
 </div>
 
 
@@ -521,18 +521,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="fa5-ethiopia-2026---genomic-analysis-exercise" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="fa5-ethiopia-2026---genomic-analysis-exercise"><span class="header-section-number">6.1</span> FA5 Ethiopia 2026 - Genomic Analysis Exercise</h2>
+<section id="fa5-ethiopia-2026---genomic-analysis-exercise" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="fa5-ethiopia-2026---genomic-analysis-exercise"><span class="header-section-number">7.1</span> FA5 Ethiopia 2026 - Genomic Analysis Exercise</h2>
 <hr>
 </section>
-<section id="exercise-exploring-trypanosome-genomic-variation" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Exercise: Exploring Trypanosome Genomic Variation</h1>
-<section id="objective" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="objective"><span class="header-section-number">7.1</span> Objective</h2>
+<section id="exercise-exploring-trypanosome-genomic-variation" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Exercise: Exploring Trypanosome Genomic Variation</h1>
+<section id="objective" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="objective"><span class="header-section-number">8.1</span> Objective</h2>
 <p>Students will perform a full genomic analysis pipeline from raw FASTQ reads to population structure, including mapping, variant calling, phylogenetics, PCA, ADMIXTURE, and IBD network analysis. This exercise emphasizes understanding each step and interpreting results.</p>
 </section>
-<section id="dataset" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="dataset"><span class="header-section-number">7.2</span> Dataset</h2>
+<section id="dataset" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="dataset"><span class="header-section-number">8.2</span> Dataset</h2>
 <ul>
 <li>Subset of Trypanosome FASTQ files: <code>*_R1.fastq.gz</code> and <code>*_R2.fastq.gz</code></li>
 <li>Reference genome: <code>L. donovani BPK282.fasta</code></li>
@@ -540,19 +540,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="part-1-quality-control" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Part 1: Quality Control</h1>
-<section id="task-1.1" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="task-1.1"><span class="header-section-number">8.1</span> Task 1.1</h2>
+<section id="part-1-quality-control" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Part 1: Quality Control</h1>
+<section id="task-1.1" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="task-1.1"><span class="header-section-number">9.1</span> Task 1.1</h2>
 <p>Run FastQC and MultiQC on raw FASTQ files.</p>
-<section id="hint" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="hint"><span class="header-section-number">8.1.1</span> Hint</h3>
+<section id="hint" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="hint"><span class="header-section-number">9.1.1</span> Hint</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results/fastqc/</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> data/<span class="pp">*</span>.fastq.gz <span class="at">-o</span> results/fastqc/</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> results/fastqc/ <span class="at">-o</span> results/fastqc/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="questions" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="questions"><span class="header-section-number">8.1.2</span> Questions</h3>
+<section id="questions" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="questions"><span class="header-section-number">9.1.2</span> Questions</h3>
 <ol type="1">
 <li>Which samples show low-quality scores?</li>
 <li>Are there adapters that need trimming?</li>
@@ -561,29 +561,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="part-2-mapping-and-bam-processing" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Part 2: Mapping and BAM Processing</h1>
-<section id="task-2.1" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="task-2.1"><span class="header-section-number">9.1</span> Task 2.1</h2>
+<section id="part-2-mapping-and-bam-processing" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Part 2: Mapping and BAM Processing</h1>
+<section id="task-2.1" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="task-2.1"><span class="header-section-number">10.1</span> Task 2.1</h2>
 <p>Align reads to the reference genome using BWA-MEM.</p>
-<section id="hint-1" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="hint-1"><span class="header-section-number">9.1.1</span> Hint</h3>
+<section id="hint-1" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="hint-1"><span class="header-section-number">10.1.1</span> Hint</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-R</span> <span class="st">"@RG\tID:sample\tSM:sample\tPL:ILLUMINA"</span> <span class="at">-t</span> 4 ref_genome.fasta R1.fastq.gz R2.fastq.gz <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-o</span> sample.bam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="task-2.2" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="task-2.2"><span class="header-section-number">9.2</span> Task 2.2</h2>
+<section id="task-2.2" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="task-2.2"><span class="header-section-number">10.2</span> Task 2.2</h2>
 <p>Filter BAMs by mapping quality, remove duplicates, and keep only properly paired reads.</p>
-<section id="hint-2" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="hint-2"><span class="header-section-number">9.2.1</span> Hint</h3>
+<section id="hint-2" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="hint-2"><span class="header-section-number">10.2.1</span> Hint</h3>
 <ul>
 <li>Mapping quality: <code>samtools view -q 30</code></li>
 <li>Remove duplicates: <code>picard MarkDuplicates REMOVE_DUPLICATES=true</code></li>
 <li>Proper pairs: <code>samtools view -f 0x2</code></li>
 </ul>
 </section>
-<section id="questions-1" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">9.2.2</span> Questions</h3>
+<section id="questions-1" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">10.2.2</span> Questions</h3>
 <ol type="1">
 <li>How many reads remain after filtering? Check with <code>samtools flagstat</code>.</li>
 <li>Which step caused the largest read loss?</li>
@@ -592,28 +592,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="part-3-variant-calling" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Part 3: Variant Calling</h1>
-<section id="task-3.1" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="task-3.1"><span class="header-section-number">10.1</span> Task 3.1</h2>
+<section id="part-3-variant-calling" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Part 3: Variant Calling</h1>
+<section id="task-3.1" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="task-3.1"><span class="header-section-number">11.1</span> Task 3.1</h2>
 <p>Use GATK HaplotypeCaller to generate GVCFs for each sample.</p>
-<section id="hint-3" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="hint-3"><span class="header-section-number">10.1.1</span> Hint</h3>
+<section id="hint-3" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="hint-3"><span class="header-section-number">11.1.1</span> Hint</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> HaplotypeCaller <span class="at">-R</span> ref_genome.fasta <span class="at">-I</span> sample.proper.bam <span class="at">-O</span> sample.g.vcf.gz <span class="at">-ERC</span> GVCF</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="task-3.2" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="task-3.2"><span class="header-section-number">10.2</span> Task 3.2</h2>
+<section id="task-3.2" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="task-3.2"><span class="header-section-number">11.2</span> Task 3.2</h2>
 <p>Combine GVCFs and run GenotypeGVCFs to get a joint VCF.</p>
 </section>
-<section id="task-3.3" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="task-3.3"><span class="header-section-number">10.3</span> Task 3.3</h2>
+<section id="task-3.3" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="task-3.3"><span class="header-section-number">11.3</span> Task 3.3</h2>
 <ol type="1">
 <li>Ensure only high-quality SNPs are retained (QUAL &gt; 30).</li>
 <li>Confirm variants are biallelic.</li>
 </ol>
-<section id="questions-2" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="questions-2"><span class="header-section-number">10.3.1</span> Questions</h3>
+<section id="questions-2" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="questions-2"><span class="header-section-number">11.3.1</span> Questions</h3>
 <ol type="1">
 <li>How many SNPs pass your filters?</li>
 <li>Why do we keep only biallelic SNPs?</li>
@@ -622,13 +622,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="part-4-phylogenetic-analysis" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Part 4: Phylogenetic Analysis</h1>
-<section id="task-4.1" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="task-4.1"><span class="header-section-number">11.1</span> Task 4.1</h2>
+<section id="part-4-phylogenetic-analysis" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Part 4: Phylogenetic Analysis</h1>
+<section id="task-4.1" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="task-4.1"><span class="header-section-number">12.1</span> Task 4.1</h2>
 <p>Convert the filtered VCF file into an alignment format suitable for phylogenetic tree construction (FASTA or PHYLIP).</p>
-<section id="hint-4" class="level3" data-number="11.1.1">
-<h3 data-number="11.1.1" class="anchored" data-anchor-id="hint-4"><span class="header-section-number">11.1.1</span> Hint</h3>
+<section id="hint-4" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="hint-4"><span class="header-section-number">12.1.1</span> Hint</h3>
 <ul>
 <li>Use a tool that converts VCF to sequence alignment format.</li>
 <li>Make sure to specify:
@@ -640,46 +640,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="task-4.2" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="task-4.2"><span class="header-section-number">11.2</span> Task 4.2</h2>
+<section id="task-4.2" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="task-4.2"><span class="header-section-number">12.2</span> Task 4.2</h2>
 <p>Build a phylogenetic tree using a Maximum Likelihood approach. You can start with using the IQ-tree software, as this is the easiest to handle, i.e.&nbsp;not much parameters to define yourself</p>
-<section id="hint-5" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="hint-5"><span class="header-section-number">11.2.1</span> Hint</h3>
+<section id="hint-5" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="hint-5"><span class="header-section-number">12.2.1</span> Hint</h3>
 <p>Look for options such as: - <code>-m MFP</code> (ModelFinder Plus) - <code>-bb</code> for ultrafast bootstrap - <code>-alrt</code> for SH-aLRT support - <code>-nt AUTO</code> for automatic threading - <code>-s</code> to specify the alignment file</p>
 </section>
-<section id="questions-3" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="questions-3"><span class="header-section-number">11.2.2</span> Questions</h3>
+<section id="questions-3" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="questions-3"><span class="header-section-number">12.2.2</span> Questions</h3>
 <ol type="1">
 <li>Which clusters are strongly supported (bootstrap &gt;70)?</li>
 <li>Compare the tree topology with PCA results (later).</li>
 </ol>
 </section>
 </section>
-<section id="task-4.3" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="task-4.3"><span class="header-section-number">11.3</span> Task 4.3</h2>
+<section id="task-4.3" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="task-4.3"><span class="header-section-number">12.3</span> Task 4.3</h2>
 <p>Infer a rapid tree using an approximate method.</p>
-<section id="subtasks" class="level3" data-number="11.3.1">
-<h3 data-number="11.3.1" class="anchored" data-anchor-id="subtasks"><span class="header-section-number">11.3.1</span> Subtasks</h3>
+<section id="subtasks" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="subtasks"><span class="header-section-number">12.3.1</span> Subtasks</h3>
 <ol type="1">
 <li>Run FastTree on the same alignment.</li>
 <li>Compare topology with the IQ-TREE result.</li>
 <li>Identify poorly supported branches.</li>
 </ol>
 </section>
-<section id="hint-think-in-terms-of-flags" class="level3" data-number="11.3.2">
-<h3 data-number="11.3.2" class="anchored" data-anchor-id="hint-think-in-terms-of-flags"><span class="header-section-number">11.3.2</span> Hint (Think in Terms of Flags)</h3>
+<section id="hint-think-in-terms-of-flags" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="hint-think-in-terms-of-flags"><span class="header-section-number">12.3.2</span> Hint (Think in Terms of Flags)</h3>
 <p>Consider: - <code>-gtr</code> for nucleotide substitution model - <code>-gamma</code> for rate heterogeneity - <code>-nt</code> for nucleotide data</p>
 <hr>
 </section>
 </section>
 </section>
-<section id="part-5-pca-analysis" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Part 5: PCA Analysis</h1>
-<section id="task-5.1" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="task-5.1"><span class="header-section-number">12.1</span> Task 5.1</h2>
+<section id="part-5-pca-analysis" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Part 5: PCA Analysis</h1>
+<section id="task-5.1" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="task-5.1"><span class="header-section-number">13.1</span> Task 5.1</h2>
 <p>Convert the filtered VCF to PLINK format and perform quality control filtering.</p>
-<section id="hint-6" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="hint-6"><span class="header-section-number">12.1.1</span> Hint</h3>
+<section id="hint-6" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="hint-6"><span class="header-section-number">13.1.1</span> Hint</h3>
 <ul>
 <li>Convert VCF to binary PLINK format.</li>
 <li>Apply SNP-level filters:
@@ -694,19 +694,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="task-5.2" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="task-5.2"><span class="header-section-number">12.2</span> Task 5.2</h2>
+<section id="task-5.2" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="task-5.2"><span class="header-section-number">13.2</span> Task 5.2</h2>
 <p>Perform LD pruning and compute principal components.</p>
-<section id="hint-7" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="hint-7"><span class="header-section-number">12.2.1</span> Hint</h3>
+<section id="hint-7" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="hint-7"><span class="header-section-number">13.2.1</span> Hint</h3>
 <ul>
 <li>Perform linkage disequilibrium pruning using a sliding window approach.</li>
 <li>Extract the pruned SNP set.</li>
 <li>Run PCA and request multiple principal components (e.g., 10 PCs).</li>
 </ul>
 </section>
-<section id="questions-4" class="level3" data-number="12.2.2">
-<h3 data-number="12.2.2" class="anchored" data-anchor-id="questions-4"><span class="header-section-number">12.2.2</span> Questions</h3>
+<section id="questions-4" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="questions-4"><span class="header-section-number">13.2.2</span> Questions</h3>
 <ol type="1">
 <li>How do samples cluster along PC1 and PC2?</li>
 <li>Do clusters correspond to metadata (country, strain)?</li>
@@ -716,13 +716,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="part-6-admixture-analysis" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Part 6: ADMIXTURE Analysis</h1>
-<section id="task-6.1" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="task-6.1"><span class="header-section-number">13.1</span> Task 6.1</h2>
+<section id="part-6-admixture-analysis" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Part 6: ADMIXTURE Analysis</h1>
+<section id="task-6.1" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="task-6.1"><span class="header-section-number">14.1</span> Task 6.1</h2>
 <p>Run ADMIXTURE for several values of K and determine the optimal number of ancestral populations.</p>
-<section id="hint-8" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="hint-8"><span class="header-section-number">13.1.1</span> Hint</h3>
+<section id="hint-8" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="hint-8"><span class="header-section-number">14.1.1</span> Hint</h3>
 <ul>
 <li>Use the LD-pruned PLINK dataset as input (.bed file).</li>
 <li>Enable <strong>cross-validation</strong>.</li>
@@ -732,11 +732,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="task-6.2" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="task-6.2"><span class="header-section-number">13.2</span> Task 6.2</h2>
+<section id="task-6.2" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="task-6.2"><span class="header-section-number">14.2</span> Task 6.2</h2>
 <p>Visualize ancestry proportions in R using stacked barplots.</p>
-<section id="questions-5" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="questions-5"><span class="header-section-number">13.2.1</span> Questions</h3>
+<section id="questions-5" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="questions-5"><span class="header-section-number">14.2.1</span> Questions</h3>
 <ol type="1">
 <li>Which K has the lowest CV error?</li>
 <li>Are there admixed individuals? Which populations contribute to admixture?</li>
@@ -745,13 +745,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="part-7-ibd-network-analysis" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Part 7: IBD Network Analysis</h1>
-<section id="task-7.1" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="task-7.1"><span class="header-section-number">14.1</span> Task 7.1</h2>
+<section id="part-7-ibd-network-analysis" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Part 7: IBD Network Analysis</h1>
+<section id="task-7.1" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="task-7.1"><span class="header-section-number">15.1</span> Task 7.1</h2>
 <p>Compute pairwise Identity-By-Descent (IBD) estimates.</p>
-<section id="hint-9" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="hint-9"><span class="header-section-number">14.1.1</span> Hint</h3>
+<section id="hint-9" class="level3" data-number="15.1.1">
+<h3 data-number="15.1.1" class="anchored" data-anchor-id="hint-9"><span class="header-section-number">15.1.1</span> Hint</h3>
 <ul>
 <li>Use the pruned PLINK dataset.</li>
 <li>Compute pairwise relatedness estimates.</li>
@@ -759,11 +759,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="task-7.2" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="task-7.2"><span class="header-section-number">14.2</span> Task 7.2</h2>
+<section id="task-7.2" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="task-7.2"><span class="header-section-number">15.2</span> Task 7.2</h2>
 <p>Construct an IBD network in R.</p>
-<section id="hint-10" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="hint-10"><span class="header-section-number">14.2.1</span> Hint</h3>
+<section id="hint-10" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="hint-10"><span class="header-section-number">15.2.1</span> Hint</h3>
 <ul>
 <li>Filter pairs above a meaningful PI_HAT threshold (e.g., &gt;0.125).</li>
 <li>Build a network graph where:
@@ -774,8 +774,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="questions-6" class="level3" data-number="14.2.2">
-<h3 data-number="14.2.2" class="anchored" data-anchor-id="questions-6"><span class="header-section-number">14.2.2</span> Questions</h3>
+<section id="questions-6" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="questions-6"><span class="header-section-number">15.2.2</span> Questions</h3>
 <ol type="1">
 <li>Which samples are most closely related?</li>
 <li>Do IBD clusters correspond to PCA or phylogenetic clusters?</li>
@@ -784,8 +784,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="tips" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Tips</h1>
+<section id="tips" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Tips</h1>
 <ul>
 <li>Check intermediate files with <code>samtools flagstat</code>, <code>bcftools stats</code>, or <code>plink --freq</code>.</li>
 <li>Use consistent file naming: <code>_rmdup.proper.bam</code>, <code>_filtered.vcf.gz</code>, <code>_QC.pruned</code>.</li>
@@ -1225,13 +1225,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/genomics/variant-calling.html" class="pagination-link" aria-label="Variant calling">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variant calling</span></span>
+      <a href="../content/bacterial_genomics/bacterial_genomics.html" class="pagination-link" aria-label="The *Salmonella* Concord mystery: a genomic investigation of a potential outbreak in Ethiopia">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The <em>Salmonella</em> Concord mystery: a genomic investigation of a potential outbreak in Ethiopia</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/bacterial_genomics.html" class="pagination-link" aria-label="From Reads to Population Structure">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">From Reads to Population Structure</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
