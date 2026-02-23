@@ -1,0 +1,25 @@
+name: wgs-intro
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+#  - bbmap=39.52
+  - bcftools=1.23
+  - bedtools=2.31.1
+  - bowtie2=2.5.4
+  - bwa=0.7.19
+  - fastp=1.1.0
+  - trimmomatic=0.40
+  - deacon=0.13.2
+  - fastq-screen=0.16.0
+  - fastqc=0.12.1
+  - fastqe=0.5.2
+  - gatk4=4.6.2.0
+  - kraken=1.1.1
+  - mosdepth=0.3.11
+  - multiqc=1.33
+  - samtools=1.23
+  - seqkit=2.12.0
+  - seqtk=1.5
+  - snpeff=5.4.0a
+  

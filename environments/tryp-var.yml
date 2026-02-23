@@ -1,0 +1,11 @@
+name: tryp-var
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+    - fasttree=2.2.0
+    - iqtree=3.0.1
+    - raxml-ng=1.2.2
+    - plink=1.90b7.7
+    - bcftools=1.23
+    - admixture=1.3.0
