@@ -1,0 +1,14 @@
+# Refresher and other resources
+
+On this page we link to a few resources on what the pre-requisite knowledge for the rest of this course.
+
+::: {.callout}
+### Unix command line and bash scripting
+
+- [Introduction to the CLI](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html)
+
+Be sure to check out the various other resources linked on [this page](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html#resources).
+
+For a more interactive learning experience, you can try [https://sandbox.bio/](https://sandbox.bio/).
+
+:::
