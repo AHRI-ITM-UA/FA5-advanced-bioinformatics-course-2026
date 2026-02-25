@@ -12,9 +12,9 @@ This course aims to provide an overview of key bioinformatics concepts related t
 2. ...
 
 
-# Re-using these materials and how to cite us [![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){fig-alt="CC" height=1em}](https://creativecommons.org/licenses/by/4.0/) [![](https://mirrors.creativecommons.org/presskit/icons/by.svg){fig-alt="BY" height=1em}](https://creativecommons.org/licenses/by/4.0/) {.unnumbered}
+# Re-using these materials and how to cite us {.unnumbered}
 
-This work is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+This work is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).  [![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){fig-alt="CC" height=1em}](https://creativecommons.org/licenses/by/4.0/) [![](https://mirrors.creativecommons.org/presskit/icons/by.svg){fig-alt="BY" height=1em}](https://creativecommons.org/licenses/by/4.0/)
 
 This (loosely-speaking) means that you are free to copy, redistribute or adapt any of the primary content on this website and in the git repository as you see fit, provided that you give us appropriate credit. Ideally, you do this by citing the Zenodo DOI (_url to be included here after initial release_). Please make sure to also provide proper attribution to the primary sources that we cite ourselves, whenever this is applicable.
 

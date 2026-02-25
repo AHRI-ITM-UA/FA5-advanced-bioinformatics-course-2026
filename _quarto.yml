@@ -4,7 +4,7 @@ project:
   execute-dir: project
 
 book:
-  title: "Pathogen genomics"
+  title: "Pathogen genomics workshop"
   subtitle: "Advanced bioinformatics course - FA5 2026"
 
   author:
@@ -17,28 +17,54 @@ book:
           url: https://www.itg.be
     - name: Wim Cuypers
       orcid: 0000-0002-1895-3526
-      # url:
-      # email:
+      email: wim.cuypers@uantwerpen.be
       affiliations:
         - name: University of Antwerp
           url: https://www.uantwerpen.be/en
     - name: Pieter Monsieurs
       orcid: 0000-0003-2214-6652
-      # url:
-      # email:
+      email: pmonsieurs@itg.be
       affiliations:
         - name: Institute of Tropical Medicine Antwerp
           url: https://www.itg.be
+    - name: Bethlehem Adnew
+      orcid: 0000-0002-6108-9534
+      email: bethlehem.adnew@ahri.gov.et
+      affiliations:
+        - name: Armauer Hansen Research Institute
+          url: https://ahri.gov.et/
+    - name: Oren Tzfadia
+      orcid: 0000-0002-7096-8063
+      email: otzfadia@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Selien Oostvogels
+      orcid: 0000-0002-6524-0246
+      email: soostvogels@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Katlijn De Meulenaere
+      orcid: 0000-0003-0723-9009
+      email: kdemeulenaere@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Eline Turcksin
+      email: eline.turcksin@uantwerpen.be
+      affiliations:
+        - name: University of Antwerp
+          url: https://www.uantwerpen.be/en
 
-  # TODO: Pieter, Betty, Eline, Selien, Katlijn, Oren
-
-  date: "2024-05-02"
-  date-format: long
+  date: "2026-02-25"
+  date-format: iso
 
   license: "CC BY 4.0"
 
   chapters:
     - index.qmd
+    - content/refresher.qmd
     - part: "From reads to variants"
       chapters:
         - content/genomics/setup.qmd
@@ -47,7 +73,7 @@ book:
         - content/genomics/qc.qmd
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
-        - content/bacterial_genomics/bacterial_genomics.qmd
+        # - content/bacterial_genomics/bacterial_genomics.qmd
     - content/phylogenetics.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd
 
@@ -91,10 +117,9 @@ book:
 
   page-footer:
     left: |
-      &copy; [Pieter Moris](https://pmoris.github.io), [Pieter Monsieurs](https://orcid.org/0000-0003-2214-6652), [Oren Tzfadia](https://orcid.org/0000-0002-7096-8063) ([Institute of Tropical Medicine Antwerp](https://www.itg.be/en)), [Wim Cuypers](https://orcid.org/0000-0002-1895-3526) ([University of Antwerp](https://www.uantwerpen.be/en/)), 2026.
-    center: |
-      Unless otherwise noted, all content on this site is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-      [![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){fig-alt="CC" height=1.2em}](https://creativecommons.org/licenses/by/4.0/) [![](https://mirrors.creativecommons.org/presskit/icons/by.svg){fig-alt="BY" height=1.2em}](https://creativecommons.org/licenses/by/4.0/)
+      &copy; 2026 [AHRI](https://ahri.gov.et/) - [ITM](https://www.itg.be/en/) - [UA](https://www.uantwerpen.be/en/) [![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){fig-alt="CC" height=1.2em}](https://creativecommons.org/licenses/by/4.0/) [![](https://mirrors.creativecommons.org/presskit/icons/by.svg){fig-alt="BY" height=1.2em}](https://creativecommons.org/licenses/by/4.0/)
+    center: "Source available on [GitHub](https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026)"
+
     right: Built with [Quarto](https://quarto.org/).
     # background: "#f8f9fa"
 
@@ -112,13 +137,12 @@ book:
     style: "floating"
     search: true
     # background: dark
-    logo: content/assets/ITM-logo_col_rgb.png
-    logo-alt: Logo of Institute of Tropical Medicine Antwerp
-    # TODO: update
-    # logo-href: https://research.itg.be/en/organisations/malariology # make logo return to the root of the page
+    # logo:
+    # logo-alt:
+    # logo-href:
 
 
-  favicon: content/assets/ITM-symbol_col_rgb.png
+  # favicon:
   # twitter-card: true
   site-url: https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026
   repo-url: https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/
