@@ -371,183 +371,53 @@
     ]
   },
   {
-    "objectID": "content/phylogenetics.html",
-    "href": "content/phylogenetics.html",
-    "title": "7  Introduction to phylogenetics",
+    "objectID": "content/phylogenomics/phylogenetics_exercise.html",
+    "href": "content/phylogenomics/phylogenetics_exercise.html",
+    "title": "7  Genomics & phylogenomics exercise",
     "section": "",
-    "text": "7.1 FA5 Ethiopia 2026 - Genomic Analysis Exercise",
+    "text": "7.0.1 1. Background\nVisceral leishmaniasis (VL), caused by the protozoan parasite Leishmania donovani, is a significant public health challenge in East Africa, Sudan, South Sudan, Ethiopia, Kenya, and Somalia being most affected. Recent genomic studies have revealed complex population structures and hybrid genotypes within L. donovani, highlighting the need for advanced molecular tools to understand parasite evolution, drug resistance, and outbreak dynamics. In this exercise, you will work with whole genome sequencing (WGS) data derived from a recent study that directly sequenced L. donovani from patient blood samples during the 2019–2022 VL outbreak in Kenya. This dataset provides a unique opportunity to explore single nucleotide polymorphisms (SNPs) and apply phylogenomic techniques to:\nBy analyzing this data, you will gain hands-on experience in SNP calling, phylogenetic tree construction, and population structure analysis, which are essential skills for modern genomics and infectious disease research.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Genomics & phylogenomics exercise</span>"
     ]
   },
   {
-    "objectID": "content/phylogenetics.html#objective",
-    "href": "content/phylogenetics.html#objective",
-    "title": "7  Introduction to phylogenetics",
-    "section": "8.1 Objective",
-    "text": "8.1 Objective\nStudents will perform a full genomic analysis pipeline from raw FASTQ reads to population structure, including mapping, variant calling, phylogenetics, PCA, ADMIXTURE, and IBD network analysis. This exercise emphasizes understanding each step and interpreting results.",
+    "objectID": "content/phylogenomics/phylogenetics_exercise.html#snp-prediction-using-gatk",
+    "href": "content/phylogenomics/phylogenetics_exercise.html#snp-prediction-using-gatk",
+    "title": "7  Genomics & phylogenomics exercise",
+    "section": "7.1 5. SNP prediction using GATK",
+    "text": "7.1 5. SNP prediction using GATK\nAfter mapping the reads to the reference genome, the next step is to call variants such as single nucleotide polymorphisms (SNPs). In this exercise, you will use the Genome Analysis Toolkit (GATK) to perform variant calling on the aligned reads. GATK is a widely used tool for variant discovery and genotyping, and it provides a comprehensive set of tools for processing and analyzing genomic data.\n\nBefore you can start with variant calling, you will need to create a sequence dictionary for the reference genome using GATK, and index the reference genome using SAMtools. This is necessary for GATK to efficiently access the reference genome during the variant calling process.\nOnce you have prepared the reference genome, you can use GATK to call variants on the aligned reads. GATK provides several tools for variant calling, such as HaplotypeCaller, which uses a sophisticated algorithm to identify variants and to genotype them across multiple samples. You can either run HaplotypeCaller on each sample separately for one sample. However, in most cases, and certainly when you are doing population genomics, it is recommended to perform joint genotyping across all samples, which can improve the accuracy of variant calling by leveraging information from multiple samples. For this, it is important to specify the GVCF output format when running HaplotypeCaller, which allows you to generate a gVCF file for each sample that contains information about both variant and non-variant sites.\nAfter running HaplotypeCaller on all samples individually, you can then use the GenomicsDBImport and GenotypeGVCFs tools to perform joint genotyping across all samples, which can improve the accuracy of variant calling by leveraging information from multiple samples.\n\n\n\n\n\n\n\nCautionExercise\n\n\n\n\ncreate a directory to store the output of the GATK variant calling\ncreate a sequence dictionary for the reference genome using GATK, and index the reference genome using SAMtools and GATK IndexFeatureFile.\nrun GATK HaplotypeCaller on the aligned reads to call variants. Make sure to use GVCF output format. Save the output to a .g.vcf file.\ncombine all gvcf files into a GenomicsDB using GATK GenomicsDBImport\nperform joint genotyping across all samples using GATK GenotypeGVCFs to generate a multi-sample VCF file (i.e. a multi-sample VCF file contains the variant calls for all samples in a single vcf file).\nextract the SNPs with a quality (QUAL) higher than 30 from the multi-sample VCF file using bcftools view and save the output to a new VCF file that only contains the quality filtered SNPs.\ncheck the effect of the quality filtering by comparing the number of variants in the original multi-sample VCF file and the filtered VCF file using bcftools stats to get statistics about the variants in each file, and to make sure that indels have been removed from the filtered VCF file.\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nWhen running HaplotypeCaller, make sure to specify the appropriate parameters for GATK, such as the reference genome, the input BAM files, and the output gVCF file.\nWhen running GenomicsDBImport, you will need a mapping file that specifies the sample names and the corresponding gVCF files. This mapping file is a simple text file that contains two columns: the first column contains the sample names, and the second column contains the paths to the corresponding gVCF files. You can create this mapping file using a for loop to iterate over all the gVCF files and extract the sample names from the file names (use bcftools query on each of the gvcf files and print the output of this command next to the gvcf file with tab as a separator to create the mapping file).\nwhren running GenomicsDBImport, you also need a intervals file that specifies the genomic intervals to be processed. This intervals file is a simple text file that contains one line per interval, with the format chr:start-end. As the organism we are working with is a relatively small, you can stick to one chromosome per interval and simply supply a list of the chromosome names in the intervals file. You can create this intervals file by extracting the chromosome names from the reference genome using samtools faidx (already done in previous step) and then using cut to extract the chromosome names from the resulting .fai file.\nwhen checking the effect of the quality filtering, you can use bcftools stats to get statistics about the variants in each file, a lot of stats are produced. But you can filter with grep on “^SN” to to get the relevant numbers.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Genomics & phylogenomics exercise</span>"
     ]
   },
   {
-    "objectID": "content/phylogenetics.html#dataset",
-    "href": "content/phylogenetics.html#dataset",
-    "title": "7  Introduction to phylogenetics",
-    "section": "8.2 Dataset",
-    "text": "8.2 Dataset\n\nSubset of Trypanosome FASTQ files: *_R1.fastq.gz and *_R2.fastq.gz\nReference genome: L. donovani BPK282.fasta",
+    "objectID": "content/phylogenomics/phylogenetics_exercise.html#phylogenetic-tree-construction",
+    "href": "content/phylogenomics/phylogenetics_exercise.html#phylogenetic-tree-construction",
+    "title": "7  Genomics & phylogenomics exercise",
+    "section": "7.2 6. Phylogenetic tree construction",
+    "text": "7.2 6. Phylogenetic tree construction\nAfter calling variants such as SNPs, the next step is to construct a phylogenetic tree to understand the evolutionary relationships among the samples. In this exercise, you will use the vcf2phylip tool to convert the VCF file containing the SNPs into a PHYLIP format file that can be used for phylogenetic tree construction. The PHYLIP format is a widely used format for representing sequence alignments and is compatible with many phylogenetic tree construction tools.\nAfter converting the VCF file to PHYLIP format, you can use a tool such as RAxML or IQ-TREE to construct a phylogenetic tree based on the SNP data. These tools use sophisticated algorithms to infer the evolutionary relationships among the samples based on the genetic variation present in the SNP data.\n\nIQ-Tree is a widely used tool for phylogenetic tree construction that implements a fast and efficient algorithm for inferring maximum likelihood trees. It also provides a comprehensive set of tools for model selection, tree visualization, and downstream analyses. When running IQ-Tree, you will need to specify the appropriate parameters for the analysis, such as the input PHYLIP file, the output tree file, and the substitution model to use for the analysis. Specifying the appropriate substitution model for the data can be tricky, but IQ-Tree can automatically select the best model for the data using the -m MFP option, which tests multiple models and selects the best one based on the Bayesian Information Criterion (BIC). This is also a big advantage compared with other tools, such as RAxML, which require you to specify the substitution model manually.\nRAxML is another widely used tool for phylogenetic tree construction that implements a maximum likelihood algorithm for inferring trees. It also provides a comprehensive set of tools for model selection, tree visualization, and downstream analyses. When running RAxML, you will need to specify the appropriate parameters for the analysis, such as the input PHYLIP file, the output tree file, and the substitution model to use for the analysis. However, RAxML does not have an automatic model selection option like IQ-Tree, so you will need to specify the substitution model manually based on your knowledge of the data and the evolutionary processes that may be at play. You can either base yourself on the output of the model selection step in IQ-Tree, or you can go for a “safe” model that is often used for SNP data, such as the GTR+G model, which is a general time reversible model with gamma distributed rate variation among sites.\nFastTree is a tool for phylogenetic tree construction that implements a fast and efficient algorithm for inferring maximum likelihood trees. It is designed to handle large datasets and can be used for both nucleotide and amino acid data. When running FastTree, you will need to specify the appropriate parameters for the analysis, such as the input PHYLIP file, the output tree file, and the substitution model to use for the analysis. FastTree has a limited set of substitution models compared to IQ-Tree and RAxML, but it can still be a useful tool for quickly constructing trees from large datasets. This is the way to go if you have a large dataset and want to quickly get an idea of the tree topology, but for more accurate tree construction, it is recommended to use IQ-Tree or RAxML.\n\nAll three tools (IQ-Tree, RAxML and FastTree) can be used to construct a phylogenetic tree based on the SNP data in the PHYLIP file. All tree software produce a final tree in nexus format, which can be visualized using tools such as FigTree or iTOL. Those tools allow you to explore the tree topology and branch lengths, and to annotate the tree with metadata information about the samples.\nIf you want to have more control on the visualisation of the tree, you can also use R packages such as ggtree to visualize the trees in R and to annotate them with metadata information about the samples. The ggtree package has a great manual with many examples that can help you to get started with visualizing and annotating your trees in R, and it also has a great support for visualizing trees in combination with metadata information about the samples, which can help you to interpret the tree in the context of the sample information.\n\n\n\n\n\n\nCautionExercise\n\n\n\n\ncreate a directory to store the output of the phylogenetic tree construction\nuse the vcf2phylip tool to convert the filtered VCF file containing the SNPs into a PHYLIP format file. Make sure to specify the appropriate parameters for vcf2phylip, such as the input VCF file and the output PHYLIP file.\nuse IQ-tree to construct a phylogenetic tree based on the SNP data in the PHYLIP file. Make sure to specify the appropriate parameters for IQ-tree, such as the input PHYLIP file and the output tree file.\n\nvisualize the tree using FigTree or ggtree\nremove the outgroup from the fasta file (make a copy of the original fasta file and remove the outgroup from the copy) and run IQ-tree again on the new fasta file without the outgroup.\n\nuse RAxML to construct a phylogenetic tree based on the SNP data in the PHYLIP file. Make sure to specify the appropriate parameters for RAxML, such as the input PHYLIP file and the output tree file. Specify a substitution model for the analysis, such as the GTR+G model, which is a general time reversible model with gamma distributed rate variation among sites.\noptional: use FastTree to construct a phylogenetic tree based on the SNP data in the PHYLIP file. Make sure to specify the appropriate parameters for FastTree, such as the input PHYLIP file and the output tree file.\nvisualize the resulting trees using a tool such as FigTree (or iTOL). Do they show the same relationships among the samples? Are there any differences in the tree topology or branch lengths?\noptional Try to create the phylogenetic tree in R using the ggtree package. Annotate the IQ tree with metadata information about the samples using the ggtree package in R.\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nwhen running the vcf2phylip tool, you will see that by default min4 is added to the filename, which means that only sites that are present in at least 4 samples are included in the output PHYLIP file. This is a common filtering step to remove sites with too much missing data.\nwe choose for the fasta output with vcf2phylip, which will give you a fasta file with the sequences for each sample, which can be used for phylogenetic tree construction. However, you can also choose for the PHYLIP format output, which is a different format that can also be used for phylogenetic tree construction, but the fasta format is more widely used and compatible with more tools.\nMake sure that you specify the -m MFP option to let IQ-tree automatically select the best substitution model for the data. This can improve the accuracy of the tree construction compared to manually specifying a substitution model.\nWhen running RAxML, you can use the --all and --bs-trees option to perform a rapid bootstrap analysis and search for the best-scoring maximum likelihood tree in one run. Normally you should go for at least 100 bootstrap replicates, but for this exercise you can go for 10 to speed up the analysis.\nWhen running FastTree, you can use the -gtr option to specify the GTR model for the analysis.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Genomics & phylogenomics exercise</span>"
     ]
   },
   {
-    "objectID": "content/phylogenetics.html#task-1.1",
-    "href": "content/phylogenetics.html#task-1.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "9.1 Task 1.1",
-    "text": "9.1 Task 1.1\nRun FastQC and MultiQC on raw FASTQ files.\n\n9.1.1 Hint\nmkdir -p results/fastqc/\nfastqc data/*.fastq.gz -o results/fastqc/\nmultiqc results/fastqc/ -o results/fastqc/\n\n\n9.1.2 Questions\n\nWhich samples show low-quality scores?\nAre there adapters that need trimming?",
+    "objectID": "content/phylogenomics/phylogenetics_exercise.html#pca-and-population-structure-analysis",
+    "href": "content/phylogenomics/phylogenetics_exercise.html#pca-and-population-structure-analysis",
+    "title": "7  Genomics & phylogenomics exercise",
+    "section": "7.3 7. PCA and population structure analysis",
+    "text": "7.3 7. PCA and population structure analysis\nAfter calling variants such as SNPs, you can also perform a principal component analysis (PCA) and population structure analysis to understand the genetic relationships among the samples. PCA is a dimensionality reduction technique that can be used to visualize the genetic variation among the samples in a lower-dimensional space. Population structure analysis is a method that can be used to identify distinct genetic clusters within the samples, which can provide insights into the population structure and evolutionary history of the samples. In this exercise, you will use the PLINK tool to perform PCA and population structure analysis on the SNP data. PLINK is a widely used tool for genome-wide association studies and population genetics analyses, and it provides a comprehensive set of tools for processing and analyzing genomic data.\n\n\n\n\n\n\nImportant\n\n\n\nIn previous data set we only worked with the first chromosome of the parasite. However, to have meaningful results when running population genomics tools like PCA, Admixture and IBD, we have to start with a dataset that contains SNPs from all chromosomes. Therefore, for this exercise, we will use the multi-sample VCF file that contains the SNPs from all chromosomes, which was downloaded from the Google Drive above (stored under data/vcf_full/full.vcf.gz). This file has already been filtered for quality (QUAL &gt; 30) and only contains SNPs (indels have been removed). You can use this file as input for the PCA and population structure analysis using PLINK.\n\n\n\n\n\n\n\n\nCautionExercise\n\n\n\n\ncreate a directory to store the output of the PCA and population structure analysis\nuse PLINK to convert the filtered VCF file containing the SNPs into PLINK format files (i.e., .bed, .bim, and .fam files).\nfilter the PLINK files to only include SNPs that fullfile the following criteria: -only SNPs that are present in at least 95% of the samples and have a minor allele frequency of at least 5% will be included in the analysis. Also remove sample with more than 10% missing data.\nperform LD pruning on the filtered PLINK files to remove SNPs that are in high linkage disequilibrium (LD) with each other, which can bias the results of the PCA analysis. This can be done using the --indep-pairwise option in PLINK, which will remove one SNP from each pair of SNPs that are in high LD (e.g., r^2 &gt; 0.5) within a specified window size (e.g., 50 kb).\nspecial case: we have less than 50 samples in our test data, so we have to calculate the allele frequencies in a separate step using the --freq option in PLINK, and then use the resulting .frq file to filter the SNPs based on the minor allele frequency (MAF) threshold.\nuse PLINK to perform PCA on the filtered PLINK files using the --pca option. Specify the number of principal components to calculate using the --pca option (e.g., --pca 5 to calculate the first 10 principal components). As we have less than 50 samples, we have to read in the frequencies from previous step using the --read-freq option in PLINK.\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nfor the QC filtering, use flags like\n\n–geno 0.05 (remove SNPs with &gt;5% missing data)\n–maf 0.05 (remove SNPs with MAF &lt; 5%)\n–mind 0.1 (remove samples with &gt;10% missing data)\n\ncommand for extraction of the\n\n\n\n\n\n\n\n\n\n\nTipTips - spoiler alert!!\n\n\n\n\n\n\nthe command for running the different PCA commands in PLINK will look something like this:\n\nplink2 --vcf input.vcf.gz --make-bed --out output to convert the VCF file to PLINK format files\nplink2 --bfile output --geno 0.05 --maf 0.05 --mind 0.1 --out output.filtered --make-bed to filter the PLINK files based on the specified criteria\nplink2 --bfile output.filtered --indep-pairwise 50 5 0.5 --out output.filtered.QC.pruned   --set-all-var-ids \\@:# --bad-ld to perform LD pruning on the filtered PLINK files, with –set-all-var-ids to set the variant IDs to a format that is compatible with PLINK, and –bad-ld to overrule the warning of PLINK that we have not enough samples to perform LD pruning.\nplink2 --bfile output.filtered.QC --extract output.filtered.QC.pruned.prune.in --make-bed --out output.filtered.QC.pruned --set-all-var-ids \\@:# \\ to create new PLINK files that only contain the pruned SNPs. Those SNPs are present in the prune.in file that is generated by the previous command.\nplink2 --bfile output.filtered --freq --out output.filtered to calculate allele frequencies for the filtered PLINK files\nplink2 --bfile output.filtered --read-freq output.filtered.frq --pca 5 --out output.pca to perform PCA on the filtered PLINK files using the calculated allele frequencies",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Genomics & phylogenomics exercise</span>"
     ]
   },
   {
-    "objectID": "content/phylogenetics.html#task-2.1",
-    "href": "content/phylogenetics.html#task-2.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "10.1 Task 2.1",
-    "text": "10.1 Task 2.1\nAlign reads to the reference genome using BWA-MEM.\n\n10.1.1 Hint\nbwa mem -R \"@RG\\tID:sample\\tSM:sample\\tPL:ILLUMINA\" -t 4 ref_genome.fasta R1.fastq.gz R2.fastq.gz | samtools sort -o sample.bam",
+    "objectID": "content/phylogenomics/phylogenetics_exercise.html#admixture-analysis",
+    "href": "content/phylogenomics/phylogenetics_exercise.html#admixture-analysis",
+    "title": "7  Genomics & phylogenomics exercise",
+    "section": "7.4 8. Admixture analysis",
+    "text": "7.4 8. Admixture analysis\nAdmixture analysis is a method that can be used to identify distinct genetic clusters within the samples, which can provide insights into the population structure and evolutionary history of the samples. In this exercise, you will use the Admixture tool to perform admixture analysis on the SNP data. Admixture is a widely used tool for population structure analysis that implements a maximum likelihood algorithm for inferring population structure and admixture proportions. When running Admixture, you will need to specify the appropriate parameters for the analysis, such as the input PLINK files, the number of clusters (K) to infer, and the output file for the admixture proportions. The choice of the number of clusters (K) can be tricky, and it is often recommended to run the analysis for a range of K values (e.g., K=1 to K=10) and to use a method such as the cross-validation error to determine the optimal K value for the data. After running Admixture, you can visualize the results using a tool such as R or Python to create bar plots of the admixture proportions for each sample, which can help you to interpret the results in the context of the sample information and the phylogenetic tree that you constructed in the previous step.\n\n\n\n\n\n\nCautionExercise\n\n\n\n\nThe .bim file from previous step (run with PLINK2) is not compatible with Admixture, as it only accepts integers as chromosome names. Therefore, we need to replace the bim file with L. donovani chromosome names with a new bim file that has integer chromosome names (we choose to set this simply to 0, as we do not need the exact chromosome). You can do this by using the awk command in the terminal to replace the chromosome names in the .bim file with integers (e.g., 1, 2, 3, etc.). Make sure to save the new .bim file with a different name to avoid overwriting the original .bim file. Example command is:\n\nawk '{$1=\"0\";print $0}' full.filtered.QC.bim &gt; full.filtered.QC.bim.tmp\nmv full.filtered.QC.bim full.filtered.QC.bim.source\nmv full.filtered.QC.bim.tmp full.filtered.QC.bim\n\nrun admixture (admixture) for a K-value varying between 2 and 10. Best is to create a for loop to run over those different values. First try with one K-value.\nextract the cross-validation error from the output of admixture for each K-value and inspect the cross validation error. Inspect the CV error or - even better - plot the cross-validation error against the K-values to determine the optimal K-value for the data. The optimal K-value is often determined as the value of K that minimizes the cross-validation error, which can be visualized as a “elbow” in the plot of cross-validation error against K-values.\nvisualize the admixture proportions for each sample using a bar plot in R. You can use the output file from Admixture that contains the admixture proportions for each sample to create a bar plot that shows the proportion of ancestry from each inferred cluster for each sample (present in the file ending with .Q).\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nwhen running Admixture (command: admixture), you can use the --cv option to perform cross-validation and to calculate the cross-validation error for each K-value. This can help you to determine the optimal K-value for the data based on the cross-validation error.\nto get the CV error, best is to use the grep command in the terminal to extract the line that contains the CV error from the output of Admixture.\nwhen visualizing the admixture proportions in R, you can use the ggplot2 package to create a bar plot of the admixture proportions for each sample. You can read in the output file from Admixture using the read.table function in R, and then use the ggplot function from the ggplot2 package to create a bar plot that shows the proportion of ancestry from each inferred cluster for each sample. You can also use the facet_wrap function from ggplot2 to create separate panels for each cluster, which can help to visualize the admixture proportions more clearly.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-2.2",
-    "href": "content/phylogenetics.html#task-2.2",
-    "title": "7  Introduction to phylogenetics",
-    "section": "10.2 Task 2.2",
-    "text": "10.2 Task 2.2\nFilter BAMs by mapping quality, remove duplicates, and keep only properly paired reads.\n\n10.2.1 Hint\n\nMapping quality: samtools view -q 30\nRemove duplicates: picard MarkDuplicates REMOVE_DUPLICATES=true\nProper pairs: samtools view -f 0x2\n\n\n\n10.2.2 Questions\n\nHow many reads remain after filtering? Check with samtools flagstat.\nWhich step caused the largest read loss?",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-3.1",
-    "href": "content/phylogenetics.html#task-3.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "11.1 Task 3.1",
-    "text": "11.1 Task 3.1\nUse GATK HaplotypeCaller to generate GVCFs for each sample.\n\n11.1.1 Hint\ngatk HaplotypeCaller -R ref_genome.fasta -I sample.proper.bam -O sample.g.vcf.gz -ERC GVCF",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-3.2",
-    "href": "content/phylogenetics.html#task-3.2",
-    "title": "7  Introduction to phylogenetics",
-    "section": "11.2 Task 3.2",
-    "text": "11.2 Task 3.2\nCombine GVCFs and run GenotypeGVCFs to get a joint VCF.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-3.3",
-    "href": "content/phylogenetics.html#task-3.3",
-    "title": "7  Introduction to phylogenetics",
-    "section": "11.3 Task 3.3",
-    "text": "11.3 Task 3.3\n\nEnsure only high-quality SNPs are retained (QUAL &gt; 30).\nConfirm variants are biallelic.\n\n\n11.3.1 Questions\n\nHow many SNPs pass your filters?\nWhy do we keep only biallelic SNPs?",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-4.1",
-    "href": "content/phylogenetics.html#task-4.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "12.1 Task 4.1",
-    "text": "12.1 Task 4.1\nConvert the filtered VCF file into an alignment format suitable for phylogenetic tree construction (FASTA or PHYLIP).\n\n12.1.1 Hint\n\nUse a tool that converts VCF to sequence alignment format.\nMake sure to specify:\n\nThe input VCF file\nThe output alignment format (FASTA or PHYLIP)\nThe desired output filename",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-4.2",
-    "href": "content/phylogenetics.html#task-4.2",
-    "title": "7  Introduction to phylogenetics",
-    "section": "12.2 Task 4.2",
-    "text": "12.2 Task 4.2\nBuild a phylogenetic tree using a Maximum Likelihood approach. You can start with using the IQ-tree software, as this is the easiest to handle, i.e. not much parameters to define yourself\n\n12.2.1 Hint\nLook for options such as: - -m MFP (ModelFinder Plus) - -bb for ultrafast bootstrap - -alrt for SH-aLRT support - -nt AUTO for automatic threading - -s to specify the alignment file\n\n\n12.2.2 Questions\n\nWhich clusters are strongly supported (bootstrap &gt;70)?\nCompare the tree topology with PCA results (later).",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-4.3",
-    "href": "content/phylogenetics.html#task-4.3",
-    "title": "7  Introduction to phylogenetics",
-    "section": "12.3 Task 4.3",
-    "text": "12.3 Task 4.3\nInfer a rapid tree using an approximate method.\n\n12.3.1 Subtasks\n\nRun FastTree on the same alignment.\nCompare topology with the IQ-TREE result.\nIdentify poorly supported branches.\n\n\n\n12.3.2 Hint (Think in Terms of Flags)\nConsider: - -gtr for nucleotide substitution model - -gamma for rate heterogeneity - -nt for nucleotide data",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-5.1",
-    "href": "content/phylogenetics.html#task-5.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "13.1 Task 5.1",
-    "text": "13.1 Task 5.1\nConvert the filtered VCF to PLINK format and perform quality control filtering.\n\n13.1.1 Hint\n\nConvert VCF to binary PLINK format.\nApply SNP-level filters:\n\nRemove SNPs with high missingness.\nRemove SNPs with low minor allele frequency (MAF).\n\nApply individual-level filtering:\n\nRemove individuals with high missingness.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-5.2",
-    "href": "content/phylogenetics.html#task-5.2",
-    "title": "7  Introduction to phylogenetics",
-    "section": "13.2 Task 5.2",
-    "text": "13.2 Task 5.2\nPerform LD pruning and compute principal components.\n\n13.2.1 Hint\n\nPerform linkage disequilibrium pruning using a sliding window approach.\nExtract the pruned SNP set.\nRun PCA and request multiple principal components (e.g., 10 PCs).\n\n\n\n13.2.2 Questions\n\nHow do samples cluster along PC1 and PC2?\nDo clusters correspond to metadata (country, strain)?\nCompare your results with the PCA analysis",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-6.1",
-    "href": "content/phylogenetics.html#task-6.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "14.1 Task 6.1",
-    "text": "14.1 Task 6.1\nRun ADMIXTURE for several values of K and determine the optimal number of ancestral populations.\n\n14.1.1 Hint\n\nUse the LD-pruned PLINK dataset as input (.bed file).\nEnable cross-validation.\nRun multiple K values (e.g. 2–10).\nCapture the output in log files.\nExtract the CV error from each run. (using grep CV)",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-6.2",
-    "href": "content/phylogenetics.html#task-6.2",
-    "title": "7  Introduction to phylogenetics",
-    "section": "14.2 Task 6.2",
-    "text": "14.2 Task 6.2\nVisualize ancestry proportions in R using stacked barplots.\n\n14.2.1 Questions\n\nWhich K has the lowest CV error?\nAre there admixed individuals? Which populations contribute to admixture?",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-7.1",
-    "href": "content/phylogenetics.html#task-7.1",
-    "title": "7  Introduction to phylogenetics",
-    "section": "15.1 Task 7.1",
-    "text": "15.1 Task 7.1\nCompute pairwise Identity-By-Descent (IBD) estimates.\n\n15.1.1 Hint\n\nUse the pruned PLINK dataset.\nCompute pairwise relatedness estimates.\nIdentify the column corresponding to PI_HAT.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
-    ]
-  },
-  {
-    "objectID": "content/phylogenetics.html#task-7.2",
-    "href": "content/phylogenetics.html#task-7.2",
-    "title": "7  Introduction to phylogenetics",
-    "section": "15.2 Task 7.2",
-    "text": "15.2 Task 7.2\nConstruct an IBD network in R.\n\n15.2.1 Hint\n\nFilter pairs above a meaningful PI_HAT threshold (e.g., &gt;0.125).\nBuild a network graph where:\n\nNodes represent samples\nEdges represent relatedness\nEdge weight reflects PI_HAT\n\n\n\n\n15.2.2 Questions\n\nWhich samples are most closely related?\nDo IBD clusters correspond to PCA or phylogenetic clusters?",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introduction to phylogenetics</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Genomics & phylogenomics exercise</span>"
     ]
   },
   {
