@@ -8,10 +8,9 @@ This is a continuation of the [FA5 2025 introductory course](https://cuypers-wim
 
 > The course notes for this repository are available at the following URL: [https://ahri-itm-ua.github.io/FA5-advanced-bioinformatics-course-2026/](https://ahri-itm-ua.github.io/FA5-advanced-bioinformatics-course-2026/).
 
-## Acknowledgements for course materials {.unnumbered}
+## Acknowledgements for course materials
 
 These materials were based on previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0) and the [FA5 2025 introductory course](https://cuypers-wim.github.io/FA5-bioinformatics/) (same team as this course - licensed under CC BY 4.0).
-
 
 ## Re-using these materials and how to cite us
 
