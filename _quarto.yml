@@ -184,3 +184,7 @@ format:
 strip-comments: true
 
 editor: source
+
+# https://quarto.org/docs/publishing/github-pages.html#freezing-computations
+execute:
+  freeze: auto
