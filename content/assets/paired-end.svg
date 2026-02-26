@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="301.7023mm"
+   height="90.319466mm"
+   viewBox="0 0 301.70229 90.319465"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="paired-end.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0520974"
+     inkscape:cx="518.48814"
+     inkscape:cy="67.009007"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="301.7023"
+       height="90.319466"
+       id="page180"
+       margin="0 0 0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="DartArrow"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6" />
+    </marker>
+    <inkscape:path-effect
+       effect="powerstroke"
+       id="path-effect14"
+       is_visible="true"
+       lpeversion="1.3"
+       scale_width="1"
+       interpolator_type="CentripetalCatmullRom"
+       interpolator_beta="0.75"
+       start_linecap_type="round"
+       end_linecap_type="round"
+       offset_points="5.4166701,1.8861134"
+       linejoin_type="spiro"
+       miter_limit="4"
+       not_jump="true"
+       sort_points="true"
+       message="&lt;b&gt;Ctrl + click&lt;/b&gt; on existing node and move it" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect13"
+       is_visible="true"
+       lpeversion="1.3"
+       threshold="0.01"
+       steps="1"
+       smooth_angles="0"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false"
+       step="1" />
+    <inkscape:path-effect
+       effect="powerstroke"
+       id="path-effect12"
+       is_visible="true"
+       lpeversion="1.3"
+       scale_width="1"
+       interpolator_type="CentripetalCatmullRom"
+       interpolator_beta="0.75"
+       start_linecap_type="round"
+       end_linecap_type="round"
+       offset_points="7.1139519,1.8861134"
+       linejoin_type="spiro"
+       miter_limit="4"
+       not_jump="true"
+       sort_points="true"
+       message="&lt;b&gt;Ctrl + click&lt;/b&gt; on existing node and move it" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect11"
+       is_visible="true"
+       lpeversion="1.3"
+       threshold="0.012"
+       steps="1"
+       smooth_angles="0"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false"
+       step="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect8"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect7"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect6"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect5"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect4"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3"
+       is_visible="true"
+       lpeversion="1" />
+    <marker
+       style="overflow:visible"
+       id="DartArrow-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6-3" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(1.0669465,-23.828481)">
+    <g
+       id="g180"
+       transform="translate(-0.6531682,1.5914562)">
+      <path
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+         d="M 18.138097,55.12559 H 282.74092"
+         id="path26" />
+      <path
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+         d="M 18.138097,79.631424 H 282.74092"
+         id="path27"
+         sodipodi:nodetypes="cc" />
+      <text
+         xml:space="preserve"
+         style="font-size:5.64444px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+         x="6.5795059"
+         y="52.458225"
+         id="text27"><tspan
+           sodipodi:role="line"
+           id="tspan27"
+           style="stroke-width:2"
+           x="6.5795059"
+           y="52.458225"></tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+         x="10.11188"
+         y="57.037155"
+         id="text28"><tspan
+           sodipodi:role="line"
+           id="tspan28"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2"
+           x="10.11188"
+           y="57.037155">5'</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+         x="10.135996"
+         y="81.577438"
+         id="text29"><tspan
+           sodipodi:role="line"
+           id="tspan29"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:2"
+           x="10.135996"
+           y="81.577438">3'</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+         x="283.66394"
+         y="81.542992"
+         id="text30"><tspan
+           sodipodi:role="line"
+           id="tspan30"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:2"
+           x="283.66394"
+           y="81.542992">5'</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+         x="283.67599"
+         y="56.623634"
+         id="text31"><tspan
+           sodipodi:role="line"
+           id="tspan31"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:2"
+           x="283.67599"
+           y="56.623634">3'</tspan></text>
+      <g
+         id="g179"
+         transform="translate(1.1394068)">
+        <g
+           id="g178">
+          <path
+             style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.00855;stroke-dasharray:none;stroke-opacity:1"
+             d="M 28.274092,58.470311 V 76.286703"
+             id="path117"
+             inkscape:tile-cx="28.274093"
+             inkscape:tile-cy="67.378509"
+             inkscape:tile-w="1.0085501"
+             inkscape:tile-h="17.816393"
+             inkscape:tile-x0="27.769818"
+             inkscape:tile-y0="58.470313" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             id="use146" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(8.0684006)"
+             id="use147" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(16.136801)"
+             id="use148" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(24.205202)"
+             id="use149" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(32.273602)"
+             id="use150" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(40.342003)"
+             id="use151" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(48.410404)"
+             id="use152" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(56.478804)"
+             id="use153" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(64.547205)"
+             id="use154" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(72.615605)"
+             id="use155" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(80.684006)"
+             id="use156" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(88.752407)"
+             id="use157" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(96.820807)"
+             id="use158" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(104.88921)"
+             id="use159" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(112.95761)"
+             id="use160" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(121.02601)"
+             id="use161" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(129.09441)"
+             id="use162" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(137.16281)"
+             id="use163" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(145.23121)"
+             id="use164" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(153.29961)"
+             id="use165" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(161.36801)"
+             id="use166" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(169.43641)"
+             id="use167" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(177.50481)"
+             id="use168" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(185.57321)"
+             id="use169" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(193.64161)"
+             id="use170" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(201.71002)"
+             id="use171" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(209.77842)"
+             id="use172" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(217.84682)"
+             id="use173" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(225.91522)"
+             id="use174" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(233.98362)"
+             id="use175" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(242.05202)"
+             id="use176" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(250.12042)"
+             id="use177" />
+          <use
+             x="0"
+             y="0"
+             inkscape:tiled-clone-of="#path117"
+             xlink:href="#path117"
+             transform="translate(-8.0684006)"
+             id="use178" />
+        </g>
+      </g>
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#4f888e;stroke-width:0.674823;stroke-dasharray:none;stroke-opacity:1"
+         id="rect179"
+         width="118.49911"
+         height="10.030924"
+         x="7.8977838"
+         y="49.610126" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4f888e;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+         x="54.862118"
+         y="38.476715"
+         id="text179"><tspan
+           sodipodi:role="line"
+           id="tspan179"
+           style="fill:#4f888e;fill-opacity:1;stroke:none;stroke-width:1"
+           x="54.862118"
+           y="38.476715">read 1</tspan></text>
+      <path
+         style="fill:none;fill-opacity:1;stroke:#4f888e;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow)"
+         d="M 15.741583,43.909166 H 112.30309"
+         id="path179" />
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#4f888e;stroke-width:0.674823;stroke-dasharray:none;stroke-opacity:1"
+         id="rect179-8"
+         width="118.49911"
+         height="10.030924"
+         x="-292.97696"
+         y="-84.146889"
+         transform="scale(-1)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CaskaydiaCove Nerd Font';-inkscape-font-specification:'CaskaydiaCove Nerd Font, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4f888e;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+         x="220.79143"
+         y="101.41554"
+         id="text179-8"><tspan
+           sodipodi:role="line"
+           id="tspan179-4"
+           style="fill:#4f888e;fill-opacity:1;stroke:none;stroke-width:1"
+           x="220.79143"
+           y="101.41554">read 2</tspan></text>
+      <path
+         style="fill:none;fill-opacity:1;stroke:#4f888e;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DartArrow-7)"
+         d="M 284.48239,90.884335 H 187.92088"
+         id="path179-5" />
+    </g>
+  </g>
+</svg>

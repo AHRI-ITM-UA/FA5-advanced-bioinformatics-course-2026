@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Variant calling – Pathogen genomics workshop</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../content/phylogenetics.html" rel="next">
+<link href="../../content/genomics/mapping.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-4041097508037897eaa93bc43357139c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-9f95b466480ac165ec6021b2b3e634d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-4041097508037897eaa93bc43357139c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": true,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/setup.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/variant-calling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Pathogen genomics workshop</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/refresher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Refresher and other resources</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">From reads to variants</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup and preparations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/pipeline-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/tools-and-formats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/qc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quality control and trimming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/variant-calling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/phylogenetics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#types-of-variants" id="toc-types-of-variants" class="nav-link active" data-scroll-target="#types-of-variants"><span class="header-section-number">6.1</span> Types of variants</a>
+  <ul>
+  <li><a href="#even-more-indices" id="toc-even-more-indices" class="nav-link" data-scroll-target="#even-more-indices"><span class="header-section-number">6.1.1</span> Even more indices</a></li>
+  </ul></li>
+  <li><a href="#calling-short-variants---gatk-haplotypecaller" id="toc-calling-short-variants---gatk-haplotypecaller" class="nav-link" data-scroll-target="#calling-short-variants---gatk-haplotypecaller"><span class="header-section-number">6.2</span> Calling (short) variants - <code>GATK HaplotypeCaller</code></a></li>
+  <li><a href="#vcf-files-revisited" id="toc-vcf-files-revisited" class="nav-link" data-scroll-target="#vcf-files-revisited"><span class="header-section-number">6.3</span> VCF files revisited</a></li>
+  <li><a href="#sec-vcf-visualisation" id="toc-sec-vcf-visualisation" class="nav-link" data-scroll-target="#sec-vcf-visualisation"><span class="header-section-number">6.4</span> Visualisation using IGV</a></li>
+  <li><a href="#combine-samples" id="toc-combine-samples" class="nav-link" data-scroll-target="#combine-samples"><span class="header-section-number">6.5</span> Combine samples</a></li>
+  <li><a href="#joint-genotyping" id="toc-joint-genotyping" class="nav-link" data-scroll-target="#joint-genotyping"><span class="header-section-number">6.6</span> Joint genotyping</a></li>
+  <li><a href="#variant-filtering" id="toc-variant-filtering" class="nav-link" data-scroll-target="#variant-filtering"><span class="header-section-number">6.7</span> Variant filtering</a></li>
+  <li><a href="#annotation-of-variants" id="toc-annotation-of-variants" class="nav-link" data-scroll-target="#annotation-of-variants"><span class="header-section-number">6.8</span> Annotation of variants</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/genomics/variant-calling.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/setup.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/variant-calling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-variant-calling" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The previous steps of our pipeline were concerned with 1) the quality control of our sequence reads and 2) where all these reads fit on our reference genome. In this final step we will assess the genetic differences between each of our samples and the reference genome. This process is called <em>variant calling</em> or <em>variant detection</em>. While conceptually simple, the main challenge is that it can be difficult to discern sequencing errors from real variants.</p>
+<p>The tools and steps involved in the variant calling process are outlined in the diagram below.</p>
+<p><a href="../assets/pipeline-variant-calling.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../assets/pipeline-variant-calling.svg" class="no-lightbox img-fluid"></a></p>
+<p>Variants can be identified by looking at all the reads at a given position in the genome and looking at the variation present in the different reads covering the position. The more reads that we see that <em>agree</em> on a specific variant compared to the reference genome, the more confident we can be that we are dealing with a real variant, in that particular sample. Of course, there are many considerations to make at this point; we need to take into account the possibility of sequencing errors, mapping errors, the ploidy of our organism, the possibility of complex infections (i.e., multiple genetically distinct parasites in a single sample, instead of a single clone), etc. Moreover, we can compare variants across different samples and perform various filtering steps to reduce the chance of false positives.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://melbournebioinformatics.github.io/MelBioInf_docs/tutorials/variant_calling_galaxy_1/media/igv_mb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Source: http://melbournebioinformatics.github.io/MelBioInf_docs/tutorials/variant_calling_galaxy_1/variant_calling_galaxy_1/"><img src="http://melbournebioinformatics.github.io/MelBioInf_docs/tutorials/variant_calling_galaxy_1/media/igv_mb.jpg" class="img-fluid figure-img" alt="Source: http://melbournebioinformatics.github.io/MelBioInf_docs/tutorials/variant_calling_galaxy_1/variant_calling_galaxy_1/"></a></p>
+<figcaption>Source: <a href="http://melbournebioinformatics.github.io/MelBioInf_docs/tutorials/variant_calling_galaxy_1/variant_calling_galaxy_1/">http://melbournebioinformatics.github.io/MelBioInf_docs/tutorials/variant_calling_galaxy_1/variant_calling_galaxy_1/</a></figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/media/fig2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Source: https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#section-3-variant-calling"><img src="https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/media/fig2.png" class="img-fluid figure-img" alt="Source: https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#section-3-variant-calling"></a></p>
+<figcaption>Source: <a href="https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#section-3-variant-calling">https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#section-3-variant-calling</a></figcaption>
+</figure>
+</div>
+<p>We will make use of <a href="https://gatk.broadinstitute.org/hc/en-us">GATK4 (Genomic Analysis ToolKit)</a> for the variant detection components of our pipeline. This is a very extensive toolkit which offers many different utilities.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;GATK is actually a java program, which means that we can pass it additional arguments like memory requirements. See the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531892-GATK4-command-line-syntax">GATK documentation</a> for more information on this.</p></div></div><section id="types-of-variants" class="level2 page-columns page-full" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="types-of-variants"><span class="header-section-number">6.1</span> Types of variants</h2>
+<p>We can identify several different types of genetic variants:</p>
+<ul>
+<li>Single nucleotide polymorphism (SNPs)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
+<ul>
+<li>If a SNP results in an amino acid change, we refer to it as a <strong>nonsynonomous substitution</strong> (resulting in a &amp;&amp;<strong>missense</strong> mutation). If there is no change in the amino acid sequence (thanks to codon redundancy), it is referred to as a <strong>synonomous substitution</strong>.</li>
+<li>If a SNP introduces a stop-codon and results in premature termination of mRNA translation, this is termed a <strong>nonsense</strong> mutation, if it removes a stop-codon, it is called a <strong>nonstop</strong> mutation.</li>
+</ul></li>
+<li>Short insertions and deletions (indels)
+<ul>
+<li>If the indel is not a multiple of three bases, this leads to a <strong>frameshift</strong> mutation.</li>
+</ul></li>
+<li>Structural variants (SVs): larger (chromosomal) rearrangements (&gt; 50 base pairs) like insertions, deletions, inversions, translocations or duplications.</li>
+<li>Copy number variation (CNVs): a particular type of SV caused by the duplication or deletion of a particular DNA segment (e.g., <em>hrp2</em> and <em>hrp3</em> genes in <em>P. falciparum</em>).</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;A related term is the single nucleotide variation (SNV). <a href="lh3.github.io/2021/03/15/snp-vs-snv">It appears to be</a> more commonly used for somatic rather than germline events, although others use it to describe single nucleotide changes below a certain frequency threshold.</p></div></div><p>The GATK variant discovery pipeline that we introduce below focuses on short (germline, as opposed to somatic) variants, i.e.&nbsp;SNPs and indels.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Structural variant discovery
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Larger structural variant discovery tends to be more challenging than short variant detection. Long-reads help quite a bit, as does paired-end sequencing. Similar considerations apply for calling haplotypes (~ combination of nearby variants, or more strictly: a physical grouping of genetic variants that is inherited together).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../assets/structural-variant-detection.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Detecting structural variants. Source: Baker (2012). Structural Variation: The Genome’s Hidden Architecture. https://doi.org/10.1038/nmeth.1858"><img src="../assets/structural-variant-detection.webp" class="img-fluid figure-img" alt="Detecting structural variants. Source: Baker (2012). Structural Variation: The Genome’s Hidden Architecture. https://doi.org/10.1038/nmeth.1858"></a></p>
+<figcaption>Detecting structural variants. Source: Baker (2012). Structural Variation: The Genome’s Hidden Architecture. <a href="https://doi.org/10.1038/nmeth.1858">https://doi.org/10.1038/nmeth.1858</a></figcaption>
+</figure>
+</div>
+<p>Further reading:</p>
+<ul>
+<li><a href="https://gatk.broadinstitute.org/hc/en-us/articles/9022476791323-Structural-Variants">https://gatk.broadinstitute.org/hc/en-us/articles/9022476791323-Structural-Variants</a></li>
+<li><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1828-7">Mahmoud, et al.&nbsp;2019. Structural variant calling: the long and the short of it</a></li>
+<li><a href="https://www.nature.com/articles/s41586-020-2287-8">Collins, et al.&nbsp;2020. A structural variation reference for medical and population genetics</a></li>
+</ul>
+</div>
+</div>
+<section id="even-more-indices" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="even-more-indices"><span class="header-section-number">6.1.1</span> Even more indices</h3>
+<p>Several of the GATK tools require us to index the reference genome again(!), but this time using <code>samtools faidx ref.fasta</code>, resulting in a <a href="http://www.htslib.org/doc/samtools-faidx.html"><code>.fai</code> indexed reference file</a>. Like before, this creates a new file in the reference genome directory, with the extension <code>.fai</code>. Additionally, we also need a <code>.dict</code> <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037422891-CreateSequenceDictionary-Picard">dictionary file</a>, which can be created using <code>gatk CreateSequenceDictionary –R ref.fasta</code>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Create the two required reference index files for both of your <em>Plasmodium</em> reference genomes.</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="calling-short-variants---gatk-haplotypecaller" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="calling-short-variants---gatk-haplotypecaller"><span class="header-section-number">6.2</span> Calling (short) variants - <code>GATK HaplotypeCaller</code></h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Just like the other steps in our pipeline, there exist many different algorithmic implementations of variant calling, each with their own strengths, weaknesses and intended use cases.</p>
+<p>Aside from GATK HaplotypeCaller, you might encounter</p>
+<ul>
+<li><a href="http://samtools.github.io/bcftools/">bcftools mpileup</a> (position-based caller, made by the same developers as <code>samtools</code>)</li>
+<li><a href="https://github.com/freebayes/freebayes">FreeBayes</a></li>
+</ul>
+</div>
+</div>
+<p>We will use the <code>GATK HaplotypeCaller</code> tool to simultaneously detect both SNPs and indels. It uses local <em>de novo</em> assembly of haplotype in regions that show signs of variation. You can find out more about the underlying process in the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller">GATK documentation</a> or in this <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531412-HaplotypeCaller-in-a-nutshell">GATK article</a>.</p>
+<p>The tool requires two</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> HaplotypeCaller <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-R</span> reference.fasta <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-I</span> alignment.sort.dup.bam <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> output.g.vcf.gz<span class="st">" </span><span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">    -ERC GVCF</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st"># optional arguments:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st"># set number of threads: --native-pair-hmm-threads 2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st"># set maximum and initial memory usage: --java-options "</span>-Xmx4g <span class="at">-Xms4g</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The output of this process is a GVCF file. It is very similar to the VCF file format, except that it tracks each genomic coordinate instead of only those positions where variations were detected. Also note that the output is compressed with gzip by default.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Run <code>gatk HaplotypeCaller</code> for a single BAM file and inspect the resulting VCF file.</li>
+<li>Create your own script to call variants for all for the Peruvian <em>P. falciparum</em> AmpliSeq alignments. Afterwards, compare your approach with the <a href="../../training/scripts/call_variants.sh"><code>call_variants.sh</code> script</a> and <a href="../../training/scripts/call_variants-extended.sh"><code>call_variants-extended.sh</code></a> scripts.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="vcf-files-revisited" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="vcf-files-revisited"><span class="header-section-number">6.3</span> VCF files revisited</h2>
+<p>The output of variant calling is a file in the Variant Call Format (<code>.vcf</code>), which we already encountered in <span class="quarto-unresolved-ref">?sec-vcf</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../assets/vcf-format.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Overview of Variant Call Format (VCF). Source: https://vcftools.sourceforge.net/VCF-poster.pdf"><img src="../assets/vcf-format.png" class="img-fluid figure-img" alt="Overview of Variant Call Format (VCF). Source: https://vcftools.sourceforge.net/VCF-poster.pdf"></a></p>
+<figcaption>Overview of Variant Call Format (VCF). Source: <a href="https://vcftools.sourceforge.net/VCF-poster.pdf">https://vcftools.sourceforge.net/VCF-poster.pdf</a></figcaption>
+</figure>
+</div>
+<p>More info can be found on on <a href="https://davetang.github.io/learning_vcf_file/">Dave Tang’s Learning the VCF page</a></p>
+</section>
+<section id="sec-vcf-visualisation" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-vcf-visualisation"><span class="header-section-number">6.4</span> Visualisation using IGV</h2>
+<p>Similar to our BAM files, we can visualise VCF files in tools like <a href="https://igv.org/">IGV (Integrative Genomics Viewer)</a>. For a tutorial on this, we refer to this <a href="https://datacarpentry.org/wrangling-genomics/04-variant_calling.html#viewing-with-igv">Data Carpentry workshop</a>.</p>
+</section>
+<section id="combine-samples" class="level2 page-columns page-full" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="combine-samples"><span class="header-section-number">6.5</span> Combine samples</h2>
+<p>After the previous step, we ended up with a GVCF file for each of our samples. Now we will merge these samples into a single <em>multi-sample</em> GVCF file using either <code>GATK CombineGVCFs</code> (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/21905054376859-CombineGVCFs">docs</a>) or <code>GATK GenomicsDBImport</code> (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/21905031525019-GenomicsDBImport">docs</a>)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;The latter is slightly faster, while the former makes it easier to work with multiple intervals. See <a href="https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#2-apply-combinegvcfs">this tutorial</a> for an example on how to use CombineGVCFs.</p></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenomicsDBImport <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--genomicsdb-workspace-path</span> /path/to/store/database <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--intervals</span> <span class="op">&lt;</span>genomic-range<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--intervals</span> <span class="op">&lt;</span>genomic-range<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--sample-name-map</span> <span class="op">&lt;</span>cohort.sample_map<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--tmp-dir</span> /path/to/large/tmp</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># optional arguments:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set maximum and initial memory usage: --java-options "-Xmx4g -Xms4g"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># number of samples to process simultaneously (affects memory): --batch-size 50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>cohort.sample_map</code> file should contain a list of sample and file names in tab-delimited format:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sample1</span>      sample1.vcf.gz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sample2</span>      sample2.vcf.gz</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">sample3</span>      sample3.vcf.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For a small number of samples, you can also provide each of them directly using multipe <code>-V</code> flags:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenomicsDBImport <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> sample_1.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> sample_2.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> sample_3.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--genomicsdb-workspace-path</span> /path/to/store/output/database <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--tmp-dir</span><span class="op">=</span>/path/to/large/tmp <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">-L</span> <span class="op">&lt;</span>genomic-interval<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>-L</code> (or <code>--intervals</code>) option is used to define the genomic intervals over which the tool operates. Unfortunately, these intervals need to be prepared and provided manually. For the <em>Plasmodium falciparum</em> Peru AmpliSeq panel, you can use:</p>
+<details>
+<summary>
+Click me to show the full list of intervals:
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-L</span> Pf3D7_01_v3:179679-179985 <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:180375-180467 <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:190106-191218 <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:191661-192230 <span class="dt">\</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:192264-192925 <span class="dt">\</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:192961-194344 <span class="dt">\</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:194371-195570 <span class="dt">\</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:195762-196800 <span class="dt">\</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:196836-200312 <span class="dt">\</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:200448-200978 <span class="dt">\</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:204949-205193 <span class="dt">\</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:339163-339466 <span class="dt">\</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:464638-466535 <span class="dt">\</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_01_v3:466803-470193 <span class="dt">\</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_02_v3:519270-519567 <span class="dt">\</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_02_v3:694157-694456 <span class="dt">\</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_03_v3:361017-361320 <span class="dt">\</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_03_v3:849331-849578 <span class="dt">\</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_04_v3:532089-532395 <span class="dt">\</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_04_v3:691941-692036 <span class="dt">\</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_04_v3:747935-749935 <span class="dt">\</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_04_v3:770125-770439 <span class="dt">\</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:921740-921999 <span class="dt">\</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:957777-958361 <span class="dt">\</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:958396-959096 <span class="dt">\</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:959153-959988 <span class="dt">\</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:960166-961735 <span class="dt">\</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:962020-962193 <span class="dt">\</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:1188236-1188508 <span class="dt">\</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_05_v3:1214304-1214615 <span class="dt">\</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_06_v3:148637-148858 <span class="dt">\</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_06_v3:635908-636217 <span class="dt">\</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_07_v3:403083-404022 <span class="dt">\</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_07_v3:404296-406440 <span class="dt">\</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_07_v3:455433-455668 <span class="dt">\</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_07_v3:782049-782219 <span class="dt">\</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:500969-501114 <span class="dt">\</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:548041-549952 <span class="dt">\</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:549982-550332 <span class="dt">\</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:803010-803329 <span class="dt">\</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:1373986-1374244 <span class="dt">\</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:1374249-1374474 <span class="dt">\</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:1374486-1374705 <span class="dt">\</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_08_v3:1374711-1375419 <span class="dt">\</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_09_v3:230922-231210 <span class="dt">\</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_09_v3:1005112-1005419 <span class="dt">\</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_10_v3:340949-341230 <span class="dt">\</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_10_v3:1172615-1172823 <span class="dt">\</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_11_v3:416182-416488 <span class="dt">\</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_11_v3:874927-875071 <span class="dt">\</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_11_v3:1294408-1295115 <span class="dt">\</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_11_v3:1295124-1295390 <span class="dt">\</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_11_v3:1295423-1295672 <span class="dt">\</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_11_v3:1505334-1505635 <span class="dt">\</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_12_v3:717790-718460 <span class="dt">\</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_12_v3:718476-719820 <span class="dt">\</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_12_v3:1126866-1127122 <span class="dt">\</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_12_v3:1552012-1552292 <span class="dt">\</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_12_v3:1611167-1611448 <span class="dt">\</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_12_v3:2091976-2094267 <span class="dt">\</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_13_v3:1595960-1596123 <span class="dt">\</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_13_v3:1724599-1727164 <span class="dt">\</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_13_v3:1827453-1827763 <span class="dt">\</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_13_v3:2503123-2503359 <span class="dt">\</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_13_v3:2503390-2505580 <span class="dt">\</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_13_v3:2840639-2841793 <span class="dt">\</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_14_v3:293359-293982 <span class="dt">\</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_14_v3:294267-294832 <span class="dt">\</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_14_v3:832462-832742 <span class="dt">\</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_14_v3:1381895-1381990 <span class="dt">\</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>-L Pf3D7_API_v3:24048-34146 <span class="dt">\</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>-L Pf_M76611:3384-4634</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>For the other AmpliSeq panels, check out the <a href="https://github.com/Ekattenberg/Plasmodium-AmpliSeq-Pipeline/tree/main">pipelines by Eline Kattenberg on GitHub</a>.</p>
+<p>For whole-genome sequencing, the MalariaGEN Pf7 database uses 10 kilobase intervals (and <code>-ip</code>/<code>--interval-padding 500</code> to add some padding) (see <a href="https://www.malariagen.net/wp-content/uploads/2023/11/Pf7-Details-of-bioinformatics-methods.pdf">methods</a>).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Improving performance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Merging GVCF files can be quite slow. GATK has written <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360056138571-GenomicsDBImport-usage-and-performance-guidelines">an article</a> on how to address performance issues.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Merge the GVCFs for all Peruvian <em>Plasmodium falciparum</em> AmpliSeq samples.</p>
+</div>
+</div>
+</section>
+<section id="joint-genotyping" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="joint-genotyping"><span class="header-section-number">6.6</span> Joint genotyping</h2>
+<p>After combining the GVCF files for all our samples, it is time to perform <em>joint genotyping</em> using <code>GATK GenotypeGVCFs</code> (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/21905118377755-GenotypeGVCFs">docs</a>). The main idea behind this step is to improve the inference of variant detection by leveraging the information that is present across all samples in our cohort. For more information on the logic behind joint genotyping, we refer to <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">this GATK article</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-R</span> reference.fasta <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> gendb://genomicsDB <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> variants.vcf.gz <span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--tmp-dir</span> /path/to/large/tmp</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># optional arguments:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># set maximum and initial memory usage: --java-options "-Xmx4g -Xms4g"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Perform joint-genotyping for the multi-sample VCF file with the Peruvian <em>Plasmodium falciparum</em> AmpliSeq samples.</li>
+<li>Inspect and visualise the output VCF (optionally using IGV).</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Have a look at GATK’s article on VCF files, in particular the section on the structure of variant call records and how to interpret them: <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format">https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format</a>.</p>
+</div>
+</div>
+</section>
+<section id="variant-filtering" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="variant-filtering"><span class="header-section-number">6.7</span> Variant filtering</h2>
+<p>Not all the variants present in our VCF file are likely to be real. Therefor, a final step in our pipeline is to filter out variants that are likely to be errors. We will discuss two different approaches: <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR">Variant Quality Score Recalibration (VQSR)</a> (recommended by GATK) and <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants">hard-filtering</a>.</p>
+<p>Hard-filtering works by setting specific thresholds for one or multiple annotations (i.e.&nbsp;properties of a variant, like read coverage, proportion of forward/reverse reads, etc.) VQSR is a more powerful because it tries to combine all of these annotations to make a decision about good or bad variants, but to do this, it require a large number of samples and a database of well-curated known variants. Therefor, we do not recommend it for AmpliSeq data, but it is probably a good idea to use it for WGS data.</p>
+<p>The GATK tool that performs hard-filtering is <code>GATK VariantFiltration</code> (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/21905081124891-VariantFiltration">docs</a>). The two main options are <code>--filter-name</code> and <code>--filter-expression</code>, which allow you to set a particular threshold for an annotation. For example, the code below filters out variants which have a sequencing depth lower than 10 (<code>DP &lt; 100</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> <span class="at">--java-options</span> <span class="st">"-Xmx7g"</span> VariantFiltration <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-R</span> reference.fasta <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> variants.vcf.gz <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> variants.filter.vcf.gz <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--filter-name</span> <span class="st">"DP100"</span> <span class="dt">\</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--filter-expression</span> <span class="st">"DP &lt; 100"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running the above will create a VCF file where the <code>filter</code> column is said to <code>PASS</code> or not depending on the filters that were applied. In order to actually remove the suspected bad variants from the file, we still need to run the following:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk/gatk</span> SelectVariants <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-R</span> reference.fasta <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> variants.filter.vcf.gz <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--exclude-filtered</span> <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> variants.filter.pass.vcf.gz</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># or equivalently</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-f</span> <span class="st">'PASS'</span> <span class="at">-O</span> vcf <span class="at">-o</span> variants.filter.pass.vcf variants.filter.vcf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hard-filtering should be done separately for SNPs and indels
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The filtering steps should ideally be performed separately for both SNPs and indels. You can split your VCF file via:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create SNPs-only subset</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> SelectVariants <span class="dt">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> cohort.vcf.gz <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-select-type</span> SNP <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> snps.vcf.gz</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create indels-only subset</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> SelectVariants <span class="dt">\</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">-V</span> cohort.vcf.gz <span class="dt">\</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">-select-type</span> INDEL <span class="dt">\</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">-O</span> indels.vcf.gz</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--select-type</span> mixed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>After filtering, they can be merged back together.</p>
+<p>See <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering">here</a> (section 2) for more info on the <code>--select-type</code> flag.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>For hard-filtering AmpliSeq data, you can explore the <a href="https://github.com/Ekattenberg/Plasmodium-AmpliSeq-Pipeline/blob/main/Pf_AmpliSeq_Peru/5.PERU_Ampliseq_filter_annotation_PF_281122.bash"><em>P. falciparum</em> AmpliSeq Peru pipeline</a>.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Further reading:</p>
+<ul>
+<li>Overview of annotations to filter on: <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants">https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants</a></li>
+<li>Hands-on GATK filtering approaches: <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering">https://gatk.broadinstitute.org/hc/en-us/articles/360035531112–How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering</a></li>
+<li><a href="https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#section-4-filter-and-prepare-analysis-ready-variants">https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#section-4-filter-and-prepare-analysis-ready-variants</a></li>
+<li><a href="https://speciationgenomics.github.io/filtering_vcfs/">https://speciationgenomics.github.io/filtering_vcfs/</a></li>
+<li><a href="https://sib-swiss.github.io/NGS-variants-training/2021.9/day2/filtering_evaluation/">https://sib-swiss.github.io/NGS-variants-training/2021.9/day2/filtering_evaluation/</a></li>
+<li><a href="https://qcb.ucla.edu/wp-content/uploads/sites/14/2016/03/IntroductiontoVariantCallsetEvaluationandFilteringTutorialAppendix-LA2016.pdf">https://qcb.ucla.edu/wp-content/uploads/sites/14/2016/03/IntroductiontoVariantCallsetEvaluationandFilteringTutorialAppendix-LA2016.pdf</a></li>
+<li><a href="https://app.terra.bio/#workspaces/help-gatk/GATKTutorials-Germline">https://app.terra.bio/#workspaces/help-gatk/GATKTutorials-Germline</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="annotation-of-variants" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="annotation-of-variants"><span class="header-section-number">6.8</span> Annotation of variants</h2>
+<p>The final step in our pipeline is to annotate variants. For this, a tool like <a href="http://pcingola.github.io/SnpEff/">snpEff</a> can be used. You can see it being used in the AmpliSeq pipeline <a href="https://github.com/Ekattenberg/Plasmodium-AmpliSeq-Pipeline/blob/2d7779e8463bbe97523f96c9dccd70ebf91161c9/Pf_AmpliSeq_Peru/5.PERU_Ampliseq_filter_annotation_PF_281122.bash#L160">here</a>.</p>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/AHRI-ITM-UA\.github\.io\/FA5-advanced-bioinformatics-course-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../content/genomics/mapping.html" class="pagination-link" aria-label="Alignment to reference genome">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../content/phylogenetics.html" class="pagination-link" aria-label="Introduction to phylogenetics">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to phylogenetics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 <a href="https://ahri.gov.et/">AHRI</a> - <a href="https://www.itg.be/en/">ITM</a> - <a href="https://www.uantwerpen.be/en/">UA</a> <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height:1.2em" alt="CC"></a> <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height:1.2em" alt="BY"></a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Source available on <a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026">GitHub</a></p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/genomics/variant-calling.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
