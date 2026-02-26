@@ -1,3 +1,14 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
 # Variant calling {#sec-variant-calling}
 
 The previous steps of our pipeline were concerned with 1) the quality control of our sequence reads and 2) where all these reads fit on our reference genome. In this final step we will assess the genetic differences between each of our samples and the reference genome. This process is called _variant calling_ or _variant detection_. While conceptually simple, the main challenge is that it can be difficult to discern sequencing errors from real variants.

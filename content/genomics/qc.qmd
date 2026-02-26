@@ -1,3 +1,14 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
 # Quality control and trimming {#sec-qc}
 
 The first step in our pipeline deals with assessing the quality of our sequence reads and when necessary cleaning them. The reads are provided to us by the sequencer in the form of `FASTQ` (or `fastq`) files. We already introduced this file format in a previous chapter (@sec-fastq), but we will dive in a bit deeper this time around.

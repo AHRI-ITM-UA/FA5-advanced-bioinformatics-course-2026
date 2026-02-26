@@ -1,3 +1,14 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
 # Pipeline overview
 
 <!-- Bioinformatics tools and formats used in genomics and next-generation sequencing -->

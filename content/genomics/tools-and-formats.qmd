@@ -1,3 +1,14 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
 # Bioinformatics tools and file formats
 
 Below we have created a list of the various tools that are used for the steps in this pipeline. As a disclaimer: a common occurrence in bioinformatics is that several different approaches have been developed for a particular task or analysis, leading to a large (and sometimes confusing) ecosystem of different software tools, each with their own advantages, disadvantages and learning curve. In the course we will try to focus on one representative tool for each task, but be aware that these are not the only ones and there might exist more suitable options depending on your data and use cases.
