@@ -74,7 +74,7 @@ book:
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
         # - content/bacterial_genomics/bacterial_genomics.qmd
-    - content/phylogenetics.qmd
+    - content/phylogenomics/phylogenetics_exercise.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd
 
     #   - part: "Bioinformatics file formats and tools"

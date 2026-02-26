@@ -1,0 +1,210 @@
+---
+author:
+  - name: Pieter Monsieurs
+    orcid: 0000-0003-2214-6652
+    email: pmonsieurs@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
+# Genomics & phylogenomics exercise {#sec-phylo}
+
+### 1. Background
+Visceral leishmaniasis (VL), caused by the protozoan parasite _Leishmania donovani_, is a significant public health challenge in East Africa, Sudan, South Sudan, Ethiopia, Kenya, and Somalia being most affected. Recent genomic studies have revealed complex population structures and hybrid genotypes within _L. donovani_, highlighting the need for advanced molecular tools to understand parasite evolution, drug resistance, and outbreak dynamics.
+In this exercise, you will work with whole genome sequencing (WGS) data derived from [a recent study that directly sequenced _L. donovani_ from patient blood samples during the 2019–2022 VL outbreak in Kenya](https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0013144). This dataset provides a unique opportunity to explore single nucleotide polymorphisms (SNPs) and apply phylogenomic techniques to:
+
+* Identify genetic variants between the different strains
+* Reconstruct the evolutionary relationships among <i>L. donovani</i> isolates.
+* Investigate the presence of hybrid genotypes and their potential impact on disease transmission.
+
+By analyzing this data, you will gain hands-on experience in SNP calling, phylogenetic tree construction, and population structure analysis, which are essential skills for modern genomics and infectious disease research.
+
+
+### 2. Explore the input data
+All the required input data can be [downloaded from Google Drive](https://drive.google.com/drive/folders/1IXuN2NUr6zb6HYCNqQeSD6rlqH9C30OC?usp=sharing).
+ These data will contain all the input fastq files, the reference genome and the metadata required to run the exercise below. The metadata is an important file that contains information about the samples, such as the sample ID, the location where the sample was collected, the date of collection, and other relevant information. This information can be used to interpret the results of the analyses and to understand the context of the samples. This file will contain important information about the samples, such as their origin, collection date, and any other relevant details that may be useful for your analyses or for visualisation.
+
+::: {.callout-caution title="Exercise"}
+* create a directory in your home folder and download the file to that directory
+* unzip the file and explore the content of the directory. Check how the directory structure looks like and what files are available.
+* inspect the metadata file and check what information is available about the samples.
+* inspect the fastq files. How many reads are available in one example fastq file? For those that already want to practice with for loops, write a command that loops over all the fastq files and counts the number of reads in each file.
+
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Tips
+* downloading a dataset can be done using the `wget` command in the terminal
+* The downloaded file is a tar.gz file, which is a compressed archive that contains multiple files and directories. You can use the `tar` command to extract the contents of the file. For example, you can run `tar -xzf filename.tar.gz` to extract the files in the current directory.
+* You can use the `ls` command to list the files in the directory, and the `head` command to view the first few lines of the metadata file. `cd` command can be used to navigate through the directories.
+* To count the number of reads in the fastq files, you can use the `wc` command.
+* use `for` loop to iterate over all the fastq files and count the number of reads in each file.
+
+:::
+
+
+### 3. Quality control
+Quality control of the raw data is an important step in any genomics analysis, as it helps to identify and remove low-quality reads that can affect the accuracy of downstream analyses. In this exercise, you will use the FastQC tool to perform quality control on the raw fastq files. FastQC is a widely used tool that provides a comprehensive report on the quality of the sequencing data, including metrics such as per base sequence quality, per sequence quality scores, and overrepresented sequences. By running FastQC on your raw data, you can identify any potential issues with the sequencing data and take appropriate steps to address them before proceeding with downstream analyses. If you have many input fastq files, you can use MultiQC to aggregate the FastQC reports and visualize them in a single report, which can help you to quickly identify any patterns or issues across all your samples
+
+::: {.callout-caution title="Exercise"}
+* create a "results" directory to store the output of the analyses. Within that results directory, create a fastqc directory to store the FastQC reports.
+* run FastQC on the raw fastq files to perform quality control. You can use the `fastqc` command in the terminal to run FastQC on your fastq files.
+* use the command `multiqc` in the terminal to run MultiQC on the FastQC reports and generate a single report that summarizes the quality of all your samples.
+* open the corresponding html files to inspect the quality of the data. Check the per base sequence quality, per sequence quality scores, and overrepresented sequences. Are there any issues with the data that you need to address before proceeding with downstream analyses?
+* If there are issues with the data, such as low-quality reads or adapter contamination, you can use a tool like `fastp` to trim the reads and remove any low-quality bases or adapter sequences. You can run `fastp` on your fastq files to perform trimming and generate new fastq files that are cleaned and ready for downstream analyses.
+
+:::
+
+::: {.callout-tip collapse="true"}
+* FastQC (`fastqc`) can be run on individual fastq files or on multiple files at once. For example, you can use the wild character `*` to run FastQC on all fastq files in a directory. But this will only work for the `fastqc` command, but will not work for many (most) of the other tools we will see in this course, e.g. `bwa`, `gatk`, `plink`, etc. For those tools, you will need to use a `for` loop to iterate over all the fastq files and run the command on each file separately.
+* When running fastp, make sure to create a new output directory to store the trimmed fastq files, and specify the output file names for the trimmed fastq files. After running fastp, you can run FastQC again on the trimmed fastq files to check if the quality has improved. As you will see, fastp is not only removing adapters, but also trimming low-quality bases from the ends of the reads, which can improve the overall quality of the data.
+
+:::
+
+### 4. Mapping with BWA-MEM and SAMtools
+Mapping the reads to a reference genome is a crucial step in genomics analyses, as it allows you to identify the genomic locations of the reads and to call variants such as single nucleotide polymorphisms (SNPs). In this exercise, you will use the BWA-MEM algorithm to align the trimmed reads to the reference genome, and then use SAMtools and Picard to process the resulting alignments. Before you can start with mapping the reads, you will need to index the reference genome using BWA, which is needed for the alignment step. This will create several index files that are used by BWA to efficiently align the reads to the reference genome. The indexing step only needs to be done once for each reference genome, and the resulting index files can be reused for multiple alignments.
+
+Mapping of the reads happens with BWA-MEM, which is a widely used algorithm for aligning short reads to a reference genome.
+
+* BWA-MEM is designed to handle large genomes and can efficiently align reads of varying lengths. After running BWA-MEM, you will obtain SAM files that contain the alignments of the reads to the reference genome.
+* You can then use SAMtools to convert the SAM files to BAM files, which are binary versions of the SAM files that are more efficient for downstream analyses.
+* Additionally, you can use Picard to mark duplicates in the BAM files, which helps to remove any duplicate reads that may have been generated during the sequencing process. This is important because duplicate reads can affect the accuracy of variant calling and other downstream analyses.
+
+::: {.callout-caution title="Exercise"}
+* index the reference genome using BWA
+* create a directory to store the output of the BWA-MEM alignments
+* We start with making a command chain for BWA and downstream processing for only one sample, and then we will use a `for` loop to run the command chain for all samples.
+    * run BWA-MEM to align the trimmed reads to the reference genome. Make sure to specify the appropriate parameters for BWA, such as the seed length (increase the seed length to 30) and the number of threads to use. Save the output to a .sam file and check the file size.
+    * use SAMtools to convert the resulting SAM files to BAM files, and to sort and index the BAM files.
+    * Try to combine the previous commands into a single command using pipes (`|`) to avoid creating (very large!) intermediate files and to speed up the processing.
+    * index the resulting BAM files using SAMtools, which is needed for downstream analyses such as variant calling. This will create index files that are used by SAMtools to efficiently access the alignments in the BAM files.
+    * run `samtools flagstat` on the indexed BAM files to get statistics about the alignments.
+    * filter out all alignments with a mapping quality (MAPQ) score below a certain threshold (e.g., 30) using SAMtools. This will help to remove low-quality alignments that may not be reliable for downstream analyses.
+    * use Picard to mark duplicates in the BAM files.
+    * use samtools to only keep the reads that are properly paired.
+* After running the command chain for one sample, use a `for` loop to iterate over all the samples and run the command chain for each sample separately.
+    * once your for loop is running, open up a new terminal and check with `htop` if the processes are running and how much CPU and memory they are using. This can help you to understand how the different parameters (e.g., number of threads) affect the performance of the analyses.
+* visualize the resulting BAM files using [a tool like IGV](https://igv.org/) to check the quality of the alignments and to identify any potential issues with the data. You can load the reference genome and the BAM files into IGV, and then explore the alignments to check for any regions with low coverage, high levels of mismatches, or other issues that may affect downstream analyses such as variant calling.
+
+:::
+
+## 5. SNP prediction using GATK
+After mapping the reads to the reference genome, the next step is to call variants such as single nucleotide polymorphisms (SNPs). In this exercise, you will use the Genome Analysis Toolkit (GATK) to perform variant calling on the aligned reads. GATK is a widely used tool for variant discovery and genotyping, and it provides a comprehensive set of tools for processing and analyzing genomic data.
+
+* Before you can start with variant calling, you will need to create a sequence dictionary for the reference genome using GATK, and index the reference genome using SAMtools. This is necessary for GATK to efficiently access the reference genome during the variant calling process.
+* Once you have prepared the reference genome, you can use GATK to call variants on the aligned reads. GATK provides several tools for variant calling, such as HaplotypeCaller, which uses a sophisticated algorithm to identify variants and to genotype them across multiple samples. You can either run HaplotypeCaller on each sample separately for one sample. However, in most cases, and certainly when you are doing population genomics, it is recommended to perform joint genotyping across all samples, which can improve the accuracy of variant calling by leveraging information from multiple samples. For this, it is important to specify the GVCF output format when running HaplotypeCaller, which allows you to generate a gVCF file for each sample that contains information about both variant and non-variant sites.
+* After running HaplotypeCaller on all samples individually, you can then use the GenomicsDBImport and GenotypeGVCFs tools to perform joint genotyping across all samples, which can improve the accuracy of variant calling by leveraging information from multiple samples.
+
+::: {.callout-caution title="Exercise"}
+* create a directory to store the output of the GATK variant calling
+* create a sequence dictionary for the reference genome using GATK, and index the reference genome using SAMtools and GATK IndexFeatureFile.
+* run GATK HaplotypeCaller on the aligned reads to call variants. Make sure to use GVCF output format. Save the output to a .g.vcf file.
+* combine all gvcf files into a GenomicsDB using GATK GenomicsDBImport
+* perform joint genotyping across all samples using GATK GenotypeGVCFs to generate a multi-sample VCF file (i.e. a multi-sample VCF file contains the variant calls for all samples in a single vcf file).
+* extract the SNPs with a quality (QUAL) higher than 30 from the multi-sample VCF file using `bcftools view` and save the output to a new VCF file that only contains the quality filtered SNPs.
+* check the effect of the quality filtering by comparing the number of variants in the original multi-sample VCF file and the filtered VCF file using `bcftools stats` to get statistics about the variants in each file, and to make sure that indels have been removed from the filtered VCF file.
+
+:::
+
+::: {.callout-tip collapse="true"}
+* When running HaplotypeCaller, make sure to specify the appropriate parameters for GATK, such as the reference genome, the input BAM files, and the output gVCF file.
+* When running GenomicsDBImport, you will need a mapping file that specifies the sample names and the corresponding gVCF files. This mapping file is a simple text file that contains two columns: the first column contains the sample names, and the second column contains the paths to the corresponding gVCF files. You can create this mapping file using a `for` loop to iterate over all the gVCF files and extract the sample names from the file names (use `bcftools query` on each of the gvcf files and print the output of this command next to the gvcf file with tab as a separator to create the mapping file).
+* whren running GenomicsDBImport, you also need a intervals file that specifies the genomic intervals to be processed. This intervals file is a simple text file that contains one line per interval, with the format `chr:start-end`. As the organism we are working with is a relatively small, you can stick to one chromosome per interval and simply supply a list of the chromosome names in the intervals file. You can create this intervals file by extracting the chromosome names from the reference genome using `samtools faidx` (already done in previous step) and then using `cut` to extract the chromosome names from the resulting .fai file.
+* when checking the effect of the quality filtering, you can use `bcftools stats` to get statistics about the variants in each file, a lot of stats are produced. But you can filter with grep on "^SN" to to get the relevant numbers.
+:::
+
+## 6. Phylogenetic tree construction
+After calling variants such as SNPs, the next step is to construct a phylogenetic tree to understand the evolutionary relationships among the samples. In this exercise, you will use the vcf2phylip tool to convert the VCF file containing the SNPs into a PHYLIP format file that can be used for phylogenetic tree construction. The PHYLIP format is a widely used format for representing sequence alignments and is compatible with many phylogenetic tree construction tools.
+
+After converting the VCF file to PHYLIP format, you can use a tool such as RAxML or IQ-TREE to construct a phylogenetic tree based on the SNP data. These tools use sophisticated algorithms to infer the evolutionary relationships among the samples based on the genetic variation present in the SNP data.
+
+* IQ-Tree is a widely used tool for phylogenetic tree construction that implements a fast and efficient algorithm for inferring maximum likelihood trees. It also provides a comprehensive set of tools for model selection, tree visualization, and downstream analyses. When running IQ-Tree, you will need to specify the appropriate parameters for the analysis, such as the input PHYLIP file, the output tree file, and the substitution model to use for the analysis. Specifying the appropriate substitution model for the data can be tricky, but IQ-Tree can automatically select the best model for the data using the `-m MFP` option, which tests multiple models and selects the best one based on the Bayesian Information Criterion (BIC). This is also a big advantage compared with other tools, such as RAxML, which require you to specify the substitution model manually.
+* RAxML is another widely used tool for phylogenetic tree construction that implements a maximum likelihood algorithm for inferring trees. It also provides a comprehensive set of tools for model selection, tree visualization, and downstream analyses. When running RAxML, you will need to specify the appropriate parameters for the analysis, such as the input PHYLIP file, the output tree file, and the substitution model to use for the analysis. However, RAxML does not have an automatic model selection option like IQ-Tree, so you will need to specify the substitution model manually based on your knowledge of the data and the evolutionary processes that may be at play. You can either base yourself on the output of the model selection step in IQ-Tree, or you can go for a "safe" model that is often used for SNP data, such as the GTR+G model, which is a general time reversible model with gamma distributed rate variation among sites.
+* FastTree is a tool for phylogenetic tree construction that implements a fast and efficient algorithm for inferring maximum likelihood trees. It is designed to handle large datasets and can be used for both nucleotide and amino acid data. When running FastTree, you will need to specify the appropriate parameters for the analysis, such as the input PHYLIP file, the output tree file, and the substitution model to use for the analysis. FastTree has a limited set of substitution models compared to IQ-Tree and RAxML, but it can still be a useful tool for quickly constructing trees from large datasets. This is the way to go if you have a large dataset and want to quickly get an idea of the tree topology, but for more accurate tree construction, it is recommended to use IQ-Tree or RAxML.
+
+All three tools (IQ-Tree, RAxML and FastTree) can be used to construct a phylogenetic tree based on the SNP data in the PHYLIP file. All tree software produce a final tree in nexus format, which can be visualized using tools such as FigTree or iTOL. Those tools allow you to explore the tree topology and branch lengths, and to annotate the tree with metadata information about the samples.
+
+If you want to have more control on the visualisation of the tree, you can also use R packages such as ggtree to visualize the trees in R and to annotate them with metadata information about the samples. The ggtree package [has a great manual with many examples](https://yulab-smu.top/treedata-book/) that can help you to get started with visualizing and annotating your trees in R, and it also has a great support for visualizing trees in combination with metadata information about the samples, which can help you to interpret the tree in the context of the sample information.
+
+::: {.callout-caution title="Exercise"}
+* create a directory to store the output of the phylogenetic tree construction
+* use the vcf2phylip tool to convert the filtered VCF file containing the SNPs into a PHYLIP format file. Make sure to specify the appropriate parameters for vcf2phylip, such as the input VCF file and the output PHYLIP file.
+* use IQ-tree to construct a phylogenetic tree based on the SNP data in the PHYLIP file. Make sure to specify the appropriate parameters for IQ-tree, such as the input PHYLIP file and the output tree file.
+    * visualize the tree using FigTree or ggtree
+    * remove the outgroup from the fasta file (make a copy of the original fasta file and remove the outgroup from the copy) and run IQ-tree again on the new fasta file without the outgroup.
+* use RAxML to construct a phylogenetic tree based on the SNP data in the PHYLIP file. Make sure to specify the appropriate parameters for RAxML, such as the input PHYLIP file and the output tree file. Specify a substitution model for the analysis, such as the GTR+G model, which is a general time reversible model with gamma distributed rate variation among sites.
+* *optional*: use FastTree to construct a phylogenetic tree based on the SNP data in the PHYLIP file. Make sure to specify the appropriate parameters for FastTree, such as the input PHYLIP file and the output tree file.
+* visualize the resulting trees using a tool such as FigTree (or iTOL). Do they show the same relationships among the samples? Are there any differences in the tree topology or branch lengths?
+* *optional* Try to create the phylogenetic tree in R using the ggtree package. Annotate the IQ tree with metadata information about the samples using the ggtree package in R.
+
+
+:::
+
+::: {.callout-tip collapse="true"}
+* when running the vcf2phylip tool, you will see that by default min4 is added to the filename, which means that only sites that are present in at least 4 samples are included in the output PHYLIP file. This is a common filtering step to remove sites with too much missing data.
+* we choose for the fasta output with vcf2phylip, which will give you a fasta file with the sequences for each sample, which can be used for phylogenetic tree construction. However, you can also choose for the PHYLIP format output, which is a different format that can also be used for phylogenetic tree construction, but the fasta format is more widely used and compatible with more tools.
+*  Make sure that you specify the `-m MFP` option to let IQ-tree automatically select the best substitution model for the data. This can improve the accuracy of the tree construction compared to manually specifying a substitution model.
+* When running RAxML, you can use the `--all` and `--bs-trees` option to perform a rapid bootstrap analysis and search for the best-scoring maximum likelihood tree in one run. Normally you should go for at least 100 bootstrap replicates, but for this exercise you can go for 10 to speed up the analysis.
+* When running FastTree, you can use the `-gtr` option to specify the GTR model for the analysis.
+
+:::
+
+## 7. PCA and population structure analysis
+After calling variants such as SNPs, you can also perform a principal component analysis (PCA) and population structure analysis to understand the genetic relationships among the samples. PCA is a dimensionality reduction technique that can be used to visualize the genetic variation among the samples in a lower-dimensional space. Population structure analysis is a method that can be used to identify distinct genetic clusters within the samples, which can provide insights into the population structure and evolutionary history of the samples. In this exercise, you will use the PLINK tool to perform PCA and population structure analysis on the SNP data. PLINK is a widely used tool for genome-wide association studies and population genetics analyses, and it provides a comprehensive set of tools for processing and analyzing genomic data.
+
+::: {.callout-important}
+In previous data set we only worked with the first chromosome of the parasite. However, to have meaningful results when running population genomics tools like PCA, Admixture and IBD, we have to start with a dataset that contains SNPs from all chromosomes. Therefore, for this exercise, we will use the multi-sample VCF file that contains the SNPs from all chromosomes, which was downloaded from the Google Drive above (stored under data/vcf_full/full.vcf.gz). This file has already been filtered for quality (QUAL > 30) and only contains SNPs (indels have been removed). You can use this file as input for the PCA and population structure analysis using PLINK.
+:::
+
+
+::: {.callout-caution title="Exercise"}
+* create a directory to store the output of the PCA and population structure analysis
+* use PLINK to convert the filtered VCF file containing the SNPs into PLINK format files (i.e., .bed, .bim, and .fam files).
+* filter the PLINK files to only include SNPs that fullfile the following criteria: -only SNPs that are present in at least 95% of the samples and have a minor allele frequency of at least 5% will be included in the analysis. Also remove sample with more than 10% missing data.
+* perform LD pruning on the filtered PLINK files to remove SNPs that are in high linkage disequilibrium (LD) with each other, which can bias the results of the PCA analysis. This can be done using the `--indep-pairwise` option in PLINK, which will remove one SNP from each pair of SNPs that are in high LD (e.g., r^2 > 0.5) within a specified window size (e.g., 50 kb).
+* special case: we have less than 50 samples in our test data, so we have to calculate the allele frequencies in a separate step using the `--freq` option in PLINK, and then use the resulting .frq file to filter the SNPs based on the minor allele frequency (MAF) threshold.
+* use PLINK to perform PCA on the filtered PLINK files using the `--pca` option. Specify the number of principal components to calculate using the `--pca` option (e.g., `--pca 5` to calculate the first 10 principal components). As we have less than 50 samples, we have to read in the frequencies from previous step using the `--read-freq` option in PLINK.
+
+:::
+
+::: {.callout-tip collapse="true"}
+* for the QC filtering, use flags like
+    * --geno 0.05 (remove SNPs with >5% missing data)
+    * --maf 0.05 (remove SNPs with MAF < 5%)
+    * --mind 0.1 (remove samples with >10% missing data)
+* command for extraction of the
+
+:::
+
+::: {.callout-tip collapse="true" title="Tips - spoiler alert!!"}
+* the command for running the different PCA commands in PLINK will look something like this:
+    * `plink2 --vcf input.vcf.gz --make-bed --out output` to convert the VCF file to PLINK format files
+    * `plink2 --bfile output --geno 0.05 --maf 0.05 --mind 0.1 --out output.filtered --make-bed` to filter the PLINK files based on the specified criteria
+    * `plink2 --bfile output.filtered --indep-pairwise 50 5 0.5 --out output.filtered.QC.pruned   --set-all-var-ids \@:# --bad-ld` to perform LD pruning on the filtered PLINK files, with --set-all-var-ids to set the variant IDs to a format that is compatible with PLINK, and --bad-ld to overrule the warning of PLINK that we have not enough samples to perform LD pruning.
+    * `plink2 --bfile output.filtered.QC --extract output.filtered.QC.pruned.prune.in --make-bed --out output.filtered.QC.pruned --set-all-var-ids \@:# \` to create new PLINK files that only contain the pruned SNPs. Those SNPs are present in the prune.in file that is generated by the previous command.
+    * `plink2 --bfile output.filtered --freq --out output.filtered` to calculate allele frequencies for the filtered PLINK files
+    * `plink2 --bfile output.filtered --read-freq output.filtered.frq --pca 5 --out output.pca` to perform PCA on the filtered PLINK files using the calculated allele frequencies
+
+:::
+
+## 8. Admixture analysis
+Admixture analysis is a method that can be used to identify distinct genetic clusters within the samples, which can provide insights into the population structure and evolutionary history of the samples. In this exercise, you will use the Admixture tool to perform admixture analysis on the SNP data. Admixture is a widely used tool for population structure analysis that implements a maximum likelihood algorithm for inferring population structure and admixture proportions. When running Admixture, you will need to specify the appropriate parameters for the analysis, such as the input PLINK files, the number of clusters (K) to infer, and the output file for the admixture proportions. The choice of the number of clusters (K) can be tricky, and it is often recommended to run the analysis for a range of K values (e.g., K=1 to K=10) and to use a method such as the cross-validation error to determine the optimal K value for the data. After running Admixture, you can visualize the results using a tool such as R or Python to create bar plots of the admixture proportions for each sample, which can help you to interpret the results in the context of the sample information and the phylogenetic tree that you constructed in the previous step.
+
+::: {.callout-caution title="Exercise"}
+* The .bim file from previous step (run with PLINK2) is not compatible with Admixture, as it only accepts integers as chromosome names. Therefore, we need to replace the bim file with _L. donovani_ chromosome names with a new bim file that has integer chromosome names (we choose to set this simply to 0, as we do not need the exact chromosome). You can do this by using the `awk` command in the terminal to replace the chromosome names in the .bim file with integers (e.g., 1, 2, 3, etc.). Make sure to save the new .bim file with a different name to avoid overwriting the original .bim file. Example command is:
+    * `awk '{$1="0";print $0}' full.filtered.QC.bim > full.filtered.QC.bim.tmp`
+    * `mv full.filtered.QC.bim full.filtered.QC.bim.source`
+    * `mv full.filtered.QC.bim.tmp full.filtered.QC.bim`
+* run admixture (`admixture`) for a K-value varying between 2 and 10. Best is to create a for loop to run over those different values. First try with one K-value.
+* extract the cross-validation error from the output of admixture for each K-value and inspect the cross validation error. Inspect the CV error or - even better - plot the cross-validation error against the K-values to determine the optimal K-value for the data. The optimal K-value is often determined as the value of K that minimizes the cross-validation error, which can be visualized as a "elbow" in the plot of cross-validation error against K-values.
+* visualize the admixture proportions for each sample using a bar plot in R. You can use the output file from Admixture that contains the admixture proportions for each sample to create a bar plot that shows the proportion of ancestry from each inferred cluster for each sample (present in the file ending with .Q).
+
+:::
+
+::: {.callout-tip collapse="true"}
+* when running Admixture (command: `admixture`), you can use the `--cv` option to perform cross-validation and to calculate the cross-validation error for each K-value. This can help you to determine the optimal K-value for the data based on the cross-validation error.
+* to get the CV error, best is to use the `grep` command in the terminal to extract the line that contains the CV error from the output of Admixture.
+* when visualizing the admixture proportions in R, you can use the `ggplot2` package to create a bar plot of the admixture proportions for each sample. You can read in the output file from Admixture using the `read.table` function in R, and then use the `ggplot` function from the `ggplot2` package to create a bar plot that shows the proportion of ancestry from each inferred cluster for each sample. You can also use the `facet_wrap` function from `ggplot2` to create separate panels for each cluster, which can help to visualize the admixture proportions more clearly.
+:::
