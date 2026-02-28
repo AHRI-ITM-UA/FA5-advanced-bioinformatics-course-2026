@@ -1,28 +1,24 @@
 # The *Salmonella* Concord mystery: a genomic investigation of a potential outbreak in Ethiopia
 
-
 Today, you will take on the role of a microbial genomics investigator and analyse bacterial isolates obtained from patients in Ethiopia. The samples originate from stool specimens collected from young patients presenting with severe gastrointestinal symptoms.
 
 Because of concerns about possible invasive bacterial infection in these young patients, several were treated empirically with antibiotics. For all patients, first-line treatment with was not effective, and therapy was switched to either ceftriaxone or ciprofloxacin. However, in one case, ciprofloxacin also failed, and the patient was subsequently treated with azithromycin, which successfully resolved the infection.
 
 Given the possibility of a localized outbreak affecting multiple patients, you were asked to investigate whether these cases are epidemiologically linked. After culturing the bacteria in the laboratory, all isolates were identified as *Salmonella*. Phenotypic antimicrobial susceptibility testing showed resistance to selected antibiotics *in vitro*.
 
-
 # Objectives
 
-Whole-genome sequencing was subsequently performed at AHRI using both Illumina and Oxford Nanopore Technologies platforms. Your task in this exercise is to analyse these genomic data, starting from the raw sequencing reads. You will assess data quality, confirm species identity, infer serotype, explore antimicrobial resistance determinants, and investigate genetic relatedness among isolates. Ultimately, you will evaluate whether these cases represent a single outbreak strain, and consider whether the lineage is likely endemic to Ethiopia or potentially imported.
+Whole-genome sequencing was subsequently performed using both Illumina and Oxford Nanopore Technologies platforms. Your task in this exercise is to analyse these genomic data, starting from the raw sequencing reads. You will assess data quality, confirm species identity, infer serotype, explore antimicrobial resistance determinants, and investigate genetic relatedness among isolates. Ultimately, you will evaluate whether these cases represent a single outbreak strain, and consider whether the lineage is likely endemic to Ethiopia or potentially imported.
 
 ## Software
 
 
-```{bash}
+```bash
 
 conda create -n concord_dataset -c conda-forge -c bioconda sra-tools
 conda install -n concord_dataset -c conda-forge -c bioconda filtlong
 
 conda install bioconda::flye
-
-
 
 ```
 
@@ -41,7 +37,7 @@ Note that is is not required for the course, and we have given you the assembled
 For retrieving the data, we'll use a tool named 'fasterq-dump' from NCBI. It can be parallelised, en hence it should be relatively fast.
 
 
-```{bash}
+```bash
 conda activate concord_dataset
 
 
@@ -70,7 +66,7 @@ done
 
 Oh no, fasterq-dump downloaded unzipped fastq files! We want to gzip them to save some space on our computer or server, but we have 8 CPUs, so we can do it in parallel. For that, we can use a tool named 'pigz', which is a parallel implementation of gzip.
 
-```{bash}
+```bash
 
 pigz -p "$CPUS" fastq/*.fastq
 
@@ -78,7 +74,7 @@ pigz -p "$CPUS" fastq/*.fastq
 
 Now we can use a tool named 'filtlong' to filter the reads based on quality and length, and to select the best 100× of the genome size (5 Mb for *Salmonella*). This will help us to reduce the computational time for assembly, while still retaining the most informative reads.
 
-```{bash}
+```bash
 
 # 100× of 5 Mb = 500 Mb
 TARGET_BASES=500000000

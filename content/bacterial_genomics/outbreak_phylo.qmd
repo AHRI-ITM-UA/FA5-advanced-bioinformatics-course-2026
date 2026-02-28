@@ -1,0 +1,157 @@
+# The *Salmonella* Concord mystery: a genomic investigation of a potential outbreak in Ethiopia
+
+Today, you will take on the role of a microbial genomics investigator and analyse bacterial isolates obtained from patients in Ethiopia. The samples originate from stool specimens collected from young patients presenting with severe gastrointestinal symptoms.
+
+Because of concerns about possible invasive bacterial infection in these young patients, several were treated empirically with antibiotics. For all patients, first-line treatment with was not effective, and therapy was switched to either ceftriaxone or ciprofloxacin. However, in one case, ciprofloxacin also failed, and the patient was subsequently treated with azithromycin, which successfully resolved the infection.
+
+Given the possibility of a localized outbreak affecting multiple patients, you were asked to investigate whether these cases are epidemiologically linked. After culturing the bacteria in the laboratory, all isolates were identified as *Salmonella*. Phenotypic antimicrobial susceptibility testing showed resistance to selected antibiotics *in vitro*.
+
+# Objectives
+
+Whole-genome sequencing was subsequently performed using both Illumina and Oxford Nanopore Technologies platforms. Your task in this exercise is to analyse these genomic data, starting from the raw sequencing reads. You will assess data quality, confirm species identity, infer serotype, explore antimicrobial resistance determinants, and investigate genetic relatedness among isolates. Ultimately, you will evaluate whether these cases represent a single outbreak strain, and consider whether the lineage is likely endemic to Ethiopia or potentially imported.
+
+
+## retrieving short read data
+
+ven in the era of long-read sequencing, short reads remain highly relevant in 2026. They are typically less expensive to generate and are well suited for phylogenetic inference. Moreover, several established pipelines are specifically optimised for short-read data. Let us therefore retrieve some Illumina sequencing data.
+
+
+```bash
+runs=( SRR8552256
+ERR9516343
+ERR9516195
+ERR9516199
+ERR9516333
+ERR9516357
+ERR9516339
+SRR10604677
+ERR9516323
+ERR9516355)
+
+
+CPUS=16
+
+mkdir -p fastq_illumina
+
+for run in "${runs[@]}"
+do
+  fasterq-dump "$run" \
+    --threads "$CPUS" \
+    --split-files \
+    --progress \
+    --outdir fastq_illumina
+  gzip -f fastq/"$run"_*.fastq
+done
+
+```
+
+## QC, mapping, and variant calling
+
+Recall the previous sessions in which we performed quality control, read mapping, and variant calling. This was quite challenging for Plasmodium, correct?
+
+For bacteria such as Salmonella, however, there is good news. Well-established pipelines are available that perform read mapping, variant calling, and even core SNP alignment automatically. This allows you to focus primarily on interpreting the resulting phylogenetic tree.
+
+Nevertheless, it remains essential that you understand each step of the pipeline and the tools involved.
+
+
+
+::: {.callout-note}
+
+Exercise 1: perform QC on the Illumina data
+
+Perform quality control on the raw Illumina reads.
+
+You may use tools such as fastqc and multiqc, or any equivalent workflow you are familiar with.
+
+Answer briefly:
+
+- What is the overall per-base quality profile?
+- Is there evidence of adapter contamination?
+- Do any samples require trimming?
+- Are there major differences in sequencing depth between samples?
+- Support your answers with specific observations from the QC reports.
+:::
+
+For bacterial variant calling, we will use **Snippy**, a widely adopted pipeline for haploid bacterial genomes:
+
+https://github.com/tseemann/snippy
+
+Carefully read the documentation and determine:
+
+- how to provide paired-end Illumina reads as input  
+- how to specify the reference genome  
+- which output files are generated  
+
+
+::: {.callout-note}
+
+Exercise 2: run the snippy pipeline
+
+Run Snippy separately for each isolate.
+
+After completion, inspect the output directory for one sample. You should find, among others:
+
+- a `*.bam` file (aligned reads)  
+- a `*.bam.bai` index file  
+- a `*.vcf` file (variant calls)  
+- a `*.consensus.fa` file  
+- summary statistics  
+
+#### Questions
+
+1. What information is stored in the `*.vcf` file?  
+   - What do the columns represent?  
+   - How are SNPs defined relative to the reference genome?  
+
+2. What is the purpose of the BAM file?  
+   - How could you visualise it?  
+   - What does read depth tell you?  
+
+3. For each isolate, how many variants are detected relative to the reference genome?  
+   - How can you count them directly from the VCF file?  
+   - Are all variants high quality? How do you know?  
+
+Be precise. Interpret the file contents rather than only reporting filenames.
+
+:::
+
+### From variants to outbreak inference
+
+Once all isolates have been processed, your next step is to compare them.
+
+Snippy provides an additional command that combines per-sample results into a core SNP alignment across all isolates. Identify the correct command in the documentation yourself and examine its parameters.
+
+::: {.callout-note}
+
+Excercise 3: generating a core SNP alignment
+
+After generating a core SNP alignment, you should find a file named `core.full.aln` in the output directory. This file contains the aligned sequences of all isolates at the core SNP sites.
+
+- Inspect the alignment file. What does each row represent?  
+- How many core SNP sites are included?  
+- Are there many differences between isolates, or only a few?  
+
+This alignment can be used as input for a phylogenetic inference tool. The resulting tree will allow you to:
+
+- assess genetic relatedness among isolates  
+- determine whether they cluster tightly  
+- evaluate whether they are consistent with a single outbreak strain  
+
+In bacterial outbreak genomics, small SNP distances often indicate recent transmission, whereas large distances suggest unrelated cases.
+
+Your final interpretation should integrate:
+
+- SNP distances  
+- clustering patterns  
+- resistance phenotypes  
+- epidemiological context in Ethiopia  
+
+Only then can you conclude whether this represents a localized outbreak of *Salmonella* Concord or multiple unrelated infections.
+:::
+
+
+# note that we need to define the azis reference genome ideally
+# branch lengths might be long, do raxml or iqtree or fastree?
+# info box: about SNP sites
+# provide table with metadata
+# also look for AMR phentotypic data for the next part
