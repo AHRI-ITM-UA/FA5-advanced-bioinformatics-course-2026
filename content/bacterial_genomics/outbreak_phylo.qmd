@@ -1,14 +1,60 @@
-# The *Salmonella* Concord mystery: a genomic investigation of a potential outbreak in Ethiopia
+# The Salmonella Concord mystery: reconstructing transmission across borders
 
-Today, you will take on the role of a microbial genomics investigator and analyse bacterial isolates obtained from patients in Ethiopia. The samples originate from stool specimens collected from young patients presenting with severe gastrointestinal symptoms.
+Several young patients in Ethiopia presented with severe gastrointestinal disease in the early 200's. Stool cultures yielded *Salmonella*, raising concerns about a possible localized outbreak. At first glance, the cases appeared epidemiologically linked: similar symptoms, similar age group, and temporal proximity.
 
-Because of concerns about possible invasive bacterial infection in these young patients, several were treated empirically with antibiotics. For all patients, first-line treatment with was not effective, and therapy was switched to either ceftriaxone or ciprofloxacin. However, in one case, ciprofloxacin also failed, and the patient was subsequently treated with azithromycin, which successfully resolved the infection.
+However, the situation quickly became more complex.
 
-Given the possibility of a localized outbreak affecting multiple patients, you were asked to investigate whether these cases are epidemiologically linked. After culturing the bacteria in the laboratory, all isolates were identified as *Salmonella*. Phenotypic antimicrobial susceptibility testing showed resistance to selected antibiotics *in vitro*.
+Additional isolates with highly similar preliminary typing results were identified in European surveillance databases. Some were recovered from patients with recent travel to Ethiopia. Others had no documented travel history at all. Were these sporadic cases? Imported infections? Or evidence of sustained international transmission?
 
-# Objectives
+You have been asked to investigate.
 
-Whole-genome sequencing was subsequently performed using both Illumina and Oxford Nanopore Technologies platforms. Your task in this exercise is to analyse these genomic data, starting from the raw sequencing reads. You will assess data quality, confirm species identity, infer serotype, explore antimicrobial resistance determinants, and investigate genetic relatedness among isolates. Ultimately, you will evaluate whether these cases represent a single outbreak strain, and consider whether the lineage is likely endemic to Ethiopia or potentially imported.
+As a microbial genomics investigator, your role is to determine whether these isolates represent:
+
+- a single clonal outbreak strain,
+- multiple unrelated introductions,
+- or a broader, circulating lineage with regional persistence.
+
+To answer this, you will move beyond traditional typing and reconstruct their evolutionary relationships using whole-genome data.
+
+## Analytical framework
+
+Whole-genome sequencing was performed using Illumina short reads for all isolates, with selected genomes additionally sequenced using long-read platforms to generate high-quality references.
+
+Your analysis will proceed from raw sequencing reads to phylogenetic inference. Along the way, you will:
+
+- assess read quality and assembly characteristics,
+- confirm species identity and serotype,
+- explore antimicrobial resistance determinants,
+- construct a core-genome SNP alignment,
+- and infer a phylogeny to evaluate genetic relatedness.
+
+The central question is not simply whether the isolates are *Salmonella* Concord, but whether they are genetically indistinguishable at outbreak scale, and what their phylogenetic structure reveals about transmission dynamics.
+
+- Are Ethiopian cases part of a tight monophyletic cluster?
+- Do European isolates nest within that cluster?
+- Is there evidence for repeated exportation events?
+- Or does the tree suggest long-term endemic circulation?
+
+The data in Table @tbl:isolate-overview provide the epidemiological context. The genome sequences will provide the evolutionary evidence.
+
+In this exercise, you will integrate both.
+
+
+## Isolate overview (short-read run accessions)
+
+Table: Overview of isolates included in the course, showing short-read run accessions and key epidemiological metadata. {#tbl:isolate-overview}
+| sequencing_ID | lab_ID | SR_run_accession | country_of_isolation | year_of_isolation | source | travel_origin |
+|:--|:--|:--|:--|--:|:--|:--|
+| SRS4345282     | 679052        | SRR8552256  | UK               | 2019 | human | Zambia    |
+| 32640_1_336    | H044240362    | ERR9516343  | UK               | 2004 | human | Kenya     |
+| 32640_1_39     | 64206         | ERR9516195  | Austria          | 2006 | human | Ethiopia  |
+| 32640_1_47     | 95907         | ERR9516199  | Austria          | 2007 | human | Ethiopia  |
+| 32640_1_316    | 1035531       | ERR9516333  | The Netherlands  | 2006 | stool | NA        |
+| 32640_1_372    | 254833        | ERR9516357  | The Netherlands  | 2003 | stool | NA        |
+| 32640_1_328    | H04340470     | ERR9516339  | UK               | 2004 | human | NA        |
+| SRS5777896     | 850890        | SRR10604677 | UK               | 2019 | human | NA        |
+| 32640_1_296    | 0508H45184    | ERR9516323  | Denmark          | 2005 | stool | Ethiopia  |
+| 32640_1_364    | 70366         | ERR9516355  | USA              | 2007 | stool | Ethiopia  |
 
 
 ## retrieving short read data
@@ -47,12 +93,11 @@ done
 
 ## QC, mapping, and variant calling
 
-Recall the previous sessions in which we performed quality control, read mapping, and variant calling. This was quite challenging for Plasmodium, correct?
+Recall the previous sessions in which we performed quality control, read mapping, and variant calling. This was quite challenging for *Plasmodium*, correct?
 
-For bacteria such as Salmonella, however, there is good news. Well-established pipelines are available that perform read mapping, variant calling, and even core SNP alignment automatically. This allows you to focus primarily on interpreting the resulting phylogenetic tree.
+For bacteria such as *Salmonella*, however, there is good news. Well-established pipelines are available that perform read mapping, variant calling, and even core SNP alignment automatically. This allows you to focus primarily on interpreting the resulting phylogenetic tree.
 
 Nevertheless, it remains essential that you understand each step of the pipeline and the tools involved.
-
 
 
 ::: {.callout-note}

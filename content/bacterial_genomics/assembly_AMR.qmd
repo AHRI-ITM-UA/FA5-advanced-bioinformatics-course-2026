@@ -1,37 +1,24 @@
-# The *Salmonella* Concord mystery: a genomic investigation of a potential outbreak in Ethiopia
+# The *Salmonella* Concord mystery: antimicrobial resistance (AMR)
 
-Today, you will take on the role of a microbial genomics investigator and analyse bacterial isolates obtained from patients in Ethiopia. The samples originate from stool specimens collected from young patients presenting with severe gastrointestinal symptoms.
+In the previous chapter, we focused on phylogenetic inference and outbreak investigation. In this chapter, we shift our attention to the genomic features of the *Salmonella* Concord isolates, with particular emphasis on antimicrobial resistance (AMR).
 
-Because of concerns about possible invasive bacterial infection in these young patients, several were treated empirically with antibiotics. For all patients, first-line treatment with was not effective, and therapy was switched to either ceftriaxone or ciprofloxacin. However, in one case, ciprofloxacin also failed, and the patient was subsequently treated with azithromycin, which successfully resolved the infection.
+An important clinical detail not discussed earlier is that, due to concerns about invasive bacterial infection in these young patients, several were treated empirically with antibiotics. In all cases, first-line therapy was ineffective, and treatment was switched to either ceftriaxone or ciprofloxacin. In one patient, ciprofloxacin also failed, and therapy was subsequently changed to azithromycin, which successfully resolved the infection.
 
-Given the possibility of a localized outbreak affecting multiple patients, you were asked to investigate whether these cases are epidemiologically linked. After culturing the bacteria in the laboratory, all isolates were identified as *Salmonella*. Phenotypic antimicrobial susceptibility testing showed resistance to selected antibiotics *in vitro*.
+Phenotypic antimicrobial susceptibility testing demonstrated resistance to selected antibiotics *in vitro*.
+
+In this chapter, we will investigate how to identify AMR genes in genome assemblies and how to interpret these findings in light of phenotypic resistance data. Ideally, we generate long-read reference genomes to obtain a comprehensive view of genome structure, including plasmids and other mobile genetic elements that frequently carry AMR genes. We can then annotate the genomes to identify specific resistance determinants and compare these results with phenotypic susceptibility testing.
+
+This integrated approach allows us to assess the potential clinical implications of genomic findings and to better understand the mechanisms underlying antimicrobial resistance in these isolates.
 
 # Objectives
 
-Whole-genome sequencing was subsequently performed using both Illumina and Oxford Nanopore Technologies platforms. Your task in this exercise is to analyse these genomic data, starting from the raw sequencing reads. You will assess data quality, confirm species identity, infer serotype, explore antimicrobial resistance determinants, and investigate genetic relatedness among isolates. Ultimately, you will evaluate whether these cases represent a single outbreak strain, and consider whether the lineage is likely endemic to Ethiopia or potentially imported.
+The objectives of this tutorial are:
 
-## Software
+- To understand the importance of assessing genome assembly quality before downstream analyses  
+- To learn how to identify antimicrobial resistance (AMR) genes in bacterial genome assemblies using dedicated tools  
+- To compare genomic findings with phenotypic antimicrobial susceptibility testing results and interpret discrepancies in the context of potential resistance mechanisms  
 
-
-```bash
-
-conda create -n concord_dataset -c conda-forge -c bioconda sra-tools
-conda install -n concord_dataset -c conda-forge -c bioconda filtlong
-
-conda install bioconda::flye
-
-# add: unzip, seqkit
-# conda install -c conda-forge -c bioconda bakta 
-# bakta_db download --output . --type light
-# the above command downloads a 1.34 gigabayte database
-/mnt/d/Docs/01_postdoc/01_projects/2026_bioinformatics_fa5/coursedev/reference_genomes
-# add abricate
-
-```
-
-
-## retrieving reference genomes
-
+## Long-read sequencing to obtain reference genomes
 
 We have nanopore data available on the SRA/ENA, that was generated using the (nowadays old) R9.4.1 data. Despite being of lower quality than the R10.4.1 data we have nowadays, the sequencing depth and coverage were high, so the overall quality is accurate and sufficient for *de novo* assembly and downstream analyses. 
 
@@ -81,7 +68,7 @@ unzip concord_fasta.zip
 
 If you do want to start from the raw reads and perform the assemblies yourself, you can find the raw data on the SRA/ENA and retrieve it using the 'fasterq-dump' tool, as shown in the next (optional) section. After retrieving the data, you can use the 'filtlong' tool to filter the reads based on quality and length, and to select the best 100× of the genome size (5 Mb for *Salmonella*). This will help you to reduce the computational time for assembly, while still retaining the most informative reads.
 
-::: {.callout-note collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Optional background to retrieve the unassembled reads yourself from the European Nucleotide archive and perform *de novo* genome assembly.
 
 
@@ -173,12 +160,8 @@ You can skip the section above where the reads are downloaded. Instead, we will 
 
 If you are unsure about the difference between *de novo* assembly and read mapping, see the information box below.
 
-::: {.callout-note}
-## De novo assembly vs mapping
-## 🧬 De novo assembly vs reference-based mapping  
-### in bacterial genomics
-
-When sequencing a bacterial genome, we obtain millions of short reads.  
+::: {.callout-tip collapse="true" title="De novo assembly vs reference-based mapping"}
+When sequencing a bacterial genome, we obtain millions of reads.  
 There are two main analysis strategies.
 
 ---
@@ -199,7 +182,7 @@ Align reads to an existing reference genome.
 
 **Strengths**
 - Fast and computationally light  
-- Works with moderate coverage  
+- Works with moderate coverage (Illumina reads for instance have high quality) 
 - Easy comparison across isolates  
 
 **Limitations**
@@ -207,7 +190,7 @@ Align reads to an existing reference genome.
 - Biased toward the reference  
 - Misses novel genes  
 - Poor detection of large rearrangements  
-- Cannot reconstruct full genome structure  
+- Cannot reconstruct full genome structure 
 
 > You see differences relative to a known genome — you do not rebuild it.
 
@@ -223,7 +206,7 @@ Reconstruct the genome directly from reads.
 - Novel strain characterisation  
 - Gene discovery  
 - Plasmid and mobile element analysis  
-- Genome structure analysis  
+- Genome structure analysis, including full-length AMR genes and their genomic context 
 
 **Strengths**
 - No reference required  
@@ -234,7 +217,7 @@ Reconstruct the genome directly from reads.
 **Limitations**
 - Higher coverage required  
 - More computationally demanding  
-- Risk of fragmented assemblies  
+- Risk of fragmented assemblies, and the assembly process often requires manual intervention.
 
 > You rebuild the genome and can study its full structure.
 
@@ -285,11 +268,10 @@ Typically, quality control is performed on raw sequencing reads. However, whenev
 
 When assemblies are obtained from curated repositories such as RefSeq, quality metrics are usually provided. In this course, the genomes were downloaded from a Zenodo repository, so we will evaluate their quality ourselves before proceeding with downstream analyses.
 
-::: {.callout-note}
+::: {.callout-note title="Exercise 2: QC on the reference genomes"}
 
-Exercise 2: QC on the reference genomes
+Perform quality control on the genome sequences. First, let's get to know our data. You know already different bash tips and tricks to do this. Use them to asnwer the following questions:
 
-Perform quality control on the genome sequences. First, let's get to know our data. You know already different bash tips and tricks to do this. Use them to asnwer the folliwing questions:
 - How many contigs are there in each assembly?
 - What is the total genome size for each assembly?  
 - Are there any contigs that are unusually short or long?
@@ -304,31 +286,155 @@ Present your results in a table to facilitate comparison between assemblies and 
 
 Good, we now have an idea of what our contigs represent (Plasmids, Chromosome, ...), and we can start looking for features in the genomes!
 
-### Finding featuires in the assemblies
+### Finding features in the assemblies
 
-Now that we have an idea of the quality of the assemblies, we can start looking for features in the genomes. We are particularly interested in **antimicrobial resistance** genes and **plasmid replicon** genes, but you can also look for other features if you like. Typically, we begin by annotating the complete genome assembl. Once annotation is complete, specific features of interest can be extracted from the resulting annotation files. `Bakta` (https://github.com/oschwengers/bakta/tree/main) is the preferred tool for annotation, and should be available in your conda environment for these excercises. 
+Now that we have an idea of the quality of the assemblies, we can start looking for features in the genomes. We are particularly interested in **antimicrobial resistance** genes and **plasmid replicon** genes, but you can also look for other features if you like. Typically, we begin by annotating the complete genome assembl. Once annotation is complete, specific features of interest can be extracted from the resulting annotation files. `Bakta` [Bakta GitHub repository](https://github.com/oschwengers/bakta/tree/main) is the preferred tool for annotation, and should be available in your conda environment for these excercises. 
 
 In addition, we tend to perform additional, specialist annotation for AMR and virulence genes (namely `AMRFinder`) and replicon genes (namely `ABRicate` using the `plasmidfinder` database; the latter indicate the presence of Plasmids). 
 
-::: {.callout-note}
+::: {.callout-note title="Exercise 3: Annotation, AMR genes, and replicon genes"}
 
-Exercise 3: Annotation, AMR genes, and replicon genes
+- Run `Bakta` to perform full annotation. Look for the best options for this project, run te pipeline, and inspect the output files. You may specifically want to inspect the `.gff` files, and look for you favourite genes! 
+- After inspecting the output files, provide the complete DNA sequence of the *Bla-CTX-M-15* gene. 
+- Find more information about this gene in the literature, and explain why it is important in the context of antimicrobial resistance in Ethiopia. 
+- Run `AMRFinder` to identify AMR genes in the assemblies. How many AMR genes do you find in each assembly? Are there any differences between the assemblies? If so, what could be the reason for that? Use your microbiology expertise or literature search skills to support your answer. To further understand the types of AMR markers, you can look at the info below.
 
-- Run `Bakta` 
+::: {.callout-tip collapse="true" title="Genomic AMR mechanisms and phenotype"}
+
+Genomic AMR annotation identifies **resistance determinants that are present**, but this does not automatically predict the observed phenotype. Resistance can arise through several major mechanisms:
+
+**Target modification**  
+Mutations in antibiotic targets reduce drug binding. For example, mutations in *gyrA* or *gyrB* (QRDR region) can increase fluoroquinolone MICs.
+
+**Drug inactivation**  
+Enzymes such as β-lactamases (e.g. *blaTEM*, *blaCTX-M*) hydrolyse β-lactam antibiotics, leading to ampicillin or cephalosporin resistance.
+
+**Target protection**  
+Proteins such as Qnr protect DNA gyrase and topoisomerase IV from quinolones, often resulting in low-level resistance.
+
+**Reduced intracellular drug concentration**  
+Efflux pumps (e.g. *acrAB-tolC*) decrease intracellular antibiotic levels and can contribute to multidrug decreased susceptibility.
+
+**Acquisition via horizontal gene transfer (HGT)**  
+Many AMR genes are located on plasmids, transposons, or integrons, enabling rapid spread between strains and species.
+
+### Important caveat
+
+Genotype–phenotype discordance is common. A gene may be truncated, partially assembled, poorly expressed, or present at low copy number. Conversely, chromosomal mutations, regulatory changes, or combined mechanisms (*e.g.* porin loss plus efflux upregulation) can increase MICs without obvious acquired genes.
+
+Genomic findings should ideally be interpreted together with phenotypic susceptibility testing and relevant literature.
+
+:::
+
+::: {.callout-tip collapse="true" title="Plasmid incompatibility (Inc) types and their relation to AMR"}
+
+Plasmids are classified into incompatibility (Inc) groups based on their replication and maintenance systems. Plasmids belonging to the same Inc group cannot stably coexist in the same (bacterial) cell.
+
+Certain Inc types are strongly associated with specific AMR genes and epidemiological patterns. For example:
+
+- IncF plasmids are common in Enterobacteriaceae and frequently carry ESBL genes (e.g. *blaCTX-M*).
+- IncI and IncHI plasmids are often associated with multidrug resistance.
+- Broad-host-range plasmids (e.g. IncA/C) facilitate interspecies spread.
+
+Identifying plasmid replicon types (e.g. with PlasmidFinder) helps assess:
+- Whether resistance genes are likely mobile
+- The potential for horizontal transfer
+- The epidemiological relatedness of isolates
+
+The presence of an AMR gene on a conjugative plasmid (which can transfer horizontally) has different clinical and public health implications than the same gene integrated into the chromosome.
 
 
+:::
 :::
 
 
 
-# mention about mechanisms: target modification such as gyrase, or the beta lactamase system, or protective genes, or gained enzymes through hgt...
-
-
 ### Genotype-phenotype association
 
-Now that we have identified the presence of AMR genes in the assemblies, we can compare these findings to the phenotypic antimicrobial susceptibility testing results. This is an important step to understand the potential clinical implications of the genomic findings, and to evaluate whether the presence of certain AMR genes correlates with resistance observed in the laboratory.
+Now that we have identified the presence of AMR genes in the assemblies, we can compare these findings to the phenotypic antimicrobial susceptibility testing results (see @tbl:isolate-AST). This is an important step to understand the potential clinical implications of the genomic findings, and to evaluate whether the presence of certain AMR genes correlates with resistance observed in the laboratory.
 
+Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates included in the Ethiopia course. AMP = ampicillin; SXT = trimethoprim/sulfamethoxazole; CHL = chloramphenicol; CRO = ceftriaxone; CIP = ciprofloxacin; AZM = azithromycin; CAZ/AVI = ceftazidime/avibactam; C/T = ceftolozane/tazobactam; CST = colistin; MER/VAB = meropenem/vaborbactam; TZP = piperacillin/tazobactam; TEM = temocillin; TGC = tigecycline; MEM = meropenem. R = resistant; S = susceptible. {#tbl:phenotype-ethiopia}
+{#tbl:isolate-AST}
+| sequencing_ID  | AMP | SXT | CHL | CRO | CIP | AZM | CAZ/AVI | C/T | CST | MER/VAB | TZP | TEM | TGC | MEM |
+|:---------------|:---:|:---:|:---:|:---:|:---:|:---:|:-------:|:---:|:---:|:-------:|:---:|:---:|:---:|:---:|
+| SRS4345282     | S | S | S | S | S | S | S | S | S | S | S | S | S | S |
+| 32640_1_336    | S | S | S | S | S | S | S | S | S | S | S | S | S | S |
+| 32640_1_39     | R | R | R | R | S | S | S | S | R | S | S | R | S | S |
+| 32640_1_47     | R | R | R | R | S | S | S | S | S | S | S | R | S | S |
+| 32640_1_316    | R | R | R | R | S | S | S | S | S | S | S | R | S | S |
+| 32640_1_372    | R | R | R | R | S | S | S | R | S | S | S | R | S | S |
+| 32640_1_328    | S | S | S | S | S | S | S | S | S | S | S | S | S | S |
+| SRS5777896     | R | R | R | R | R | S | S | S | S | S | S | R | S | S |
+| 32640_1_296    | R | R | R | R | S | R | S | S | S | S | S | R | S | S |
+| 32640_1_364    | R | R | R | R | S | R | S | S | S | S | S | R | S | S |
 
+::: {.callout-note title="Exercise 4: genotype-phenotype association"}
+
+::: {.callout-note title="Exercise 4: genotype–phenotype association"}
+
+In this exercise, you will compare the AMR genes detected in the genome assemblies with the phenotypic antimicrobial susceptibility testing (AST) results shown in @tbl:isolate-AST.
+
+The goal is to evaluate concordance between genotype and phenotype and to interpret discrepancies in a biologically meaningful way.
+
+### Part 1 – β-lactam resistance
+
+1. Identify isolates that are resistant to ampicillin (AMP) and ceftriaxone (CRO).
+2. For these isolates:
+   - Which β-lactamase genes are present (e.g. *blaTEM*, *blaCTX-M*)?
+   - Are ESBL genes detected?
+3. Do the genotypes explain the observed phenotypes?
+4. Are there isolates carrying β-lactamase genes but remaining phenotypically susceptible?
+
+### Part 2 – Trimethoprim/sulfamethoxazole and chloramphenicol
+
+1. For isolates resistant to SXT:
+   - Are *dfr* and/or *sul* genes detected?
+2. For chloramphenicol resistance:
+   - Are *cat* or *cml* genes present?
+3. Is genotype–phenotype concordance complete?
+
+### Part 3 – Fluoroquinolones and azithromycin
+
+1. Identify isolates resistant to ciprofloxacin (CIP).
+   - Are plasmid-mediated quinolone resistance genes (e.g. *qnr*) detected?
+   - Are QRDR mutations present in *gyrA* and/or *parC*?
+2. For azithromycin-resistant isolates:
+   - Are macrolide resistance genes (e.g. *mph*, *erm*) present?
+3. Discuss possible mechanisms if resistance is observed without an obvious gene.
+
+### Part 4 – Carbapenems and last-line agents
+
+1. Are any isolates resistant to meropenem (MEM), meropenem/vaborbactam (MER/VAB), or colistin (CST)?
+2. Are carbapenemase genes (e.g. *blaKPC*, *blaNDM*, *blaOXA-48-like*) detected?
+3. If carbapenem resistance is absent, what does this suggest about the clinical risk profile of this dataset?
+
+### Part 5 – Plasmid context
+
+Using your plasmid replicon typing results:
+
+1. Which Inc types are detected in the MDR isolates?
+2. Are ESBL genes located on plasmid-associated contigs?
+3. Do multiple isolates share the same Inc type and resistance genes?
+4. What does this suggest about:
+   - Horizontal gene transfer?
+   - Epidemiological relatedness?
+   - The potential for international spread?
+
+### Final questions
+
+1. For each isolate, would you consider the genomic AMR prediction clinically reliable?
+2. Identify any genotype–phenotype discrepancies.
+   - Propose biological explanations (gene expression, porin loss, efflux, gene truncation, assembly fragmentation, breakpoint interpretation).
+3. Based on both genomic and phenotypic data, which isolates would you prioritise for public health surveillance?
+
+Summarise your findings in a concise table that includes:
+- sequencing_ID  
+- key resistance genes  
+- key plasmid Inc types  
+- MDR status  
+- notable genotype–phenotype discrepancies  
+
+:::
 
 ## Wrap up and outlook
 
