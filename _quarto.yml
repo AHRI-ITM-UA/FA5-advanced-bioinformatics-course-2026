@@ -73,6 +73,7 @@ book:
         - content/genomics/qc.qmd
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
+        - content/genomics/annotation.qmd
         - content/genomics/further-reading.qmd
         # - content/bacterial_genomics/bacterial_genomics.qmd
     - content/phylogenomics/phylogenetics_exercise.qmd
