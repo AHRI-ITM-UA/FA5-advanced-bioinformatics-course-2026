@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pieter Moris">
 
 <title>3&nbsp; Bioinformatics tools and file formats – Pathogen genomics workshop</title>
 <style>
@@ -249,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/setup.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/tools-and-formats.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/pipeline-overview.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/tools-and-formats.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -306,12 +307,6 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/genomics/setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Setup and preparations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../content/genomics/pipeline-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span></a>
   </div>
@@ -340,18 +335,24 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variant annotation</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/phylogenomics/phylogenetics_exercise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -375,6 +376,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sam-bam-sequence-alignments" id="toc-sam-bam-sequence-alignments" class="nav-link" data-scroll-target="#sam-bam-sequence-alignments"><span class="header-section-number">3.0.3</span> SAM / BAM: Sequence alignments</a></li>
   <li><a href="#vcf-variant-calls" id="toc-vcf-variant-calls" class="nav-link" data-scroll-target="#vcf-variant-calls"><span class="header-section-number">3.0.4</span> VCF: Variant calls</a></li>
   <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools"><span class="header-section-number">3.1</span> Tools</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="header-section-number">3.2</span> Acknowledgements</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/genomics/tools-and-formats.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -382,16 +384,31 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/setup.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/tools-and-formats.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/pipeline-overview.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/tools-and-formats.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://pmoris.github.io">Pieter Moris</a> <a href="mailto:pmoris@itg.be" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-4242-4939" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.itg.be">
+            Institute of Tropical Medicine Antwerp
+            </a>
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
   
     
   </div>
@@ -425,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <ul>
 <li><a href="qc.html#sec-fastq-in-depth" class="quarto-xref"><span>Section 4.1</span></a></li>
-<li>(<span class="quarto-unresolved-ref">?sec-fasta</span>)</li>
+<li>The previouse course’s <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fasta">fasta introduction</a></li>
 </ul>
 </section>
 <section id="fastq-sequence-reads-and-qualities" class="level3" data-number="3.0.2">
@@ -435,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <ul>
 <li><a href="qc.html#sec-fastq-in-depth" class="quarto-xref"><span>Section 4.1</span></a></li>
-<li>(<span class="quarto-unresolved-ref">?sec-fastq</span>)</li>
+<li>The previous course’s <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fastq">section on fastq</a></li>
 </ul>
 </section>
 <section id="sam-bam-sequence-alignments" class="level3" data-number="3.0.3">
@@ -449,8 +466,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </blockquote>
 <ul>
-<li><span class="quarto-unresolved-ref">?sec-sam-format</span></li>
-<li><span class="quarto-unresolved-ref">?sec-bam-format</span></li>
+<li>The previous course’s <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format">section on sam</a></li>
+<li>The previous course’s <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format">section on bam</a></li>
 <li><a href="mapping.html#sec-alignment" class="quarto-xref"><span>Section 5.3</span></a></li>
 <li><a href="https://davetang.github.io/learning_bam_file/">Learning the BAM format page by Dave Tang</a></li>
 </ul>
@@ -465,7 +482,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </blockquote>
 <ul>
-<li><span class="quarto-unresolved-ref">?sec-vcf</span></li>
+<li>The previous course’s <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-vcf">section on vcf</a></li>
 <li><a href="variant-calling.html" class="quarto-xref"><span>Chapter 6</span></a></li>
 <li><a href="https://davetang.github.io/learning_vcf_file/">Learning the VCF page by Dave Tang</a></li>
 </ul>
@@ -483,6 +500,10 @@ ul.task-list li input[type="checkbox"] {
 <li>GATK: <a href="variant-calling.html" class="quarto-xref"><span>Chapter 6</span></a></li>
 <li>IGV: <a href="mapping.html#sec-alignment-visualisation" class="quarto-xref"><span>Section 5.9</span></a> and <a href="variant-calling.html#sec-vcf-visualisation" class="quarto-xref"><span>Section 6.4</span></a></li>
 </ul>
+</section>
+<section id="acknowledgements" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="acknowledgements"><span class="header-section-number">3.2</span> Acknowledgements</h2>
+<p>This section of the course materials was adapted from previous work by Pieter Moris (<a href="https://pmoris.github.io/FiMAB-bioinformatics/">International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module</a> - <a href="https://doi.org/10.5281/zenodo.18701255"><img src="https://zenodo.org/badge/727651304.svg" class="img-fluid" alt="DOI"></a> - licensed under CC BY 4.0).</p>
 
 
 </section>

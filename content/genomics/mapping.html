@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pieter Moris">
 
 <title>5&nbsp; Alignment to reference genome – Pathogen genomics workshop</title>
 <style>
@@ -307,7 +308,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/setup.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/mapping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/pipeline-overview.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/mapping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -364,12 +365,6 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/genomics/setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Setup and preparations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../content/genomics/pipeline-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span></a>
   </div>
@@ -398,18 +393,24 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/genomics/annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variant annotation</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/phylogenomics/phylogenetics_exercise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -440,6 +441,7 @@ div.csl-indent {
   <li><a href="#sec-picard-duplicates" id="toc-sec-picard-duplicates" class="nav-link" data-scroll-target="#sec-picard-duplicates"><span class="header-section-number">5.7</span> Mark PCR duplicates - <code>picard MarkDuplicates</code></a></li>
   <li><a href="#sec-picard-metrics" id="toc-sec-picard-metrics" class="nav-link" data-scroll-target="#sec-picard-metrics"><span class="header-section-number">5.8</span> Alignment statistics</a></li>
   <li><a href="#sec-alignment-visualisation" id="toc-sec-alignment-visualisation" class="nav-link" data-scroll-target="#sec-alignment-visualisation"><span class="header-section-number">5.9</span> Alignment visualisation</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="header-section-number">5.10</span> Acknowledgements</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/genomics/mapping.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -447,16 +449,31 @@ div.csl-indent {
 <main class="content page-columns page-full" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/setup.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/mapping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/genomics/pipeline-overview.html">From reads to variants</a></li><li class="breadcrumb-item"><a href="../../content/genomics/mapping.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://pmoris.github.io">Pieter Moris</a> <a href="mailto:pmoris@itg.be" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-4242-4939" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.itg.be">
+            Institute of Tropical Medicine Antwerp
+            </a>
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
   
     
   </div>
@@ -466,7 +483,7 @@ div.csl-indent {
 </header>
 
 
-<p>The next step of our pipeline tries to align the filtered and trimmed reads to the reference genome of the organism we’re studying. It starts from the processed <code>FASTQ</code> files and produces <code>SAM</code> and <code>BAM</code> files, which contain the mapped reads. We encountered these file formats before in <span class="quarto-unresolved-ref">?sec-sam-format</span> and <span class="quarto-unresolved-ref">?sec-bam-format</span>, but we will go a bit more in-depth now. Two other important aspects in this part of the pipeline are indexing the reference genome and filtering out PCR duplicates from our alignment.</p>
+<p>The next step of our pipeline tries to align the filtered and trimmed reads to the reference genome of the organism we’re studying. It starts from the processed <code>FASTQ</code> files and produces <code>SAM</code> and <code>BAM</code> files, which contain the mapped reads. We encountered these file formats before in the previous course’s <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format">section on sam</a> and the <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format">section on bam</a>, but we will go a bit more in-depth now. Two other important aspects in this part of the pipeline are indexing the reference genome and filtering out PCR duplicates from our alignment.</p>
 <p><a href="../assets/pipeline-mapping.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../assets/pipeline-mapping.svg" class="no-lightbox img-fluid"></a></p>
 <div id="tip-reproducibility" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -480,7 +497,7 @@ Tip&nbsp;5.1: Reproducibility and organized projects
 <div class="callout-body-container callout-body">
 <p>To make your analyses more reproducible, and to be able to figure out what you did in the (distant) future, it is important to use meaningful file names and to organise all of your data, scripts and accompanying files (like metadata and readme files, see <a href="#tip-reproducibility-2" class="quarto-xref">Tip&nbsp;<span>5.2</span></a>). During these hands-on sessions, try to already think about naming conventions and a clear hierarchy of your files and directories.</p>
 <p>We will write separate scripts for each of the different parts of the pipeline, but at the very end, we can try to merge them into just a handful scripts for each of the major conceptual steps, optionally accompanied by a master script to govern them all.</p>
-<p>As a last tip, try to be aware of the types of paths that you use when writing your scripts: absolute or relative ones (<span class="quarto-unresolved-ref">?sec-linux-paths</span>).</p>
+<p>As a last tip, try to be aware of the types of paths that you use when writing your scripts: absolute or relative ones (<a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/4-unix-navigation.html#sec-linux-paths">see previous course notes</a>.</p>
 <p>Relative paths are more portable than absolute ones (which will not work on a different workstation with different file paths), but they can be more prone to errors. Indeed, the relative path is defined based on where call the script from, rather than the location of the script itself, so be mindful of this.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>Whichever type you use, we recommend to define all important files and folders at the top of your scripts as variables. This makes it easier to change them at a later time.</p>
 <p>You can already compare the basic and extended versions of some of the example scripts stored in the <code>./training/scripts</code> directory to see how you can extend a simple script to make it more robust and reusable (and hopefully clear).</p>
@@ -488,7 +505,7 @@ Tip&nbsp;5.1: Reproducibility and organized projects
 </div>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;An alternative is to make use of relative paths, but in that case the script still needs to be called from a fixed location in your project folders (or you need to make use of <a href="https://stackoverflow.com/a/246128">this strategy</a>). For even more complex scripts, you might want to look into providing paths as an argument, or to make use of configuration or samplesheets (as is done by more complex workflow manager tools).</p></div></div><section id="where-to-find-your-reference-genomes---bwa-mem" class="level2 page-columns page-full" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="where-to-find-your-reference-genomes---bwa-mem"><span class="header-section-number">5.1</span> Where to find your reference genomes - <code>bwa mem</code></h2>
-<p>We already downloaded a reference genome from <a href="https://plasmodb.org/plasmo/app/downloads">PlasmoDB</a> in <span class="quarto-unresolved-ref">?sec-plasmodb</span> (where we introduced the <code>wget</code> command). These reference genomes allow us to compare the samples we have collected with a representative reference type_of the organism that we’re studying<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. For some organisms, multiple reference genomes exist (e.g., because the organism exhibits a lot of genetic variability between different geographic locations), and these references also receive updates from time to time, as the assemblies of complex regions improves (e.g., gaps spanned, repetitive regions mapped, or in the case of <em>Plasmodium</em>, the polymorphic subtelomeric regions).</p>
+<p><a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-plasmodb">In the introduction course</a>, we already downloaded a reference genome from <a href="https://plasmodb.org/plasmo/app/downloads">PlasmoDB</a> (where we introduced the <code>wget</code> command). These reference genomes allow us to compare the samples we have collected with a representative reference type_of the organism that we’re studying<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. For some organisms, multiple reference genomes exist (e.g., because the organism exhibits a lot of genetic variability between different geographic locations), and these references also receive updates from time to time, as the assemblies of complex regions improves (e.g., gaps spanned, repetitive regions mapped, or in the case of <em>Plasmodium</em>, the polymorphic subtelomeric regions).</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;In practice, reference genomes rarely contain the genetic material of a single individual. Instead, they tend to be a mosaic of DNA sequences from different sources. See <a href="https://en.wikipedia.org/wiki/Reference_genome">https://en.wikipedia.org/wiki/Reference_genome</a>.</p></div></div><div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -509,7 +526,7 @@ Tip&nbsp;5.1: Reproducibility and organized projects
 <section id="indexing-a-reference-genome" class="level2 page-columns page-full" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="indexing-a-reference-genome"><span class="header-section-number">5.2</span> Indexing a reference genome</h2>
 <p>Before we can map our reads to a reference genome, we need to create an index to allow our mapper to more efficiently search through the (usually rather large) FASTA file<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. You can think of it like the index or table of contents of a book (if that particular book contained about <em>23 million characters</em> in the case of <em>Plasmodium falciparum</em>, or <em>3.1 billion characters</em> for the human reference genome).</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;For a refresher on the FASTA file format, check out <span class="quarto-unresolved-ref">?sec-fasta</span>.</p></div></div><p>The indexing step itself is usually performed by the same tool as the one that does the actual alignment. The index <strong>only needs to be created once</strong>, and then it can be re-used when mapping each of our FASTQ files. In this course, we will be using <code>bwa</code> - the <a href="https://github.com/lh3/bwa">Burrows-Wheeler Aligner</a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;For a refresher on the FASTA file format, check out <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fasta">the previous course’s fasta introduction</a>.</p></div></div><p>The indexing step itself is usually performed by the same tool as the one that does the actual alignment. The index <strong>only needs to be created once</strong>, and then it can be re-used when mapping each of our FASTQ files. In this course, we will be using <code>bwa</code> - the <a href="https://github.com/lh3/bwa">Burrows-Wheeler Aligner</a>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -587,7 +604,7 @@ Tip&nbsp;5.3: Orientation of forward and reverse reads during mapping
 <p>When we call <code>bwa mem</code> without any additional arguments, we get an overview of how to use it:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> bwa mem <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> <span class="op">&lt;</span>reference-genome<span class="op">&gt;</span> <span class="op">&lt;</span>R1.fastq<span class="op">&gt;</span> <span class="pp">[</span><span class="ss">R2.fastq</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As you can see, the second read pair file is <code>[optional]</code>, but when dealing with paired-end read data the two files need to be supplied at the same time. To do this programmatically, it is again important to use concepts like <em>looping over pairs of FASTQ files</em> to do this efficiently (see <a href="qc.html#tip-paired-fastq-loop" class="quarto-xref">Tip&nbsp;<span>4.2</span></a>).</p>
-<p>By default, <code>bwa</code> will output its results straight into the terminal’s standard out (see <span class="quarto-unresolved-ref">?sec-unix-streams</span>). This is very useful once we start chaining different tools together, but for your first attempts you should provide the <code>-o &lt;output_file&gt;</code> flag to write everything to a file instead.</p>
+<p>By default, <code>bwa</code> will output its results straight into the terminal’s standard out (<a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-unix-streams">see previous course’s section on unix streams</a>). This is very useful once we start chaining different tools together, but for your first attempts you should provide the <code>-o &lt;output_file&gt;</code> flag to write everything to a file instead.</p>
 <p><code>bwa mem</code> provides <em>many</em> different options, but we recommend the following ones:</p>
 <ul>
 <li><code>-t &lt;int&gt;</code>: the number of threads to use. See <a href="#tip-parallel" class="quarto-xref">Tip&nbsp;<span>5.4</span></a>.</li>
@@ -653,8 +670,8 @@ Tip&nbsp;5.4: Speeding up code through multi-threading or parallelization
 </section>
 <section id="sec-samtools" class="level2 page-columns page-full" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="sec-samtools"><span class="header-section-number">5.4</span> SAM and BAM files</h2>
-<p>The output of the alignment step (using <code>bwa mem</code>) is a SAM file (see <span class="quarto-unresolved-ref">?sec-sam-format</span>). This stands for <em>Sequence Alignment Map</em>. These are plain text files delimited with tabs, so you can view them using a text editor or a command like <code>less</code>.</p>
-<p>To save space and make the alignment quicker to index, SAM files are often converted to BAM files (<span class="quarto-unresolved-ref">?sec-bam-format</span>), which are compressed binary versions of the alignment. These can be used by downstream tools directly, so we tend to only store the alignment in this format, even though you can no longer inspect the alignment yourself.</p>
+<p>The output of the alignment step (using <code>bwa mem</code>) is a SAM file (see <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format">previous course’s section on sam</a>). This stands for <em>Sequence Alignment Map</em>. These are plain text files delimited with tabs, so you can view them using a text editor or a command like <code>less</code>.</p>
+<p>To save space and make the alignment quicker to index, SAM files are often converted to BAM files (<a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format">see previous course’s section on bam</a>), which are compressed binary versions of the alignment. These can be used by downstream tools directly, so we tend to only store the alignment in this format, even though you can no longer inspect the alignment yourself.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>0080_S44_L001.bam | head -n30</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>@HD     VN:1.6  SO:coordinate</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>@SQ     SN:Pf3D7_01_v3  LN:640851</span>
@@ -874,7 +891,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Recall what you learned in <span class="quarto-unresolved-ref">?sec-unix-streams</span> about piping the output of one command into the input of another using the <code>|</code> operator. We can make use of this to feed the output of <code>bwa mem</code> directly into <code>samtools</code>. This allows us to forego the need to write the output to any intermediate files.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>Recall what you learned in <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-unix-streams">the previous course’s section on unix streams</a> about piping the output of one command into the input of another using the <code>|</code> operator. We can make use of this to feed the output of <code>bwa mem</code> directly into <code>samtools</code>. This allows us to forego the need to write the output to any intermediate files.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
 <p>The only difference compared to before is that we now remove the <code>-o output.sam</code> option from the <code>bwa mem</code> command and that we do not provide an explicit input file to <code>samtools</code> (it is read from <code>stdout</code> directly instead).<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="op">&lt;</span>arguments<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-o</span> alignment.sort.bam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For clarity we use the <code>sorted.bam</code> file suffix for any sorted BAM files.</p>
@@ -1050,6 +1067,10 @@ Warning
 <section id="sec-alignment-visualisation" class="level2" data-number="5.9">
 <h2 data-number="5.9" class="anchored" data-anchor-id="sec-alignment-visualisation"><span class="header-section-number">5.9</span> Alignment visualisation</h2>
 <p>After creating and filtering our alignment files, we can visualise them in a tool like <a href="https://igv.org/">IGV (Integrative Genomics Viewer)</a>. We refer to <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html#visualization-using-a-genome-browser-igv">this section</a> of the Galaxy training materials <span class="citation" data-cites="Hiltemann_2023 sequence-analysis-mapping">(<a href="../references.html#ref-Hiltemann_2023" role="doc-biblioref">Hiltemann et al. 2023</a>; <a href="../references.html#ref-sequence-analysis-mapping" role="doc-biblioref">Wolff, Batut, and Rasche</a>)</span>.</p>
+</section>
+<section id="acknowledgements" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="acknowledgements"><span class="header-section-number">5.10</span> Acknowledgements</h2>
+<p>This section of the course materials was adapted from previous work by Pieter Moris (<a href="https://pmoris.github.io/FiMAB-bioinformatics/">International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module</a> - <a href="https://doi.org/10.5281/zenodo.18701255"><img src="https://zenodo.org/badge/727651304.svg" class="img-fluid" alt="DOI"></a> - licensed under CC BY 4.0).</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

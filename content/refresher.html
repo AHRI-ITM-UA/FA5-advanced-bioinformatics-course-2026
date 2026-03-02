@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/genomics/setup.html" rel="next">
+<link href="../content/genomics/pipeline-overview.html" rel="next">
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -306,12 +326,6 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Setup and preparations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../content/genomics/pipeline-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span></a>
   </div>
@@ -340,18 +354,24 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/genomics/annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variant annotation</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/phylogenomics/phylogenetics_exercise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -365,8 +385,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#unix-command-line-and-bash-scripting" id="toc-unix-command-line-and-bash-scripting" class="nav-link active" data-scroll-target="#unix-command-line-and-bash-scripting"><span class="header-section-number">1.1</span> Unix command line and bash scripting</a></li>
+  <li><a href="#whole-genome-sequencing-pipelines" id="toc-whole-genome-sequencing-pipelines" class="nav-link" data-scroll-target="#whole-genome-sequencing-pipelines"><span class="header-section-number">1.2</span> Whole-genome sequencing pipelines</a></li>
+  <li><a href="#computational-thinking-best-practices-and-reproducibility" id="toc-computational-thinking-best-practices-and-reproducibility" class="nav-link" data-scroll-target="#computational-thinking-best-practices-and-reproducibility"><span class="header-section-number">1.3</span> Computational thinking, best practices and reproducibility</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/refresher.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -392,25 +420,73 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>On this page we link to a few resources on what the pre-requisite knowledge for the rest of this course.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Unix command line and bash scripting
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<section id="unix-command-line-and-bash-scripting" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="unix-command-line-and-bash-scripting"><span class="header-section-number">1.1</span> Unix command line and bash scripting</h2>
 <ul>
 <li><a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html">Introduction to the CLI</a></li>
 </ul>
 <p>Be sure to check out the various other resources linked on <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html#resources">this page</a>.</p>
 <p>For a more interactive learning experience, you can try <a href="https://sandbox.bio/">https://sandbox.bio/</a>.</p>
-</div>
-</div>
+</section>
+<section id="whole-genome-sequencing-pipelines" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="whole-genome-sequencing-pipelines"><span class="header-section-number">1.2</span> Whole-genome sequencing pipelines</h2>
+<p>We have collected a number of related resources below, which have served as an inspiration while preparing our own course. We hope they’ll be useful to you for further learning as well.</p>
+<ul>
+<li><a href="https://genomics.sschmeier.com/">https://genomics.sschmeier.com/</a></li>
+<li><a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/">https://training.galaxyproject.org/training-material/topics/sequence-analysis/</a></li>
+<li><a href="https://mbite.mdhs.unimelb.edu.au/tutorials/variant_calling_gatk1/variant_calling_gatk1/">https://mbite.mdhs.unimelb.edu.au/tutorials/variant_calling_gatk1/variant_calling_gatk1/</a></li>
+<li><a href="https://speciationgenomics.github.io/">https://speciationgenomics.github.io/</a></li>
+<li><a href="https://ngs-course.readthedocs.io/en/praha-november-2023/">https://ngs-course.readthedocs.io/en/praha-november-2023/</a></li>
+<li><a href="https://people.duke.edu/~ccc14/duke-hts-2018/index.html">https://people.duke.edu/~ccc14/duke-hts-2018/index.html</a></li>
+<li><a href="https://biomedicalhub.github.io/genomics/">https://biomedicalhub.github.io/genomics/</a></li>
+<li><a href="https://github.com/hbctraining/main?tab=readme-ov-file#current-topics-in-bioinformatics-series">https://github.com/hbctraining/main?tab=readme-ov-file#current-topics-in-bioinformatics-series</a></li>
+<li><a href="https://datacarpentry.org/wrangling-genomics/">https://datacarpentry.org/wrangling-genomics/</a></li>
+<li><a href="https://mmbdtp.github.io/modules/sequencing/week-2-programme/">https://mmbdtp.github.io/modules/sequencing/week-2-programme/</a></li>
+<li><a href="https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html">https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html</a></li>
+<li><a href="https://rnnh.github.io/bioinfo-notebook/#contents">https://rnnh.github.io/bioinfo-notebook/#contents</a></li>
+<li><a href="https://learn.gencore.bio.nyu.edu/">https://learn.gencore.bio.nyu.edu/</a></li>
+<li><a href="https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html">https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html</a></li>
+</ul>
+<p>The video below by Tobias Rausch @ EMBL-EBI <span class="citation" data-cites="rausch_EMBL-EBI_2022">(<a href="references.html#ref-rausch_EMBL-EBI_2022" role="doc-biblioref">Rausch 2022</a>)</span> also provides an excellent overview of various topics that come up in genomic variant calling, but it is broader in scope than just AmpliSeq or molecular surveillance of parasites:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/zO9WCOaq3aQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="computational-thinking-best-practices-and-reproducibility" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="computational-thinking-best-practices-and-reproducibility"><span class="header-section-number">1.3</span> Computational thinking, best practices and reproducibility</h2>
+<ul>
+<li>Track software versions</li>
+<li>Use “good” file and variable names</li>
+<li>Keep track of order of analysis and how each file was produced</li>
+<li>Structure scripts/data in clear directories</li>
+<li>Avoid manually tweaking things</li>
+<li>Add readmes and/or comments for complex steps</li>
+<li>(Track/version your own code on git)</li>
+<li>(for pipelining / complex scripts: try everything on small test data before starting a long-running analysis)</li>
+<li>(general bash safety / best practices - no sudo, doublecheck every rm and mv command, etc.)</li>
+</ul>
+<p>Further reading:</p>
+<ul>
+<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285">Ten Simple Rules for Reproducible Computational Research</a>:</p></li>
+<li><p><a href="https://link.springer.com/article/10.1186/s13059-015-0850-7">Five selfish reasons to work reproducibly</a></p></li>
+<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005871">Ten simple rules for biologists learning to program</a></p></li>
+<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008645">Ten simple rules for getting started with command-line bioinformatics</a></p></li>
+<li><p><a href="https://openscpca.readthedocs.io/en/stable/ensuring-repro/managing-software/">Managing software dependencies</a></p></li>
+<li><p>Project folder organisation:</p>
+<ul>
+<li><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424">A Quick Guide to Organizing Computational Biology Projects</a></li>
+<li><a href="https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/organizing-your-project.html">Organizing your project by The Johns Hopkins Data Science Lab</a></li>
+<li><a href="https://alexanderlabwhoi.github.io/BVCNReproducibility/02/2/organizing.html">BVCN Reproducibility Challenge by The Reproducibility Challenge Team</a></li>
+</ul></li>
+<li><p><a href="https://rdatatoolbox.github.io/">Reproducible Research in Computational Ecology</a> - covers a wide array of related topics</p></li>
+<li><p><a href="https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/">Bioinformatics for the terrified</a></p></li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-rausch_EMBL-EBI_2022" class="csl-entry" role="listitem">
+Rausch, Tobias. 2022. <span>“Methods in Genomic Variant Calling.”</span> EMBL-EBI. <a href="https://doi.org/10.6019/TOL.GenomicVariantCalling-w.2022.00001.1 ">https://doi.org/10.6019/TOL.GenomicVariantCalling-w.2022.00001.1 </a>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -833,8 +909,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/genomics/setup.html" class="pagination-link" aria-label="Setup and preparations">
-        <span class="nav-page-text">Setup and preparations</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/genomics/pipeline-overview.html" class="pagination-link" aria-label="Pipeline overview">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -846,7 +922,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
 <p>Source available on <a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026">GitHub</a></p>
-<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/refresher.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/refresher.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
