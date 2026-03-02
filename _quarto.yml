@@ -67,7 +67,6 @@ book:
     - content/refresher.qmd
     - part: "From reads to variants"
       chapters:
-        - content/genomics/setup.qmd
         - content/genomics/pipeline-overview.qmd
         - content/genomics/tools-and-formats.qmd
         - content/genomics/qc.qmd
