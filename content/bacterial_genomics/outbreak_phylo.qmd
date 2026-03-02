@@ -61,6 +61,8 @@ Table: Overview of isolates included in the course, showing short-read run acces
 
 ven in the era of long-read sequencing, short reads remain highly relevant in 2026. They are typically less expensive to generate and are well suited for phylogenetic inference. Moreover, several established pipelines are specifically optimised for short-read data. Let us therefore retrieve some Illumina sequencing data.
 
+# todo: add oldest isolate for rooting!!!
+# addl ink to azis reference genome!!
 
 ```bash
 runs=( SRR8552256
@@ -100,13 +102,11 @@ For bacteria such as *Salmonella*, however, there is good news. Well-established
 Nevertheless, it remains essential that you understand each step of the pipeline and the tools involved.
 
 
-::: {.callout-note}
-
-Exercise 1: perform QC on the Illumina data
+::: {.callout-note title="Exercise 1: Quality control"}
 
 Perform quality control on the raw Illumina reads.
 
-You may use tools such as fastqc and multiqc, or any equivalent workflow you are familiar with.
+You may use tools such as `fastqc` and `multiqc`, or any equivalent workflow you are familiar with.
 
 Answer briefly:
 
@@ -128,9 +128,7 @@ Carefully read the documentation and determine:
 - which output files are generated  
 
 
-::: {.callout-note}
-
-Exercise 2: run the snippy pipeline
+::: {.callout-note title="Exercise 2: mapping, variant calling"}
 
 Run Snippy separately for each isolate.
 
@@ -166,9 +164,10 @@ Once all isolates have been processed, your next step is to compare them.
 
 Snippy provides an additional command that combines per-sample results into a core SNP alignment across all isolates. Identify the correct command in the documentation yourself and examine its parameters.
 
-::: {.callout-note}
+Here is the snippy repo linked: [Snippy: Rapid haploid variant calling and core genome alignment](https://github.com/tseemann/snippy)
 
-Excercise 3: generating a core SNP alignment
+::: {.callout-note title="Excercise 3: generating a core SNP alignment for phylogenetic inference"}
+
 
 After generating a core SNP alignment, you should find a file named `core.full.aln` in the output directory. This file contains the aligned sequences of all isolates at the core SNP sites.
 
