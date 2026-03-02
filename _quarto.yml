@@ -73,35 +73,12 @@ book:
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
         - content/genomics/annotation.qmd
-        # - content/bacterial_genomics/bacterial_genomics.qmd
     - content/phylogenomics/phylogenetics_exercise.qmd
+    - part: "Bacterial genomics"
+      chapters:
+        - content/bacterial_genomics/assembly_AMR.qmd
+        - content/bacterial_genomics/outbreak_phylo.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd
-
-    #   - part: "Bioinformatics file formats and tools"
-    #   # chapters:
-    #     # - content/bioinf/bioinf-file-formats.qmd
-    # - part: "Malaria Molecular Surveillance"
-    #   chapters:
-    #       - content/mms/mms_usecases
-    #       - content/mms/molecular_markers
-    #       - content/mms/practical_variants_of_interest
-    #       - content/mms/genetic_diversity
-    # - part: "Population genetics"
-    #   chapters:
-    #       - content/popgen/population_genetics
-    #       - content/popgen/micro_evolution
-    #       - content/popgen/practical_LD
-    #       - content/popgen/visualisation
-    #       - content/popgen/practical_PCA
-    #       - content/popgen/relatedness
-    #       - content/popgen/multilocus
-    #       - content/popgen/ibd
-    #       - content/popgen/population_structure
-    #       - content/popgen/practical_ibd
-    # - part: "Case studies"
-    # - content/population-genetics.qmd
-    # - content/phylogenetics.qmd
-    # - part: "Computational literacy" # aka things that ~can~ will go wrong aka what I wish I had known
     - content/references.qmd
     # https://quarto.org/docs/books/book-structure.html#parts-appendices
     # parts can either be a stand-alone file with intro

@@ -1,0 +1,201 @@
+# The Salmonella Concord mystery: reconstructing transmission across borders
+
+Several young patients in Ethiopia presented with severe gastrointestinal disease in the early 200's. Stool cultures yielded *Salmonella*, raising concerns about a possible localized outbreak. At first glance, the cases appeared epidemiologically linked: similar symptoms, similar age group, and temporal proximity.
+
+However, the situation quickly became more complex.
+
+Additional isolates with highly similar preliminary typing results were identified in European surveillance databases. Some were recovered from patients with recent travel to Ethiopia. Others had no documented travel history at all. Were these sporadic cases? Imported infections? Or evidence of sustained international transmission?
+
+You have been asked to investigate.
+
+As a microbial genomics investigator, your role is to determine whether these isolates represent:
+
+- a single clonal outbreak strain,
+- multiple unrelated introductions,
+- or a broader, circulating lineage with regional persistence.
+
+To answer this, you will move beyond traditional typing and reconstruct their evolutionary relationships using whole-genome data.
+
+## Analytical framework
+
+Whole-genome sequencing was performed using Illumina short reads for all isolates, with selected genomes additionally sequenced using long-read platforms to generate high-quality references.
+
+Your analysis will proceed from raw sequencing reads to phylogenetic inference. Along the way, you will:
+
+- assess read quality and assembly characteristics,
+- confirm species identity and serotype,
+- explore antimicrobial resistance determinants,
+- construct a core-genome SNP alignment,
+- and infer a phylogeny to evaluate genetic relatedness.
+
+The central question is not simply whether the isolates are *Salmonella* Concord, but whether they are genetically indistinguishable at outbreak scale, and what their phylogenetic structure reveals about transmission dynamics.
+
+- Are Ethiopian cases part of a tight monophyletic cluster?
+- Do European isolates nest within that cluster?
+- Is there evidence for repeated exportation events?
+- Or does the tree suggest long-term endemic circulation?
+
+The data in Table @tbl:isolate-overview provide the epidemiological context. The genome sequences will provide the evolutionary evidence.
+
+In this exercise, you will integrate both.
+
+
+## Isolate overview (short-read run accessions)
+
+Table: Overview of isolates included in the course, showing short-read run accessions and key epidemiological metadata. {#tbl:isolate-overview}
+| sequencing_ID | lab_ID | SR_run_accession | country_of_isolation | year_of_isolation | source | travel_origin |
+|:--|:--|:--|:--|--:|:--|:--|
+| SRS4345282     | 679052        | SRR8552256  | UK               | 2019 | human | Zambia    |
+| 32640_1_336    | H044240362    | ERR9516343  | UK               | 2004 | human | Kenya     |
+| 32640_1_39     | 64206         | ERR9516195  | Austria          | 2006 | human | Ethiopia  |
+| 32640_1_47     | 95907         | ERR9516199  | Austria          | 2007 | human | Ethiopia  |
+| 32640_1_316    | 1035531       | ERR9516333  | The Netherlands  | 2006 | stool | NA        |
+| 32640_1_372    | 254833        | ERR9516357  | The Netherlands  | 2003 | stool | NA        |
+| 32640_1_328    | H04340470     | ERR9516339  | UK               | 2004 | human | NA        |
+| SRS5777896     | 850890        | SRR10604677 | UK               | 2019 | human | NA        |
+| 32640_1_296    | 0508H45184    | ERR9516323  | Denmark          | 2005 | stool | Ethiopia  |
+| 32640_1_364    | 70366         | ERR9516355  | USA              | 2007 | stool | Ethiopia  |
+
+
+## retrieving short read data
+
+ven in the era of long-read sequencing, short reads remain highly relevant in 2026. They are typically less expensive to generate and are well suited for phylogenetic inference. Moreover, several established pipelines are specifically optimised for short-read data. Let us therefore retrieve some Illumina sequencing data.
+
+# todo: add oldest isolate for rooting!!!
+# addl ink to azis reference genome!!
+
+```bash
+runs=( SRR8552256
+ERR9516343
+ERR9516195
+ERR9516199
+ERR9516333
+ERR9516357
+ERR9516339
+SRR10604677
+ERR9516323
+ERR9516355)
+
+
+CPUS=16
+
+mkdir -p fastq_illumina
+
+for run in "${runs[@]}"
+do
+  fasterq-dump "$run" \
+    --threads "$CPUS" \
+    --split-files \
+    --progress \
+    --outdir fastq_illumina
+  gzip -f fastq/"$run"_*.fastq
+done
+
+```
+
+## QC, mapping, and variant calling
+
+Recall the previous sessions in which we performed quality control, read mapping, and variant calling. This was quite challenging for *Plasmodium*, correct?
+
+For bacteria such as *Salmonella*, however, there is good news. Well-established pipelines are available that perform read mapping, variant calling, and even core SNP alignment automatically. This allows you to focus primarily on interpreting the resulting phylogenetic tree.
+
+Nevertheless, it remains essential that you understand each step of the pipeline and the tools involved.
+
+
+::: {.callout-note title="Exercise 1: Quality control"}
+
+Perform quality control on the raw Illumina reads.
+
+You may use tools such as `fastqc` and `multiqc`, or any equivalent workflow you are familiar with.
+
+Answer briefly:
+
+- What is the overall per-base quality profile?
+- Is there evidence of adapter contamination?
+- Do any samples require trimming?
+- Are there major differences in sequencing depth between samples?
+- Support your answers with specific observations from the QC reports.
+:::
+
+For bacterial variant calling, we will use **Snippy**, a widely adopted pipeline for haploid bacterial genomes:
+
+https://github.com/tseemann/snippy
+
+Carefully read the documentation and determine:
+
+- how to provide paired-end Illumina reads as input  
+- how to specify the reference genome  
+- which output files are generated  
+
+
+::: {.callout-note title="Exercise 2: mapping, variant calling"}
+
+Run Snippy separately for each isolate.
+
+After completion, inspect the output directory for one sample. You should find, among others:
+
+- a `*.bam` file (aligned reads)  
+- a `*.bam.bai` index file  
+- a `*.vcf` file (variant calls)  
+- a `*.consensus.fa` file  
+- summary statistics  
+
+#### Questions
+
+1. What information is stored in the `*.vcf` file?  
+   - What do the columns represent?  
+   - How are SNPs defined relative to the reference genome?  
+
+2. What is the purpose of the BAM file?  
+   - How could you visualise it?  
+   - What does read depth tell you?  
+
+3. For each isolate, how many variants are detected relative to the reference genome?  
+   - How can you count them directly from the VCF file?  
+   - Are all variants high quality? How do you know?  
+
+Be precise. Interpret the file contents rather than only reporting filenames.
+
+:::
+
+### From variants to outbreak inference
+
+Once all isolates have been processed, your next step is to compare them.
+
+Snippy provides an additional command that combines per-sample results into a core SNP alignment across all isolates. Identify the correct command in the documentation yourself and examine its parameters.
+
+Here is the snippy repo linked: [Snippy: Rapid haploid variant calling and core genome alignment](https://github.com/tseemann/snippy)
+
+::: {.callout-note title="Excercise 3: generating a core SNP alignment for phylogenetic inference"}
+
+
+After generating a core SNP alignment, you should find a file named `core.full.aln` in the output directory. This file contains the aligned sequences of all isolates at the core SNP sites.
+
+- Inspect the alignment file. What does each row represent?  
+- How many core SNP sites are included?  
+- Are there many differences between isolates, or only a few?  
+
+This alignment can be used as input for a phylogenetic inference tool. The resulting tree will allow you to:
+
+- assess genetic relatedness among isolates  
+- determine whether they cluster tightly  
+- evaluate whether they are consistent with a single outbreak strain  
+
+In bacterial outbreak genomics, small SNP distances often indicate recent transmission, whereas large distances suggest unrelated cases.
+
+Your final interpretation should integrate:
+
+- SNP distances  
+- clustering patterns  
+- resistance phenotypes  
+- epidemiological context in Ethiopia  
+
+Only then can you conclude whether this represents a localized outbreak of *Salmonella* Concord or multiple unrelated infections.
+:::
+
+
+# note that we need to define the azis reference genome ideally
+# branch lengths might be long, do raxml or iqtree or fastree?
+# info box: about SNP sites
+# provide table with metadata
+# also look for AMR phentotypic data for the next part
