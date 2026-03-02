@@ -459,4 +459,8 @@ The output of these tools can again be aggregated using a tool like MulitQC. See
 After creating and filtering our alignment files, we can visualise them in a tool like [IGV (Integrative Genomics Viewer)](https://igv.org/). We refer to [this section](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html#visualization-using-a-genome-browser-igv) of the Galaxy training materials [@Hiltemann_2023; @sequence-analysis-mapping].
 
 
-<!-- TODO: add info on coverage and read depth -->
+<!-- TODO: add info on coverage and read depth using mosdepth -->
+
+## Acknowledgements
+
+This section of the course materials was adapted from previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0).

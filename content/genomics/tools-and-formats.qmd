@@ -79,3 +79,7 @@ We have also compiled a few other resources that give an overview of the the var
 - picard: @sec-picard-duplicates and @sec-picard-metrics
 - GATK: @sec-variant-calling
 - IGV: @sec-alignment-visualisation and @sec-vcf-visualisation
+
+## Acknowledgements
+
+This section of the course materials was adapted from previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0).

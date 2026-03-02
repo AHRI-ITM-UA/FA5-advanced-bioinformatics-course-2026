@@ -66,3 +66,7 @@ We have collected a number of related resources below, which have served as an i
 The video below by Tobias Rausch \@ EMBL-EBI [@rausch_EMBL-EBI_2022] also provides an excellent overview of various topics that come up in genomic variant calling, but it is broader in scope than just AmpliSeq or molecular surveillance of parasites:
 
 {{< video https://www.youtube.com/watch?v=zO9WCOaq3aQ >}}
+
+## Acknowledgements
+
+This section of the course materials was adapted from previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0).

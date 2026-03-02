@@ -863,3 +863,7 @@ https://www.illumina.com/content/dam/illumina-marketing/documents/products/illum
 -->
 
 :::
+
+## Acknowledgements
+
+This section of the course materials was adapted from previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0).
