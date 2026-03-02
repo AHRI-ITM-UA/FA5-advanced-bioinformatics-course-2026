@@ -2,8 +2,7 @@
 
 On this page we link to a few resources on what the pre-requisite knowledge for the rest of this course.
 
-::: {.callout}
-### Unix command line and bash scripting
+## Unix command line and bash scripting
 
 - [Introduction to the CLI](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html)
 
@@ -11,4 +10,64 @@ Be sure to check out the various other resources linked on [this page](https://p
 
 For a more interactive learning experience, you can try [https://sandbox.bio/](https://sandbox.bio/).
 
-:::
+## Whole-genome sequencing pipelines
+
+We have collected a number of related resources below, which have served as an inspiration while preparing our own course. We hope they'll be useful to you for further learning as well.
+
+- [https://genomics.sschmeier.com/](https://genomics.sschmeier.com/)
+- [https://training.galaxyproject.org/training-material/topics/sequence-analysis/](https://training.galaxyproject.org/training-material/topics/sequence-analysis/)
+- [https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/](https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/)
+- [https://speciationgenomics.github.io/](https://speciationgenomics.github.io/)
+- [https://ngs-course.readthedocs.io/en/praha-november-2023/](https://ngs-course.readthedocs.io/en/praha-november-2023/)
+- [https://people.duke.edu/~ccc14/duke-hts-2018/index.html](https://people.duke.edu/~ccc14/duke-hts-2018/index.html)
+- [https://biomedicalhub.github.io/genomics/](https://biomedicalhub.github.io/genomics/)
+- [https://hbctraining.github.io/variant_analysis/schedule/self-learning.html](https://hbctraining.github.io/variant_analysis/schedule/self-learning.html)
+- [https://datacarpentry.org/wrangling-genomics/](https://datacarpentry.org/wrangling-genomics/)
+- [https://mmbdtp.github.io/modules/sequencing/week-2-programme/](https://mmbdtp.github.io/modules/sequencing/week-2-programme/)
+- [https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html](https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html)
+- [https://rnnh.github.io/bioinfo-notebook/#contents](https://rnnh.github.io/bioinfo-notebook/#contents)
+- [https://learn.gencore.bio.nyu.edu/](https://learn.gencore.bio.nyu.edu/)
+- [https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html](https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html)
+- [https://bio-courses1.rsb.anu.edu.au/biol3161-data/ReadsToVariants.html](https://bio-courses1.rsb.anu.edu.au/biol3161-data/ReadsToVariants.html)
+
+The video below by Tobias Rausch \@ EMBL-EBI [@rausch_EMBL-EBI_2022] also provides an excellent overview of various topics that come up in genomic variant calling, but it is broader in scope than just AmpliSeq or molecular surveillance of parasites:
+
+{{< video https://www.youtube.com/watch?v=zO9WCOaq3aQ >}}
+
+## Computational thinking, best practices and reproducibility
+
+- Track software versions
+- Use "good" file and variable names
+- Keep track of order of analysis and how each file was produced
+- Structure scripts/data in clear directories
+- Avoid manually tweaking things
+- Add readmes and/or comments for complex steps
+- (Track/version your own code on git)
+- (for pipelining / complex scripts: try everything on small test data before starting a long-running analysis)
+- (general bash safety / best practices - no sudo, doublecheck every rm and mv command, etc.)
+
+Further reading:
+
+- [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285):
+- [Five selfish reasons to work reproducibly](https://link.springer.com/article/10.1186/s13059-015-0850-7)
+- [Ten simple rules for biologists learning to program](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005871)
+- [Ten simple rules for getting started with command-line bioinformatics](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008645)
+
+- [Managing software dependencies](https://openscpca.readthedocs.io/en/stable/ensuring-repro/managing-software/)
+
+- Project folder organisation:
+    - [A Quick Guide to Organizing Computational Biology Projects](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)
+    - [Organizing your project by The Johns Hopkins Data Science Lab](https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/organizing-your-project.html)
+    - [BVCN Reproducibility Challenge by The Reproducibility Challenge Team](https://alexanderlabwhoi.github.io/BVCNReproducibility/02/2/organizing.html)
+
+- [Reproducible Research in Computational Ecology](https://rdatatoolbox.github.io/) - covers a wide array of related topics
+
+- [Bioinformatics for the terrified](https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/)
+
+<!-- <div>
+```{=html}
+<iframe width="780" height="500" class="slide-deck" src="computational-toolbox/computational-toolbox.qmd"></iframe>
+```
+</div>
+
+::: -->
