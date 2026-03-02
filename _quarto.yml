@@ -67,12 +67,12 @@ book:
     - content/refresher.qmd
     - part: "From reads to variants"
       chapters:
-        - content/genomics/setup.qmd
         - content/genomics/pipeline-overview.qmd
         - content/genomics/tools-and-formats.qmd
         - content/genomics/qc.qmd
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
+        - content/genomics/annotation.qmd
         # - content/bacterial_genomics/bacterial_genomics.qmd
     - content/phylogenomics/phylogenetics_exercise.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd

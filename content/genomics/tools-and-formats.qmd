@@ -1,3 +1,14 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
 # Bioinformatics tools and file formats
 
 Below we have created a list of the various tools that are used for the steps in this pipeline. As a disclaimer: a common occurrence in bioinformatics is that several different approaches have been developed for a particular task or analysis, leading to a large (and sometimes confusing) ecosystem of different software tools, each with their own advantages, disadvantages and learning curve. In the course we will try to focus on one representative tool for each task, but be aware that these are not the only ones and there might exist more suitable options depending on your data and use cases.
@@ -22,14 +33,14 @@ We have also compiled a few other resources that give an overview of the the var
 > File extension: generally `.fasta`, `.fas` or `.fa`, but `.fna` (**F**ASTA **n**ucleic **a**cids), `.faa` (**F**ASTA **a**mino **a**cids) and `.frn` ((**F**ASTA non-coding **RN**A)) are also used. After indexing with `bwa`, there are additional `.{amb,ann,bwt,pac,sa}` files.
 
 - @sec-fastq-in-depth
-- \(@sec-fasta\)
+- The previouse course's [fasta introduction](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fasta)
 
 ### FASTQ: Sequence reads and qualities
 
 > File extension: `.fq` or `.fastq`. (generally compressed with `.gzip`)
 
 - @sec-fastq-in-depth
-- \(@sec-fastq\)
+- The previous course's [section on fastq](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fastq)
 
 ### SAM / BAM: Sequence alignments
 
@@ -39,8 +50,8 @@ We have also compiled a few other resources that give an overview of the the var
 > - `.bam`: binary version of SAM file
 > - `.bai`: index file for BAM file
 
-- @sec-sam-format
-- @sec-bam-format
+- The previous course's [section on sam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format)
+- The previous course's [section on bam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format)
 - @sec-alignment
 - [Learning the BAM format page by Dave Tang](https://davetang.github.io/learning_bam_file/)
 
@@ -51,7 +62,7 @@ We have also compiled a few other resources that give an overview of the the var
 > - `.vcf`: variant calls in plain text format (generally compressed with `.gzip`)
 > - `g.vcf`: variant calls in plain text format for a single sample
 
-- @sec-vcf
+- The previous course's [section on vcf](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-vcf)
 - @sec-variant-calling
 - [Learning the VCF page by Dave Tang](https://davetang.github.io/learning_vcf_file/)
 
@@ -68,3 +79,7 @@ We have also compiled a few other resources that give an overview of the the var
 - picard: @sec-picard-duplicates and @sec-picard-metrics
 - GATK: @sec-variant-calling
 - IGV: @sec-alignment-visualisation and @sec-vcf-visualisation
+
+## Acknowledgements
+
+This section of the course materials was adapted from previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0).

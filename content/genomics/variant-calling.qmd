@@ -1,3 +1,14 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
 # Variant calling {#sec-variant-calling}
 
 The previous steps of our pipeline were concerned with 1) the quality control of our sequence reads and 2) where all these reads fit on our reference genome. In this final step we will assess the genetic differences between each of our samples and the reference genome. This process is called _variant calling_ or _variant detection_. While conceptually simple, the main challenge is that it can be difficult to discern sequencing errors from real variants.
@@ -47,7 +58,14 @@ Further reading:
 
 ### Even more indices
 
-Several of the GATK tools require us to index the reference genome again(!), but this time using `samtools faidx ref.fasta`, resulting in a [`.fai` indexed reference file](http://www.htslib.org/doc/samtools-faidx.html). Like before, this creates a new file in the reference genome directory, with the extension `.fai`. Additionally, we also need a `.dict` [dictionary file](https://gatk.broadinstitute.org/hc/en-us/articles/360037422891-CreateSequenceDictionary-Picard), which can be created using `gatk CreateSequenceDictionary –R ref.fasta`.
+Several of the GATK tools require us to [index the reference genome again(!)](https://www.htslib.org/doc/samtools-faidx.html), but this time using `samtools faidx ref.fasta`, resulting in a [`.fai` indexed reference file](http://www.htslib.org/doc/samtools-faidx.html). Like before, this creates a new file in the same directory as where the reference genome was stored, with the extension `.fai`.
+
+Additionally, we also need a `.dict` [dictionary file](https://gatk.broadinstitute.org/hc/en-us/articles/360037422891-CreateSequenceDictionary-Picard), which can be created using `gatk CreateSequenceDictionary –R ref.fasta`.
+
+Lastly, we need to make sure that all `.bam` files are [indexed as well](https://www.htslib.org/doc/samtools-index.html). This can be done using `samtools index alignment.bam`.
+
+<!-- https://gatk.broadinstitute.org/hc/en-us/articles/360035531652-FASTA-Reference-genome-format -->
+
 
 <!-- TODO bam index also required samtools index alignment.sort.bam -->
 
@@ -63,10 +81,11 @@ Several of the GATK tools require us to index the reference genome again(!), but
 ::: {.callout-note}
 Just like the other steps in our pipeline, there exist many different algorithmic implementations of variant calling, each with their own strengths, weaknesses and intended use cases.
 
-Aside from GATK HaplotypeCaller, you might encounter
+Aside from GATK HaplotypeCaller, you might encounter, amongst others, the following tools:
 
 - [bcftools mpileup](http://samtools.github.io/bcftools/) (position-based caller, made by the same developers as `samtools`)
 - [FreeBayes](https://github.com/freebayes/freebayes)
+- [DeepVariant](https://github.com/google/deepvariant)
 
 :::
 
@@ -106,7 +125,7 @@ GenomicsDBImport offers the same functionality as CombineGVCFs -->
 
 ## VCF files revisited
 
-The output of variant calling is a file in the Variant Call Format (`.vcf`), which we already encountered in @sec-vcf.
+The output of variant calling is a file in the Variant Call Format (`.vcf`), which we already encountered in the previous course's [section on vcf](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-vcf).
 
 ![Overview of Variant Call Format (VCF). Source: [https://vcftools.sourceforge.net/VCF-poster.pdf](https://vcftools.sourceforge.net/VCF-poster.pdf)](../assets/vcf-format.png)
 
@@ -289,11 +308,68 @@ Have a look at GATK's article on VCF files, in particular the section on the str
 
 <!-- https://hpc.nih.gov/training/gatk_tutorial/genomics-db-import.html -->
 
+::: {.callout-note}
+## Parallellization AKA the scatter gather approach
+
+Several of the GATK steps can take a very long time to complete, but fortunately we can speed up things by making use of parallellization. Briefly, the idea is to analyse and process different regions of the reference genome in parallel. The easiest way of doing this is usually splitting by the chromosomes/contigs of your reference genome (commonly referred to as intervals as well).
+
+```
+flow:
+BAM files (N samples × M chromosomes/contigs/intervals)
+    ↓ gatk4 HaplotypeCaller [parallel: N×M]
+GVCF files (N samples × M intervals)
+    ↓ Group all samples per interval
+GVCF groups (M intervals, each with N samples)
+    ↓ gatk4 GenomicsDBImport [parallel: M]
+GenomicsDB (M databases, one per interval)
+    ↓ gatk4 GenotypeGVCFs [parallel: M]
+VCF files (M interval VCFs, each with all N samples)
+    ↓ gatk MergeVcfs (or bcftools)
+Final VCF (1 file with variants across N samples in M intervals)
+```
+
+GATK has written several posts on this very topic:
+
+- [ Introducing GATK "Biggest Practices" for Joint Calling Supersized Cohorts ](https://gatk.broadinstitute.org/hc/en-us/articles/16957867036315-Introducing-GATK-Biggest-Practices-for-Joint-Calling-Supersized-Cohorts)
+- [ The logic of joint calling for germline short variants ](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)
+- [ Calling variants on cohorts of samples using the HaplotypeCaller in GVCF mode ](https://gatk.broadinstitute.org/hc/en-us/articles/360035890411)
+- [GATK (How to) Consolidate GVCFs for joint calling with GenotypeGVCFs](https://gatk.broadinstitute.org/hc/en-us/articles/360035889971--How-to-Consolidate-GVCFs-for-joint-calling-with-GenotypeGVCFs)
+[https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather](https://gatk.broadinstitute.org/hc/en-us/articles/360035532012-Parallelism-Multithreading-Scatter-Gather)
+
+Note that when your reference genome is highly fragmented and consists of a large amount of short regions, it is recommended to group them into fewer bins using [IntervalListTools (--ACTION=CONCAT)](https://gatk.broadinstitute.org/hc/en-us/articles/30331973321499-IntervalListTools-Picard#--SUBDIVISION_MODE) (which provides the same functionality as [SplitIntervals](https://gatk.broadinstitute.org/hc/en-us/articles/30332044447003-SplitIntervals)).
+
+```bash
+# create bed file from fasta reference fai index - has over 600 regions
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' PlasmoDB-68_PovalecurtisiGH01_Genome.fasta.fai > PlasmoDB-68_PovalecurtisiGH01_Genome.bed
+
+# create interval_list file from bed file
+gatk BedToIntervalList -I PlasmoDB-68_PovalecurtisiGH01_Genome.bed -O PlasmoDB-68_PovalecurtisiGH01_Genome.interval_list -SD PlasmoDB-68_PovalecurtisiGH01_Genome.dict
+
+# group into 20 sections, each containing a subset of the original 600 regions
+gatk SplitIntervals \
+    --input plasmoDB-68_PovalecurtisiGH01_Genome.interval_list \
+    --scatter-count 20 \
+    --subdivision-mode BALANCING_WITHOUT_INTERVAL_SUBDIVISION \
+    --output curtisi-splitintervals
+```
+
+See [this post](https://gatk.broadinstitute.org/hc/en-us/articles/360035531852-Intervals-and-interval-lists) for more info on intervals and interval lists. Note that usually simple `.bed` files can be used instead of GATK's own `interval_list` format.
+:::
+
 ## Variant filtering
 
 Not all the variants present in our VCF file are likely to be real. Therefor, a final step in our pipeline is to filter out variants that are likely to be errors. We will discuss two different approaches: [Variant Quality Score Recalibration (VQSR)](https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR) (recommended by GATK) and [hard-filtering](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants).
 
-Hard-filtering works by setting specific thresholds for one or multiple annotations (i.e. properties of a variant, like read coverage, proportion of forward/reverse reads, etc.) VQSR is a more powerful because it tries to combine all of these annotations to make a decision about good or bad variants, but to do this, it require a large number of samples and a database of well-curated known variants. Therefor, we do not recommend it for AmpliSeq data, but it is probably a good idea to use it for WGS data.
+Hard-filtering works by setting specific thresholds for one or multiple annotations (i.e. properties of a variant, like read coverage, proportion of forward/reverse reads, etc.) VQSR is a more powerful approach because it tries to combine all of these annotations to make a decision about good or bad variants, but to do this, it requires database of well-curated known variants as a training set. When these are available, this approach is highly recommended.
+
+::: {.callout-tip}
+
+GATK has published a number of posts on the different options for variant filtering:
+
+- [ (How to) Filter variants either with VQSR or by hard-filtering ](https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering)
+-
+
+:::
 
 The GATK tool that performs hard-filtering is `GATK VariantFiltration` ([docs](https://gatk.broadinstitute.org/hc/en-us/articles/21905081124891-VariantFiltration)). The two main options are `--filter-name` and `--filter-expression`, which allow you to set a particular threshold for an annotation. For example, the code below filters out variants which have a sequencing depth lower than 10 (`DP < 100`):
 
@@ -365,16 +441,6 @@ Further reading:
 
 :::
 
-## Annotation of variants
-
-The final step in our pipeline is to annotate variants. For this, a tool like [snpEff](http://pcingola.github.io/SnpEff/) can be used. You can see it being used in the AmpliSeq pipeline [here](https://github.com/Ekattenberg/Plasmodium-AmpliSeq-Pipeline/blob/2d7779e8463bbe97523f96c9dccd70ebf91161c9/Pf_AmpliSeq_Peru/5.PERU_Ampliseq_filter_annotation_PF_281122.bash#L160).
-
-<!-- TODO variants to table
-https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#1-variantstotable
-https://gatk.broadinstitute.org/hc/en-us/articles/21904953853595-VariantsToTable
- -->
-
-
 <!--
 https://www.malariagen.net/wp-content/uploads/2023/11/Pf7-Details-of-bioinformatics-methods.pdf
 
@@ -400,3 +466,7 @@ https://www.nature.com/articles/s41576-023-00590-0/figures/1
 
 <!-- TODO left-aligning indels https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html#left-aligning-indels -->
 <!-- TODO filtering reads: https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html#filtering-reads -->
+
+## Acknowledgements
+
+This section of the course materials was adapted from previous work by Pieter Moris ([International Training Progamme - Fighting Malaria Across Borders - Bioinformatics Module](https://pmoris.github.io/FiMAB-bioinformatics/) - [![DOI](https://zenodo.org/badge/727651304.svg)](https://doi.org/10.5281/zenodo.18701255) - licensed under CC BY 4.0).
