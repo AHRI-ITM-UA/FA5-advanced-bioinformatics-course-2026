@@ -20,7 +20,12 @@ conda install -n concord_dataset -c conda-forge -c bioconda filtlong
 
 conda install bioconda::flye
 
-# add: unzip
+# add: unzip, seqkit
+# conda install -c conda-forge -c bioconda bakta 
+# bakta_db download --output . --type light
+# the above command downloads a 1.34 gigabayte database
+/mnt/d/Docs/01_postdoc/01_projects/2026_bioinformatics_fa5/coursedev/reference_genomes
+# add abricate
 
 ```
 
@@ -30,7 +35,43 @@ conda install bioconda::flye
 
 We have nanopore data available on the SRA/ENA, that was generated using the (nowadays old) R9.4.1 data. Despite being of lower quality than the R10.4.1 data we have nowadays, the sequencing depth and coverage were high, so the overall quality is accurate and sufficient for *de novo* assembly and downstream analyses. 
 
-Because *de novo* assembly takes quite some time to run, we have already performed the assemblies for you. You can find the resulting FASTA files here:
+### QC on Nanopore Reads
+
+For retrieving the data, we'll use a tool named 'fasterq-dump' from NCBI. It can be parallelised, en hence it should be relatively fast. For the sake of time and computational resources, we will only retrieve the FASTQ data for one of the samples for now for illustrating Nanopore QC, but you can retrieve the data for all samples if you like. The sample we will use is SRR10604677.
+
+```bash
+conda activate concord_dataset
+
+CPUS=8
+
+run="ERR9855653"
+output_dir="concord_fastq_ERR9855653"
+mkdir -p "$output_dir"
+
+fasterq-dump "$run" --threads "$CPUS" --progress --outdir "$output_dir"
+
+# hint: use pigz to gzip the fastq files in parallel
+
+pigz -p "$CPUS" ERR9855653.fastq
+
+```
+
+You will end up with a FASTQ file containing the raw reads. We can now perform some quality control on these reads to assess their quality and suitability for downstream analyses.
+
+::: {.callout-note}
+
+Exercise 1: QC on the raw reads
+
+- Perform QC on the raw Nanopore reads using tools such as `fastqc`, `fastlong` or `NanoPlot`. Assess the read length distribution, quality scores, and overall data quality. Are there any issues with the data that might affect downstream analyses? If so, how would you address them?
+- When using fastqc, the quality values look terrible, why is that? Do you think the data is of poor quality, or is there another explanation for the low quality scores? Use your knowledge of Nanopore sequencing and the tools you are using to support your answer.
+
+:::
+
+
+
+### Reference genomes (this course) and *de novo* assembly (optional)
+
+Because downloading the reads, and performing *de novo* assembly takes quite some time to run, we have already performed the assemblies for you. You can find the resulting FASTA files here:
 
 ```bash
 wget https://zenodo.org/api/records/18813829/files-archive -O concord_fasta.zip
@@ -43,7 +84,6 @@ If you do want to start from the raw reads and perform the assemblies yourself, 
 ::: {.callout-note collapse="true"}
 ## Optional background to retrieve the unassembled reads yourself from the European Nucleotide archive and perform *de novo* genome assembly.
 
-For retrieving the data, we'll use a tool named 'fasterq-dump' from NCBI. It can be parallelised, en hence it should be relatively fast.
 
 
 ```bash
@@ -98,7 +138,7 @@ With these subsets, we can now run the assembly program 'flye' to perform *de no
 
 We will specify the genome size, the number of threads to use, and the number of iterations for polishing the assembly.
 
-```{bash}
+```bash
 # run flye 
 
 genome=5m
@@ -241,11 +281,13 @@ Because bacterial genomes are relatively small, running both is feasible and com
 
 ### Quick QC assesments
 
-Typicvally we perform QC on reads, but everythime we download or generate a bacterial genome assembly, it would be wise to check the quality. Often, when download from say RefSeq, you'll have quality info available. Here, we donsloaded the genomes from a Zenodo link for this coure, so we want to check it ourselves. 
+Typically, quality control is performed on raw sequencing reads. However, whenever you download or generate a bacterial genome assembly, it is equally important to assess its quality.
+
+When assemblies are obtained from curated repositories such as RefSeq, quality metrics are usually provided. In this course, the genomes were downloaded from a Zenodo repository, so we will evaluate their quality ourselves before proceeding with downstream analyses.
 
 ::: {.callout-note}
 
-Exercise 1: QC on the reference genomes
+Exercise 2: QC on the reference genomes
 
 Perform quality control on the genome sequences. First, let's get to know our data. You know already different bash tips and tricks to do this. Use them to asnwer the folliwing questions:
 - How many contigs are there in each assembly?
@@ -259,65 +301,51 @@ Present your results in a table to facilitate comparison between assemblies and 
 
 :::
 
-Good, we now have an idea of what we ....
+
+Good, we now have an idea of what our contigs represent (Plasmids, Chromosome, ...), and we can start looking for features in the genomes!
 
 ### Finding featuires in the assemblies
 
-Now that we have an idea of the quality of the assemblies, we can start looking for features in the genomes. We are particularly interested in antimicrobial resistance genes and plasmid replicon genes, but you can also look for other features if you like.
+Now that we have an idea of the quality of the assemblies, we can start looking for features in the genomes. We are particularly interested in **antimicrobial resistance** genes and **plasmid replicon** genes, but you can also look for other features if you like. Typically, we begin by annotating the complete genome assembl. Once annotation is complete, specific features of interest can be extracted from the resulting annotation files. `Bakta` (https://github.com/oschwengers/bakta/tree/main) is the preferred tool for annotation, and should be available in your conda environment for these excercises. 
+
+In addition, we tend to perform additional, specialist annotation for AMR and virulence genes (namely `AMRFinder`) and replicon genes (namely `ABRicate` using the `plasmidfinder` database; the latter indicate the presence of Plasmids). 
 
 ::: {.callout-note}
 
-Exercise 2: Annotation, AMR genes, and rplicon genes
+Exercise 3: Annotation, AMR genes, and replicon genes
+
+- Run `Bakta` 
+
+
+:::
+
+
+
+# mention about mechanisms: target modification such as gyrase, or the beta lactamase system, or protective genes, or gained enzymes through hgt...
+
+
+### Genotype-phenotype association
+
+Now that we have identified the presence of AMR genes in the assemblies, we can compare these findings to the phenotypic antimicrobial susceptibility testing results. This is an important step to understand the potential clinical implications of the genomic findings, and to evaluate whether the presence of certain AMR genes correlates with resistance observed in the laboratory.
+
+
+
+## Wrap up and outlook
+
+As you may have noticed, the relationship between genotype and phenotype is not always straightforward. Even in Salmonella, where genotype–phenotype concordance is relatively high compared with many other bacteria, discrepancies can occur.
+
+For example, you may detect a partial match to a known antimicrobial resistance (AMR) gene, while phenotypic susceptibility testing indicates that the isolate remains susceptible to the corresponding antibiotic. How should such a result be interpreted?
+
+One approach is to consult the literature to determine whether similar variants have been described and functionally characterised. Another strategy is to evaluate the genetic variation in more detail. For instance:
+
+- Does the variant introduce a missense mutation, a premature stop codon, or a frameshift?
+- Could the mutation alter protein function by affecting key residues?
+- Might the change influence the three-dimensional conformation of the target protein?
+- Assessing mutations in their structural context can provide additional insight into their potential functional impact.
+
+The next chapter introduces tools for working with protein 3D structures.
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-## retrieving short read data for the same samples of the long read data
-
-
-Back in the day (2021), we often performed Nanopore sequencing in combination with Illumina sequencing, to have both long and short reads for the same samples. This is useful for hybrid assembly, polishing, and other downstream analyses. 
-
-While nowadays we could just perform Nanopore sequencing only, it is still useful to have the short read data for benchmarking and comparison purposes. Lets get the corresponding Illumina sequences: 
-
-
-```bash
-runs=( SRR8552256
-ERR9516343
-ERR9516195
-ERR9516199
-ERR9516333
-ERR9516357
-ERR9516339
-SRR10604677
-ERR9516323
-ERR9516355)
-
-
-CPUS=16
-
-mkdir -p fastq_illumina
-
-for run in "${runs[@]}"
-do
-  fasterq-dump "$run" \
-    --threads "$CPUS" \
-    --split-files \
-    --progress \
-    --outdir fastq_illumina
-  gzip -f fastq/"$run"_*.fastq
-done
-
-```
