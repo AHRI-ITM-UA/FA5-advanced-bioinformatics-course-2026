@@ -11,7 +11,7 @@ author:
 
 # Quality control and trimming {#sec-qc}
 
-The first step in our pipeline deals with assessing the quality of our sequence reads and when necessary cleaning them. The reads are provided to us by the sequencer in the form of `FASTQ` (or `fastq`) files. We already introduced this file format in a previous chapter (@sec-fastq), but we will dive in a bit deeper this time around.
+The first step in our pipeline deals with assessing the quality of our sequence reads and when necessary cleaning them. The reads are provided to us by the sequencer in the form of `FASTQ` (or `fastq`) files. We already introduced this file format in the previous course's [section on fastq](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fastq), but we will dive in a bit deeper this time around.
 
 ![](../assets/pipeline-qc.svg){.no-lightbox}
 
@@ -134,9 +134,9 @@ FASTQ files can typically contain up to millions of reads (depending on the dept
 ::: {.callout-tip}
 ## Compress your files!
 
-Throughout this pipeline (and in many other bioinformatics analyses) you should avoid using and storing uncompressed files, because they waste disk space. Moreover, many of the formats we will talk about are also faster to analyse in binary compressed form compared to the plain-text versions (e.g., BAM vs SAM, see @sec-sam-format and @sec-bam-format).
+Throughout this pipeline (and in many other bioinformatics analyses) you should avoid using and storing uncompressed files, because they waste disk space. Moreover, many of the formats we will talk about are also faster to analyse in binary compressed form compared to the plain-text versions (e.g., BAM vs SAM, see the previous course's [section on sam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format) and the [section on bam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format)).
 
-Refer to @sec-compression or [this overview](https://mmbdtp.github.io/modules/sequencing/file-compression/) for a refresher on file compression.
+Refer to [the information in the previous course](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-compression) or [this overview](https://github.com/mmbdtp/mmbdtp.github.io/blob/2bd0618e0e1af14c6d18bd47ad1a19c0d520ab89/modules/sequencing/_posts/_old_2000-01-03-file-compression.md) for a refresher on file compression.
 
 :::
 
@@ -722,7 +722,7 @@ The `threads` option allows you to process multiple samples simultaneously to sp
 ::: {#tip-paired-fastq-loop .callout-tip }
 ## Looping over paired FASTQ files in `bash`
 
-When writing scripts that iterate over paired FASTQ files, you can use the concepts that we introduced in @tip-basename.
+When writing scripts that iterate over paired FASTQ files, you can use the concepts that we introduced in [the previous course, like `basename`](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/8-unix-variables-loops-scripts.html#tip-basename).
 
 A minimal example is provided below:
 

@@ -125,7 +125,7 @@ GenomicsDBImport offers the same functionality as CombineGVCFs -->
 
 ## VCF files revisited
 
-The output of variant calling is a file in the Variant Call Format (`.vcf`), which we already encountered in @sec-vcf.
+The output of variant calling is a file in the Variant Call Format (`.vcf`), which we already encountered in the previous course's [section on vcf](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-vcf).
 
 ![Overview of Variant Call Format (VCF). Source: [https://vcftools.sourceforge.net/VCF-poster.pdf](https://vcftools.sourceforge.net/VCF-poster.pdf)](../assets/vcf-format.png)
 

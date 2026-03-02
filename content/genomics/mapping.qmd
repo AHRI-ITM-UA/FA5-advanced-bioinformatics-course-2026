@@ -11,7 +11,7 @@ author:
 
 # Alignment to reference genome
 
-The next step of our pipeline tries to align the filtered and trimmed reads to the reference genome of the organism we're studying. It starts from the processed `FASTQ` files and produces `SAM` and `BAM` files, which contain the mapped reads. We encountered these file formats before in @sec-sam-format and @sec-bam-format, but we will go a bit more in-depth now. Two other important aspects in this part of the pipeline are indexing the reference genome and filtering out PCR duplicates from our alignment.
+The next step of our pipeline tries to align the filtered and trimmed reads to the reference genome of the organism we're studying. It starts from the processed `FASTQ` files and produces `SAM` and `BAM` files, which contain the mapped reads. We encountered these file formats before in the previous course's [section on sam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format) and the [section on bam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format), but we will go a bit more in-depth now. Two other important aspects in this part of the pipeline are indexing the reference genome and filtering out PCR duplicates from our alignment.
 
 ![](../assets/pipeline-mapping.svg){.no-lightbox}
 
@@ -24,7 +24,7 @@ To make your analyses more reproducible, and to be able to figure out what you d
 
 We will write separate scripts for each of the different parts of the pipeline, but at the very end, we can try to merge them into just a handful scripts for each of the major conceptual steps, optionally accompanied by a master script to govern them all.
 
-As a last tip, try to be aware of the types of paths that you use when writing your scripts: absolute or relative ones (@sec-linux-paths).
+As a last tip, try to be aware of the types of paths that you use when writing your scripts: absolute or relative ones ([see previous course notes](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/4-unix-navigation.html#sec-linux-paths).
 
 Relative paths are more portable than absolute ones (which will not work on a different workstation with different file paths), but they can be more prone to errors. Indeed, the relative path is defined based on where call the script from, rather than the location of the script itself, so be mindful of this.^[An alternative is to make use of relative paths, but in that case the script still needs to be called from a fixed location in your project folders (or you need to make use of [this strategy](https://stackoverflow.com/a/246128)). For even more complex scripts, you might want to look into providing paths as an argument, or to make use of configuration or samplesheets (as is done by more complex workflow manager tools).]
 
@@ -36,7 +36,7 @@ You can already compare the basic and extended versions of some of the example s
 
 ## Where to find your reference genomes - `bwa mem`
 
-We already downloaded a reference genome from [PlasmoDB](https://plasmodb.org/plasmo/app/downloads) in @sec-plasmodb (where we introduced the `wget` command). These reference genomes allow us to compare the samples we have collected with a representative reference type_of the organism that we're studying[^reference-genome]. For some organisms, multiple reference genomes exist (e.g., because the organism exhibits a lot of genetic variability between different geographic locations), and these references also receive updates from time to time, as the assemblies of complex regions improves (e.g., gaps spanned, repetitive regions mapped, or in the case of _Plasmodium_, the polymorphic subtelomeric regions).
+[In the introduction course](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-plasmodb), we already downloaded a reference genome from [PlasmoDB](https://plasmodb.org/plasmo/app/downloads) (where we introduced the `wget` command). These reference genomes allow us to compare the samples we have collected with a representative reference type_of the organism that we're studying[^reference-genome]. For some organisms, multiple reference genomes exist (e.g., because the organism exhibits a lot of genetic variability between different geographic locations), and these references also receive updates from time to time, as the assemblies of complex regions improves (e.g., gaps spanned, repetitive regions mapped, or in the case of _Plasmodium_, the polymorphic subtelomeric regions).
 
 [^reference-genome]: In practice, reference genomes rarely contain the genetic material of a single individual. Instead, they tend to be a mosaic of DNA sequences from different sources. See [https://en.wikipedia.org/wiki/Reference_genome](https://en.wikipedia.org/wiki/Reference_genome).
 
@@ -52,7 +52,7 @@ We already downloaded a reference genome from [PlasmoDB](https://plasmodb.org/pl
 
 Before we can map our reads to a reference genome, we need to create an index to allow our mapper to more efficiently search through the (usually rather large) FASTA file[^fasta-refresher]. You can think of it like the index or table of contents of a book (if that particular book contained about _23 million characters_ in the case of _Plasmodium falciparum_, or _3.1 billion characters_ for the human reference genome).
 
-[^fasta-refresher]: For a refresher on the FASTA file format, check out @sec-fasta.
+[^fasta-refresher]: For a refresher on the FASTA file format, check out [the previous course's fasta introduction](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/5-unix-files-and-dirs.html#sec-fasta).
 
 The indexing step itself is usually performed by the same tool as the one that does the actual alignment. The index **only needs to be created once**, and then it can be re-used when mapping each of our FASTQ files. In this course, we will be using `bwa` - the [Burrows-Wheeler Aligner](https://github.com/lh3/bwa).
 
@@ -133,7 +133,7 @@ Usage: bwa mem [options] <reference-genome> <R1.fastq> [R2.fastq]
 
 As you can see, the second read pair file is `[optional]`, but when dealing with paired-end read data the two files need to be supplied at the same time. To do this programmatically, it is again important to use concepts like _looping over pairs of FASTQ files_ to do this efficiently (see @tip-paired-fastq-loop).
 
-By default, `bwa` will output its results straight into the terminal's standard out (see @sec-unix-streams). This is very useful once we start chaining different tools together, but for your first attempts you should provide the `-o <output_file>` flag to write everything to a file instead.
+By default, `bwa` will output its results straight into the terminal's standard out ([see previous course's section on unix streams](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-unix-streams)). This is very useful once we start chaining different tools together, but for your first attempts you should provide the `-o <output_file>` flag to write everything to a file instead.
 
 `bwa mem` provides _many_ different options, but we recommend the following ones:
 
@@ -192,9 +192,9 @@ You could try this for yourself as a bonus exercise. See [this guide](https://li
 
 ## SAM and BAM files {#sec-samtools}
 
-The output of the alignment step (using `bwa mem`) is a SAM file (see @sec-sam-format). This stands for _Sequence Alignment Map_. These are plain text files delimited with tabs, so you can view them using a text editor or a command like `less`.
+The output of the alignment step (using `bwa mem`) is a SAM file (see [previous course's section on sam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-sam-format)). This stands for _Sequence Alignment Map_. These are plain text files delimited with tabs, so you can view them using a text editor or a command like `less`.
 
-To save space and make the alignment quicker to index, SAM files are often converted to BAM files (@sec-bam-format), which are compressed binary versions of the alignment. These can be used by downstream tools directly, so we tend to only store the alignment in this format, even though you can no longer inspect the alignment yourself.
+To save space and make the alignment quicker to index, SAM files are often converted to BAM files ([see previous course's section on bam](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/6-unix-more-commands.html#sec-bam-format)), which are compressed binary versions of the alignment. These can be used by downstream tools directly, so we tend to only store the alignment in this format, even though you can no longer inspect the alignment yourself.
 
 ```default
 0080_S44_L001.bam | head -n30
@@ -289,7 +289,7 @@ Can we make things even more streamlined and combine the `bwa` mapping and `samt
 ::: {.callout-tip}
 ## Chaining commands via pipes
 
-Recall what you learned in @sec-unix-streams about piping the output of one command into the input of another using the `|` operator. We can make use of this to feed the output of `bwa mem` directly into `samtools`. This allows us to forego the need to write the output to any intermediate files.^[This works out of the box, but you might encounter the syntax `command_1 | command_2 -`, where the hyphen `-` is a way of explicitly telling the second command to look at `stdin` for its input. For many tools, including `samtools`, [this is not necessary however](https://bioinformatics.stackexchange.com/questions/20773/problem-with-samtools-command-with-a-final-hyphen).]
+Recall what you learned in [the previous course's section on unix streams](https://pmoris.github.io/FiMAB-bioinformatics/content/unix/7-unix-redirection.html#sec-unix-streams) about piping the output of one command into the input of another using the `|` operator. We can make use of this to feed the output of `bwa mem` directly into `samtools`. This allows us to forego the need to write the output to any intermediate files.^[This works out of the box, but you might encounter the syntax `command_1 | command_2 -`, where the hyphen `-` is a way of explicitly telling the second command to look at `stdin` for its input. For many tools, including `samtools`, [this is not necessary however](https://bioinformatics.stackexchange.com/questions/20773/problem-with-samtools-command-with-a-final-hyphen).]
 
 The only difference compared to before is that we now remove the `-o output.sam` option from the `bwa mem` command and that we do not provide an explicit input file to `samtools` (it is read from `stdout` directly instead).^[One final thing we could do is use `>` to write the output of `samtools` to a file directly, instead of using the `-o` flag.]
 

@@ -16,19 +16,18 @@ We have collected a number of related resources below, which have served as an i
 
 - [https://genomics.sschmeier.com/](https://genomics.sschmeier.com/)
 - [https://training.galaxyproject.org/training-material/topics/sequence-analysis/](https://training.galaxyproject.org/training-material/topics/sequence-analysis/)
-- [https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/](https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/)
+- [https://mbite.mdhs.unimelb.edu.au/tutorials/variant_calling_gatk1/variant_calling_gatk1/](https://mbite.mdhs.unimelb.edu.au/tutorials/variant_calling_gatk1/variant_calling_gatk1/)
 - [https://speciationgenomics.github.io/](https://speciationgenomics.github.io/)
 - [https://ngs-course.readthedocs.io/en/praha-november-2023/](https://ngs-course.readthedocs.io/en/praha-november-2023/)
 - [https://people.duke.edu/~ccc14/duke-hts-2018/index.html](https://people.duke.edu/~ccc14/duke-hts-2018/index.html)
 - [https://biomedicalhub.github.io/genomics/](https://biomedicalhub.github.io/genomics/)
-- [https://hbctraining.github.io/variant_analysis/schedule/self-learning.html](https://hbctraining.github.io/variant_analysis/schedule/self-learning.html)
+- [https://github.com/hbctraining/main?tab=readme-ov-file#current-topics-in-bioinformatics-series](https://github.com/hbctraining/main?tab=readme-ov-file#current-topics-in-bioinformatics-series)
 - [https://datacarpentry.org/wrangling-genomics/](https://datacarpentry.org/wrangling-genomics/)
 - [https://mmbdtp.github.io/modules/sequencing/week-2-programme/](https://mmbdtp.github.io/modules/sequencing/week-2-programme/)
 - [https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html](https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html)
 - [https://rnnh.github.io/bioinfo-notebook/#contents](https://rnnh.github.io/bioinfo-notebook/#contents)
 - [https://learn.gencore.bio.nyu.edu/](https://learn.gencore.bio.nyu.edu/)
 - [https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html](https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html)
-- [https://bio-courses1.rsb.anu.edu.au/biol3161-data/ReadsToVariants.html](https://bio-courses1.rsb.anu.edu.au/biol3161-data/ReadsToVariants.html)
 
 The video below by Tobias Rausch \@ EMBL-EBI [@rausch_EMBL-EBI_2022] also provides an excellent overview of various topics that come up in genomic variant calling, but it is broader in scope than just AmpliSeq or molecular surveillance of parasites:
 
