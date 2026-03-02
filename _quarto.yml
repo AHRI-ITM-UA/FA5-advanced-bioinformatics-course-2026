@@ -8,34 +8,39 @@ book:
   subtitle: "Advanced bioinformatics course - FA5 2026"
 
   author:
-    - name: Pieter Moris
-      orcid: 0000-0003-4242-4939
-      url: https://pmoris.github.io
-      email: pmoris@itg.be
-      affiliations:
-        - name: Institute of Tropical Medicine Antwerp
-          url: https://www.itg.be
-    - name: Wim Cuypers
-      orcid: 0000-0002-1895-3526
-      email: wim.cuypers@uantwerpen.be
-      affiliations:
-        - name: University of Antwerp
-          url: https://www.uantwerpen.be/en
-    - name: Pieter Monsieurs
-      orcid: 0000-0003-2214-6652
-      email: pmonsieurs@itg.be
-      affiliations:
-        - name: Institute of Tropical Medicine Antwerp
-          url: https://www.itg.be
     - name: Bethlehem Adnew
       orcid: 0000-0002-6108-9534
       email: bethlehem.adnew@ahri.gov.et
       affiliations:
         - name: Armauer Hansen Research Institute
           url: https://ahri.gov.et/
+    - name: Eline Turcksin
+      email: eline.turcksin@uantwerpen.be
+      affiliations:
+        - name: University of Antwerp
+          url: https://www.uantwerpen.be/en
+    - name: Katlijn De Meulenaere
+      orcid: 0000-0003-0723-9009
+      email: kdemeulenaere@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
     - name: Oren Tzfadia
       orcid: 0000-0002-7096-8063
       email: otzfadia@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Pieter Monsieurs
+      orcid: 0000-0003-2214-6652
+      email: pmonsieurs@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Pieter Moris
+      orcid: 0000-0003-4242-4939
+      url: https://pmoris.github.io
+      email: pmoris@itg.be
       affiliations:
         - name: Institute of Tropical Medicine Antwerp
           url: https://www.itg.be
@@ -45,14 +50,9 @@ book:
       affiliations:
         - name: Institute of Tropical Medicine Antwerp
           url: https://www.itg.be
-    - name: Katlijn De Meulenaere
-      orcid: 0000-0003-0723-9009
-      email: kdemeulenaere@itg.be
-      affiliations:
-        - name: Institute of Tropical Medicine Antwerp
-          url: https://www.itg.be
-    - name: Eline Turcksin
-      email: eline.turcksin@uantwerpen.be
+    - name: Wim Cuypers
+      orcid: 0000-0002-1895-3526
+      email: wim.cuypers@uantwerpen.be
       affiliations:
         - name: University of Antwerp
           url: https://www.uantwerpen.be/en
@@ -188,3 +188,6 @@ editor: source
 # https://quarto.org/docs/publishing/github-pages.html#freezing-computations
 execute:
   freeze: auto
+
+language:
+  title-block-author-plural: "Teaching team and organising committee"
