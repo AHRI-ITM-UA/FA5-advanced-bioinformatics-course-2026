@@ -59,10 +59,15 @@ Table: Overview of isolates included in the course, showing short-read run acces
 
 ## retrieving short read data
 
-ven in the era of long-read sequencing, short reads remain highly relevant in 2026. They are typically less expensive to generate and are well suited for phylogenetic inference. Moreover, several established pipelines are specifically optimised for short-read data. Let us therefore retrieve some Illumina sequencing data.
+Even in the era of long-read sequencing, short reads remain highly relevant in 2026. They are typically less expensive to generate and are well suited for phylogenetic inference. Moreover, several established pipelines are specifically optimised for short-read data. Let us therefore retrieve some Illumina sequencing data.
 
-# todo: add oldest isolate for rooting!!!
+Note that in addition to the isolate accessions mentioned above, we will download reads for an old isolate, one from 1977 with accession ERR9516255, which will be convenient for rooting the phylogentic tree eventually. Here, we hypothesise that this isolate from 1977 from Djibouti has a most recent common ancestor with all other isolates studied (note: we are not 100% sure about this, but it is a plausible hypothesis). 
+
+
 # addl ink to azis reference genome!!
+# add kraken2 to QC section, and maybe also mlst for species confirmation and serotyping?
+
+
 
 ```bash
 runs=( SRR8552256
@@ -74,7 +79,9 @@ ERR9516357
 ERR9516339
 SRR10604677
 ERR9516323
-ERR9516355)
+ERR9516355
+ERR9516255
+)
 
 
 CPUS=16
@@ -115,7 +122,48 @@ Answer briefly:
 - Do any samples require trimming?
 - Are there major differences in sequencing depth between samples?
 - Support your answers with specific observations from the QC reports.
+
+Also, by now, you may be familiar with tools that perform rapid taxonomic classifiaction such as `kraken2`, or tools such as `checkM`. Leverage your expertise with these tools to asses whether your have actually sequenced Salmonella and not some other nasty bacterium that has contaminated your culture!
+
+- Are most reads being classified as *Salmonella*? 
+- Are there samples where you doubt the quality? 
+
 :::
+
+::: {.callout-note title="Optional excercise 1.1: serotype determination" collapse="true"}
+
+
+
+Last but not least, if most of the data appears to be *Salmonella*, it would be interesting to confirm the sertype that was determined in the lab bioinformatically. For this purpose, a tools exists named `seqsero2` that can determine *in silico* what serotype your isolate is. A potential issue here is that it works on assembled sequences, and not on raw reads.
+
+We will learn more about genome assembly in the next sections, so for now you can just use this code on your read sets:
+
+```bash
+
+for i in ls *fastq.gz
+do 
+spades.py \
+--read1 "$read1" \
+--read2 "$read2" \
+--threads "$CPUS" \
+---blabla
+
+done
+```
+Great! now you have assemblesyour reads into a draft assembly, which means its a fragmented assembly, where one biological molecule (e.g the bacterial chromosome), is represented by multiple contis (continuous stretches of assembled reads).
+
+You can now use the assemblies to run Seqsero, but also, you could leverage this oprtunity of having assembles genomes for another round of QC!
+
+Perform a quick assembly QC using `Quast`. 
+
+- What can you learn when assessing the number of contigs, and the contig N50 value? If it is not clear what these values mean, you can check the `Quast` manual. 
+
+Now, if everything looks good to go quality-wise, run `SeqSero2` and determine whether your isolates are actually Serovar Concord and not some other serovar. 
+
+- Are your draft assemblies classified as *Salmonella enterica* subspecies *enterica* serovar Concord?
+
+:::
+
 
 For bacterial variant calling, we will use **Snippy**, a widely adopted pipeline for haploid bacterial genomes:
 
@@ -130,7 +178,7 @@ Carefully read the documentation and determine:
 
 ::: {.callout-note title="Exercise 2: mapping, variant calling"}
 
-Run Snippy separately for each isolate.
+Run Snippy separately for each isolate. You will need a reference genome, which we will provide during the course. (link to Zenodo)
 
 After completion, inspect the output directory for one sample. You should find, among others:
 
@@ -181,6 +229,8 @@ This alignment can be used as input for a phylogenetic inference tool. The resul
 - determine whether they cluster tightly  
 - evaluate whether they are consistent with a single outbreak strain  
 
+Tip: u can use tools such as FastTree, IQtree, or RaxML-ng. They should all provide roughly the same results. RaxML-ng, when used correclt, may yield the most accurate hypothesis of the phylogeny of *Salmonella* Concord, but will also require ac higher runtime and more ocmputational resources. 
+
 In bacterial outbreak genomics, small SNP distances often indicate recent transmission, whereas large distances suggest unrelated cases.
 
 Your final interpretation should integrate:
@@ -188,14 +238,10 @@ Your final interpretation should integrate:
 - SNP distances  
 - clustering patterns  
 - resistance phenotypes  
-- epidemiological context in Ethiopia  
+- metadata (cfr. epidemiological context in Ethiopia 
 
-Only then can you conclude whether this represents a localized outbreak of *Salmonella* Concord or multiple unrelated infections.
-:::
+Only then can you conclude whether this dataset represents a localized outbreak of *Salmonella* Concord or multiple unrelated infections of strains imported from elsewhere.
+::
 
 
-# note that we need to define the azis reference genome ideally
-# branch lengths might be long, do raxml or iqtree or fastree?
 # info box: about SNP sites
-# provide table with metadata
-# also look for AMR phentotypic data for the next part
