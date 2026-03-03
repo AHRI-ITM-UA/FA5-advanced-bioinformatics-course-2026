@@ -8,7 +8,7 @@
 
 <meta name="author" content="Oren Tzfadia">
 
-<title>9&nbsp; Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold – Pathogen genomics workshop</title>
+<title>11&nbsp; Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold – Pathogen genomics workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../content/references.html" rel="next">
-<link href="../../content/phylogenomics/phylogenetics_exercise.html" rel="prev">
+<link href="../../content/bacterial_genomics/outbreak_phylo.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/chimera/snp_mapping_chimera_alphafold.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/chimera/snp_mapping_chimera_alphafold.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -387,10 +387,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bacterial genomics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/bacterial_genomics/assembly_AMR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The <em>Salmonella</em> Concord mystery: antimicrobial resistance (AMR)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/bacterial_genomics/outbreak_phylo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Salmonella Concord mystery: reconstructing transmission across borders</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -409,34 +432,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">10</span> Overview</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">12</span> Overview</a>
   <ul>
-  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals"><span class="header-section-number">10.1</span> Learning goals</a></li>
-  <li><a href="#inputs-for-this-practical" id="toc-inputs-for-this-practical" class="nav-link" data-scroll-target="#inputs-for-this-practical"><span class="header-section-number">10.2</span> Inputs for this practical</a></li>
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals"><span class="header-section-number">12.1</span> Learning goals</a></li>
+  <li><a href="#inputs-for-this-practical" id="toc-inputs-for-this-practical" class="nav-link" data-scroll-target="#inputs-for-this-practical"><span class="header-section-number">12.2</span> Inputs for this practical</a></li>
   </ul></li>
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">11</span> Background</a></li>
-  <li><a href="#step-1-obtain-a-structure" id="toc-step-1-obtain-a-structure" class="nav-link" data-scroll-target="#step-1-obtain-a-structure"><span class="header-section-number">12</span> Step 1: Obtain a structure</a></li>
-  <li><a href="#step-2-prepare-an-attribute-file-for-chimera" id="toc-step-2-prepare-an-attribute-file-for-chimera" class="nav-link" data-scroll-target="#step-2-prepare-an-attribute-file-for-chimera"><span class="header-section-number">13</span> Step 2: Prepare an attribute file for Chimera</a>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">13</span> Background</a></li>
+  <li><a href="#step-1-obtain-a-structure" id="toc-step-1-obtain-a-structure" class="nav-link" data-scroll-target="#step-1-obtain-a-structure"><span class="header-section-number">14</span> Step 1: Obtain a structure</a></li>
+  <li><a href="#step-2-prepare-an-attribute-file-for-chimera" id="toc-step-2-prepare-an-attribute-file-for-chimera" class="nav-link" data-scroll-target="#step-2-prepare-an-attribute-file-for-chimera"><span class="header-section-number">15</span> Step 2: Prepare an attribute file for Chimera</a>
   <ul>
-  <li><a href="#key-rules-to-avoid-failure" id="toc-key-rules-to-avoid-failure" class="nav-link" data-scroll-target="#key-rules-to-avoid-failure"><span class="header-section-number">13.1</span> Key rules to avoid failure</a></li>
-  <li><a href="#automating-attribute-creation" id="toc-automating-attribute-creation" class="nav-link" data-scroll-target="#automating-attribute-creation"><span class="header-section-number">13.2</span> Automating attribute creation</a></li>
+  <li><a href="#key-rules-to-avoid-failure" id="toc-key-rules-to-avoid-failure" class="nav-link" data-scroll-target="#key-rules-to-avoid-failure"><span class="header-section-number">15.1</span> Key rules to avoid failure</a></li>
+  <li><a href="#automating-attribute-creation" id="toc-automating-attribute-creation" class="nav-link" data-scroll-target="#automating-attribute-creation"><span class="header-section-number">15.2</span> Automating attribute creation</a></li>
   </ul></li>
-  <li><a href="#step-3-open-the-model-in-chimera" id="toc-step-3-open-the-model-in-chimera" class="nav-link" data-scroll-target="#step-3-open-the-model-in-chimera"><span class="header-section-number">14</span> Step 3: Open the model in Chimera</a></li>
-  <li><a href="#step-4-load-the-residue-attribute-and-color-the-structure" id="toc-step-4-load-the-residue-attribute-and-color-the-structure" class="nav-link" data-scroll-target="#step-4-load-the-residue-attribute-and-color-the-structure"><span class="header-section-number">15</span> Step 4: Load the residue attribute and color the structure</a>
+  <li><a href="#step-3-open-the-model-in-chimera" id="toc-step-3-open-the-model-in-chimera" class="nav-link" data-scroll-target="#step-3-open-the-model-in-chimera"><span class="header-section-number">16</span> Step 3: Open the model in Chimera</a></li>
+  <li><a href="#step-4-load-the-residue-attribute-and-color-the-structure" id="toc-step-4-load-the-residue-attribute-and-color-the-structure" class="nav-link" data-scroll-target="#step-4-load-the-residue-attribute-and-color-the-structure"><span class="header-section-number">17</span> Step 4: Load the residue attribute and color the structure</a>
   <ul>
-  <li><a href="#define-the-attribute" id="toc-define-the-attribute" class="nav-link" data-scroll-target="#define-the-attribute"><span class="header-section-number">15.1</span> Define the attribute</a></li>
-  <li><a href="#render-by-attribute" id="toc-render-by-attribute" class="nav-link" data-scroll-target="#render-by-attribute"><span class="header-section-number">15.2</span> Render by attribute</a></li>
+  <li><a href="#define-the-attribute" id="toc-define-the-attribute" class="nav-link" data-scroll-target="#define-the-attribute"><span class="header-section-number">17.1</span> Define the attribute</a></li>
+  <li><a href="#render-by-attribute" id="toc-render-by-attribute" class="nav-link" data-scroll-target="#render-by-attribute"><span class="header-section-number">17.2</span> Render by attribute</a></li>
   </ul></li>
-  <li><a href="#step-5-switch-representations-to-interpret-the-pattern" id="toc-step-5-switch-representations-to-interpret-the-pattern" class="nav-link" data-scroll-target="#step-5-switch-representations-to-interpret-the-pattern"><span class="header-section-number">16</span> Step 5: Switch representations to interpret the pattern</a>
+  <li><a href="#step-5-switch-representations-to-interpret-the-pattern" id="toc-step-5-switch-representations-to-interpret-the-pattern" class="nav-link" data-scroll-target="#step-5-switch-representations-to-interpret-the-pattern"><span class="header-section-number">18</span> Step 5: Switch representations to interpret the pattern</a>
   <ul>
-  <li><a href="#cartoon-plus-side-chains" id="toc-cartoon-plus-side-chains" class="nav-link" data-scroll-target="#cartoon-plus-side-chains"><span class="header-section-number">16.1</span> Cartoon plus side chains</a></li>
-  <li><a href="#wire-or-stick-emphasis" id="toc-wire-or-stick-emphasis" class="nav-link" data-scroll-target="#wire-or-stick-emphasis"><span class="header-section-number">16.2</span> Wire or stick emphasis</a></li>
-  <li><a href="#surface-view" id="toc-surface-view" class="nav-link" data-scroll-target="#surface-view"><span class="header-section-number">16.3</span> Surface view</a></li>
+  <li><a href="#cartoon-plus-side-chains" id="toc-cartoon-plus-side-chains" class="nav-link" data-scroll-target="#cartoon-plus-side-chains"><span class="header-section-number">18.1</span> Cartoon plus side chains</a></li>
+  <li><a href="#wire-or-stick-emphasis" id="toc-wire-or-stick-emphasis" class="nav-link" data-scroll-target="#wire-or-stick-emphasis"><span class="header-section-number">18.2</span> Wire or stick emphasis</a></li>
+  <li><a href="#surface-view" id="toc-surface-view" class="nav-link" data-scroll-target="#surface-view"><span class="header-section-number">18.3</span> Surface view</a></li>
   </ul></li>
-  <li><a href="#step-6-add-alphafold-confidence-as-a-sanity-check" id="toc-step-6-add-alphafold-confidence-as-a-sanity-check" class="nav-link" data-scroll-target="#step-6-add-alphafold-confidence-as-a-sanity-check"><span class="header-section-number">17</span> Step 6: Add AlphaFold confidence as a sanity check</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">18</span> Exercises</a></li>
-  <li><a href="#common-troubleshooting" id="toc-common-troubleshooting" class="nav-link" data-scroll-target="#common-troubleshooting"><span class="header-section-number">19</span> Common troubleshooting</a></li>
-  <li><a href="#further-reading-and-resources" id="toc-further-reading-and-resources" class="nav-link" data-scroll-target="#further-reading-and-resources"><span class="header-section-number">20</span> Further reading and resources</a></li>
+  <li><a href="#step-6-add-alphafold-confidence-as-a-sanity-check" id="toc-step-6-add-alphafold-confidence-as-a-sanity-check" class="nav-link" data-scroll-target="#step-6-add-alphafold-confidence-as-a-sanity-check"><span class="header-section-number">19</span> Step 6: Add AlphaFold confidence as a sanity check</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">20</span> Exercises</a></li>
+  <li><a href="#common-troubleshooting" id="toc-common-troubleshooting" class="nav-link" data-scroll-target="#common-troubleshooting"><span class="header-section-number">21</span> Common troubleshooting</a></li>
+  <li><a href="#further-reading-and-resources" id="toc-further-reading-and-resources" class="nav-link" data-scroll-target="#further-reading-and-resources"><span class="header-section-number">22</span> Further reading and resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/chimera/snp_mapping_chimera_alphafold.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -446,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></h1>
 </div>
 
 
@@ -476,8 +499,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Overview</h1>
+<section id="overview" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Overview</h1>
 <p>In this module you will learn how to:</p>
 <ul>
 <li>Retrieve AlphaFold protein structures</li>
@@ -486,8 +509,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Interpret mutation density in structural context</li>
 </ul>
 <p>We use the <em>Mycobacterium tuberculosis</em> protein Rv3872 (PE35) as a worked example.</p>
-<section id="learning-goals" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="learning-goals"><span class="header-section-number">10.1</span> Learning goals</h2>
+<section id="learning-goals" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="learning-goals"><span class="header-section-number">12.1</span> Learning goals</h2>
 <p>By the end you should be able to:</p>
 <ul>
 <li>Generate a valid Chimera attribute file (.defattr) from a residue-level SNP table</li>
@@ -496,8 +519,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Combine SNP burden with AlphaFold confidence to avoid over-interpreting low-confidence regions</li>
 </ul>
 </section>
-<section id="inputs-for-this-practical" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="inputs-for-this-practical"><span class="header-section-number">10.2</span> Inputs for this practical</h2>
+<section id="inputs-for-this-practical" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="inputs-for-this-practical"><span class="header-section-number">12.2</span> Inputs for this practical</h2>
 <p>AlphaFold model (example):</p>
 <ul>
 <li><a href="./AF-P9WIG7-F1-model_v2.pdb">AF-P9WIG7-F1-model_v2.pdb</a></li>
@@ -512,13 +535,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="background" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Background</h1>
+<section id="background" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Background</h1>
 <p>Mapping SNPs onto protein structures can help you identify mutation hotspots, assess structural clustering and generate mechanistic hypotheses. It is most informative when combined with: variant effect type, lineage context, phenotypes such as MIC, and structural confidence from AlphaFold.</p>
 <p>This practical focuses on the mechanics of getting from a residue-level SNP table to a useful structural visualization.</p>
 </section>
-<section id="step-1-obtain-a-structure" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Step 1: Obtain a structure</h1>
+<section id="step-1-obtain-a-structure" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Step 1: Obtain a structure</h1>
 <ol type="1">
 <li>Open AlphaFold DB</li>
 <li>Search for the UniProt ID of the protein of interest (for Rv3872: P9WIG7)</li>
@@ -528,8 +551,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Figure examples below show the same structure in different representations you will recreate in Chimera.</p>
 <p><a href="images/rv3872_cartoon_backbone.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/rv3872_cartoon_backbone.png" class="img-fluid" alt="Rv3872 cartoon backbone representation"></a></p>
 </section>
-<section id="step-2-prepare-an-attribute-file-for-chimera" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Step 2: Prepare an attribute file for Chimera</h1>
+<section id="step-2-prepare-an-attribute-file-for-chimera" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Step 2: Prepare an attribute file for Chimera</h1>
 <p>Chimera can color residues by a custom attribute. The attribute is supplied as a plain text file with a required header and one line per residue.</p>
 <p>A minimal .defattr structure is:</p>
 <pre class="text"><code>attribute: nsSNPs
@@ -538,8 +561,8 @@ recipient: residues
     :1    0
     :2    0
     :3    0</code></pre>
-<section id="key-rules-to-avoid-failure" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="key-rules-to-avoid-failure"><span class="header-section-number">13.1</span> Key rules to avoid failure</h2>
+<section id="key-rules-to-avoid-failure" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="key-rules-to-avoid-failure"><span class="header-section-number">15.1</span> Key rules to avoid failure</h2>
 <ul>
 <li>Use tabs between the residue selector and the value</li>
 <li>Residue numbering must match the model residue numbering</li>
@@ -569,8 +592,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="automating-attribute-creation" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="automating-attribute-creation"><span class="header-section-number">13.2</span> Automating attribute creation</h2>
+<section id="automating-attribute-creation" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="automating-attribute-creation"><span class="header-section-number">15.2</span> Automating attribute creation</h2>
 <p>You can generate a .defattr from a two-column table residue,count. Below are two options: a small Python script and an awk one-liner. Both avoid manual spreadsheet editing.</p>
 <p>Option A: Python script ^^^^^^^^^^^^^^^^^^^^^^^</p>
 <p>Save as make_defattr.py and run from the command line.</p>
@@ -642,8 +665,8 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 <pre class="text"><code>awk 'BEGIN{print "attribute: nsSNPs"; print "match mode: 1-to-1"; print "recipient: residues"} {if ($1 ~ /^[0-9]+$/) print "\t:"$1"\t"$2}' input.tsv &gt; Rv3872_nsSNPs.defattr</code></pre>
 </section>
 </section>
-<section id="step-3-open-the-model-in-chimera" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Step 3: Open the model in Chimera</h1>
+<section id="step-3-open-the-model-in-chimera" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Step 3: Open the model in Chimera</h1>
 <p>Install and open UCSF Chimera.</p>
 <ul>
 <li>File → Open → select your model file (.pdb or .cif)</li>
@@ -654,18 +677,18 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 <li>Presets → Interactive 1 (optional)</li>
 </ul>
 </section>
-<section id="step-4-load-the-residue-attribute-and-color-the-structure" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Step 4: Load the residue attribute and color the structure</h1>
-<section id="define-the-attribute" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="define-the-attribute"><span class="header-section-number">15.1</span> Define the attribute</h2>
+<section id="step-4-load-the-residue-attribute-and-color-the-structure" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Step 4: Load the residue attribute and color the structure</h1>
+<section id="define-the-attribute" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="define-the-attribute"><span class="header-section-number">17.1</span> Define the attribute</h2>
 <ul>
 <li>Tools → Structure Analysis → Define Attribute</li>
 <li>Load your .defattr file</li>
 <li>Confirm recipient is residues and the attribute name is nsSNPs</li>
 </ul>
 </section>
-<section id="render-by-attribute" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="render-by-attribute"><span class="header-section-number">15.2</span> Render by attribute</h2>
+<section id="render-by-attribute" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="render-by-attribute"><span class="header-section-number">17.2</span> Render by attribute</h2>
 <ul>
 <li>Tools → Structure Analysis → Render by Attribute</li>
 <li>Attribute: nsSNPs</li>
@@ -677,23 +700,23 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 <p><a href="images/rv3872_cartoon_sidechains.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/rv3872_cartoon_sidechains.png" class="img-fluid" alt="Rv3872 cartoon with side chains"></a></p>
 </section>
 </section>
-<section id="step-5-switch-representations-to-interpret-the-pattern" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Step 5: Switch representations to interpret the pattern</h1>
-<section id="cartoon-plus-side-chains" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="cartoon-plus-side-chains"><span class="header-section-number">16.1</span> Cartoon plus side chains</h2>
+<section id="step-5-switch-representations-to-interpret-the-pattern" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Step 5: Switch representations to interpret the pattern</h1>
+<section id="cartoon-plus-side-chains" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="cartoon-plus-side-chains"><span class="header-section-number">18.1</span> Cartoon plus side chains</h2>
 <p>Use this to see whether hotspots fall on particular helices or loops.</p>
 <ul>
 <li>Actions → Atoms/Bonds → show</li>
 <li>Actions → Atoms/Bonds → stick (optional for emphasis)</li>
 </ul>
 </section>
-<section id="wire-or-stick-emphasis" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="wire-or-stick-emphasis"><span class="header-section-number">16.2</span> Wire or stick emphasis</h2>
+<section id="wire-or-stick-emphasis" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="wire-or-stick-emphasis"><span class="header-section-number">18.2</span> Wire or stick emphasis</h2>
 <p>This view is useful when you want the mutation pattern to stand out from the backbone.</p>
 <p><a href="images/rv3872_wire_sidechains.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/rv3872_wire_sidechains.png" class="img-fluid" alt="Rv3872 wire representation emphasizing side chains"></a></p>
 </section>
-<section id="surface-view" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="surface-view"><span class="header-section-number">16.3</span> Surface view</h2>
+<section id="surface-view" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="surface-view"><span class="header-section-number">18.3</span> Surface view</h2>
 <p>Surfaces help decide whether hotspots are likely exposed.</p>
 <ul>
 <li>Actions → Surface → show</li>
@@ -703,8 +726,8 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 <p><a href="images/rv3872_electrostatic_surface.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/rv3872_electrostatic_surface.png" class="img-fluid" alt="Rv3872 electrostatic surface example"></a></p>
 </section>
 </section>
-<section id="step-6-add-alphafold-confidence-as-a-sanity-check" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Step 6: Add AlphaFold confidence as a sanity check</h1>
+<section id="step-6-add-alphafold-confidence-as-a-sanity-check" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Step 6: Add AlphaFold confidence as a sanity check</h1>
 <p>AlphaFold structures include per-residue confidence (pLDDT). A common pitfall is to interpret clustering in regions with low confidence, often flexible or disordered.</p>
 <p>Practical guidance:</p>
 <ul>
@@ -713,8 +736,8 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 </ul>
 <p>In Chimera you can inspect confidence if it is stored as a B-factor like field in your model, depending on file type. If not available, obtain confidence from the AlphaFold download and map it as a second attribute using the same mechanism as for nsSNPs.</p>
 </section>
-<section id="exercises" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Exercises</h1>
+<section id="exercises" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Exercises</h1>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -768,8 +791,8 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 </div>
 </div>
 </section>
-<section id="common-troubleshooting" class="level1" data-number="19">
-<h1 data-number="19"><span class="header-section-number">19</span> Common troubleshooting</h1>
+<section id="common-troubleshooting" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> Common troubleshooting</h1>
 <p>Attribute file loads but nothing changes:</p>
 <ul>
 <li>Check that residue numbering matches the model</li>
@@ -787,8 +810,8 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
 <li>Check AlphaFold confidence and avoid over-interpreting low-confidence segments</li>
 </ul>
 </section>
-<section id="further-reading-and-resources" class="level1" data-number="20">
-<h1 data-number="20"><span class="header-section-number">20</span> Further reading and resources</h1>
+<section id="further-reading-and-resources" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> Further reading and resources</h1>
 <ul>
 <li>Chimera tutorials: <a href="https://www.cgl.ucsf.edu/chimera/tutorials.html">https://www.cgl.ucsf.edu/chimera/tutorials.html</a></li>
 <li>Chimera getting started: <a href="https://www.cgl.ucsf.edu/Outreach/Tutorials/GettingStarted.html">https://www.cgl.ucsf.edu/Outreach/Tutorials/GettingStarted.html</a></li>
@@ -1214,8 +1237,8 @@ python make_defattr.py --infile NOTgoodComma.csv --delimiter "," --outfile Rv387
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../content/phylogenomics/phylogenetics_exercise.html" class="pagination-link" aria-label="Genomics &amp; phylogenomics exercise">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span>
+      <a href="../../content/bacterial_genomics/outbreak_phylo.html" class="pagination-link" aria-label="The Salmonella Concord mystery: reconstructing transmission across borders">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Salmonella Concord mystery: reconstructing transmission across borders</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
