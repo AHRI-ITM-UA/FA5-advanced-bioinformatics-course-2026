@@ -214,7 +214,7 @@ Snippy provides an additional command that combines per-sample results into a co
 
 Here is the snippy repo linked: [Snippy: Rapid haploid variant calling and core genome alignment](https://github.com/tseemann/snippy)
 
-::: {.callout-note title="Excercise 3: generating a core SNP alignment for phylogenetic inference"}
+::: {.callout-note title="Excercise 3: generating a core SNP alignment and phylogenetic inference"}
 
 
 After generating a core SNP alignment, you should find a file named `core.full.aln` in the output directory. This file contains the aligned sequences of all isolates at the core SNP sites.
@@ -229,7 +229,7 @@ This alignment can be used as input for a phylogenetic inference tool. The resul
 - determine whether they cluster tightly  
 - evaluate whether they are consistent with a single outbreak strain  
 
-Tip: u can use tools such as FastTree, IQtree, or RaxML-ng. They should all provide roughly the same results. RaxML-ng, when used correclt, may yield the most accurate hypothesis of the phylogeny of *Salmonella* Concord, but will also require ac higher runtime and more ocmputational resources. 
+Tip: u can use tools such as `FastTree`, `IQtree`, or `RaxML-ng`. They should all provide roughly the same results. `RaxML-ng`, when used correctly, may yield the most accurate hypothesis of the phylogeny of *Salmonella* Concord, but will also require ac higher runtime and more ocmputational resources. 
 
 In bacterial outbreak genomics, small SNP distances often indicate recent transmission, whereas large distances suggest unrelated cases.
 
@@ -241,7 +241,7 @@ Your final interpretation should integrate:
 - metadata (cfr. epidemiological context in Ethiopia 
 
 Only then can you conclude whether this dataset represents a localized outbreak of *Salmonella* Concord or multiple unrelated infections of strains imported from elsewhere.
-::
 
+:::
 
 # info box: about SNP sites
