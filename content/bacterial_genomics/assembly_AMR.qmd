@@ -351,10 +351,12 @@ The presence of an AMR gene on a conjugative plasmid (which can transfer horizon
 
 ### Genotype-phenotype association
 
-Now that we have identified the presence of AMR genes in the assemblies, we can compare these findings to the phenotypic antimicrobial susceptibility testing results (see @tbl:isolate-AST). This is an important step to understand the potential clinical implications of the genomic findings, and to evaluate whether the presence of certain AMR genes correlates with resistance observed in the laboratory.
+Now that we have identified the presence of AMR genes in the assemblies, we can compare these findings to the phenotypic antimicrobial susceptibility testing results (see @tbl-isolate-AST). This is an important step to understand the potential clinical implications of the genomic findings, and to evaluate whether the presence of certain AMR genes correlates with resistance observed in the laboratory.
 
-Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates included in the Ethiopia course. AMP = ampicillin; SXT = trimethoprim/sulfamethoxazole; CHL = chloramphenicol; CRO = ceftriaxone; CIP = ciprofloxacin; AZM = azithromycin; CAZ/AVI = ceftazidime/avibactam; C/T = ceftolozane/tazobactam; CST = colistin; MER/VAB = meropenem/vaborbactam; TZP = piperacillin/tazobactam; TEM = temocillin; TGC = tigecycline; MEM = meropenem. R = resistant; S = susceptible. {#tbl:isolate-AST}
-| sequencing_ID  | AMP | SXT | CHL | CRO | CIP | AZM | CAZ/AVI | C/T | CST | MER/VAB | TZP | TEM | TGC | MEM |
+
+
+Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates included in the Ethiopia course. AMP = ampicillin; SXT = trimethoprim/sulfamethoxazole; CHL = chloramphenicol; CRO = ceftriaxone; CIP = ciprofloxacin; AZM = azithromycin; CAZ/AVI = ceftazidime/avibactam; C/T = ceftolozane/tazobactam; CST = colistin; MER/VAB = meropenem/vaborbactam; TZP = piperacillin/tazobactam; TEM = temocillin; TGC = tigecycline; MEM = meropenem. R = resistant; S = susceptible {#tbl-isolate-AST}
+| sequencing_ID  | AMP | SXT | CHL | CRO | CIP | AZM | CAZ_AVI | C_T | CST | MER_VAB | TZP | TEM | TGC | MEM |
 |:---------------|:---:|:---:|:---:|:---:|:---:|:---:|:-------:|:---:|:---:|:-------:|:---:|:---:|:---:|:---:|
 | SRS4345282     | S | S | S | S | S | S | S | S | S | S | S | S | S | S |
 | 32640_1_336    | S | S | S | S | S | S | S | S | S | S | S | S | S | S |
@@ -367,9 +369,8 @@ Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates inclu
 | 32640_1_296    | R | R | R | R | S | R | S | S | S | S | S | R | S | S |
 | 32640_1_364    | R | R | R | R | S | R | S | S | S | S | S | R | S | S |
 
-::: {.callout-note title="Exercise 4: genotype-phenotype association"}
 
-::: {.callout-note title="Exercise 4: genotype–phenotype association"}
+::: {.callout-note title="Exercise 4: genotype-phenotype association"}
 
 In this exercise, you will compare the AMR genes detected in the genome assemblies with the phenotypic antimicrobial susceptibility testing (AST) results shown in @tbl:isolate-AST.
 

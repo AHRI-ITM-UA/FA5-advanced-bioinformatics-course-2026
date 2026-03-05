@@ -35,26 +35,27 @@ The central question is not simply whether the isolates are *Salmonella* Concord
 - Is there evidence for repeated exportation events?
 - Or does the tree suggest long-term endemic circulation?
 
-The data in Table @tbl:isolate-overview provide the epidemiological context. The genome sequences will provide the evolutionary evidence.
-
-In this exercise, you will integrate both.
-
 
 ## Isolate overview (short-read run accessions)
 
-Table: Overview of isolates included in the course, showing short-read run accessions and key epidemiological metadata. {#tbl:isolate-overview}
+The data in @tbl-isolate-overview provide the epidemiological context. The genome sequences will provide the evolutionary context.
+
+In this exercise, you will integrate both.
+
 | sequencing_ID | lab_ID | SR_run_accession | country_of_isolation | year_of_isolation | source | travel_origin |
 |:--|:--|:--|:--|--:|:--|:--|
-| SRS4345282     | 679052        | SRR8552256  | UK               | 2019 | human | Zambia    |
-| 32640_1_336    | H044240362    | ERR9516343  | UK               | 2004 | human | Kenya     |
-| 32640_1_39     | 64206         | ERR9516195  | Austria          | 2006 | human | Ethiopia  |
-| 32640_1_47     | 95907         | ERR9516199  | Austria          | 2007 | human | Ethiopia  |
-| 32640_1_316    | 1035531       | ERR9516333  | The Netherlands  | 2006 | stool | NA        |
-| 32640_1_372    | 254833        | ERR9516357  | The Netherlands  | 2003 | stool | NA        |
-| 32640_1_328    | H04340470     | ERR9516339  | UK               | 2004 | human | NA        |
-| SRS5777896     | 850890        | SRR10604677 | UK               | 2019 | human | NA        |
-| 32640_1_296    | 0508H45184    | ERR9516323  | Denmark          | 2005 | stool | Ethiopia  |
-| 32640_1_364    | 70366         | ERR9516355  | USA              | 2007 | stool | Ethiopia  |
+| SRS4345282  | 679052     | SRR8552256  | UK              | 2019 | human | Zambia |
+| 32640_1_336 | H044240362 | ERR9516343  | UK              | 2004 | human | Kenya  |
+| 32640_1_39  | 64206      | ERR9516195  | Austria         | 2006 | human | Ethiopia |
+| 32640_1_47  | 95907      | ERR9516199  | Austria         | 2007 | human | Ethiopia |
+| 32640_1_316 | 1035531    | ERR9516333  | The Netherlands | 2006 | stool | NA |
+| 32640_1_372 | 254833     | ERR9516357  | The Netherlands | 2003 | stool | NA |
+| 32640_1_328 | H04340470  | ERR9516339  | UK              | 2004 | human | NA |
+| SRS5777896  | 850890     | SRR10604677 | UK              | 2019 | human | NA |
+| 32640_1_296 | 0508H45184 | ERR9516323  | Denmark         | 2005 | stool | Ethiopia |
+| 32640_1_364 | 70366      | ERR9516355  | USA             | 2007 | stool | Ethiopia |
+
+Table: Overview of isolates included in the course, showing short-read run accessions and key epidemiological metadata. {#tbl-isolate-overview}
 
 
 ## retrieving short read data
@@ -95,8 +96,11 @@ do
     --split-files \
     --progress \
     --outdir fastq_illumina
-  gzip -f fastq/"$run"_*.fastq
+
 done
+
+cd fastq_illumina
+pigz -p "$CPUS" *.fastq 
 
 ```
 
@@ -140,17 +144,21 @@ We will learn more about genome assembly in the next sections, so for now you ca
 
 ```bash
 
-for i in ls *fastq.gz
-do 
-spades.py \
---read1 "$read1" \
---read2 "$read2" \
---threads "$CPUS" \
----blabla
+for read1 in *_R1.fastq.gz
+do
+    read2=${read1/_R1/_R2}
+    sample=basename "$read1" _R1.fastq.gz
 
+    spades.py \
+        --pe1-1 "$read1" \
+        --pe1-2 "$read2" \
+        --threads "$CPUS" \
+        -o "spades_${sample}"
 done
+
+
 ```
-Great! now you have assemblesyour reads into a draft assembly, which means its a fragmented assembly, where one biological molecule (e.g the bacterial chromosome), is represented by multiple contis (continuous stretches of assembled reads).
+Great! now you have assembled your reads into a draft assembly, which means its a fragmented assembly, where one biological molecule (e.g the bacterial chromosome), is represented by multiple contis (continuous stretches of assembled reads).
 
 You can now use the assemblies to run Seqsero, but also, you could leverage this oprtunity of having assembles genomes for another round of QC!
 
