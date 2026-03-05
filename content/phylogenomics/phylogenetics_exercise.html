@@ -402,6 +402,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#phylogenetic-tree-construction" id="toc-phylogenetic-tree-construction" class="nav-link" data-scroll-target="#phylogenetic-tree-construction"><span class="header-section-number">8.2</span> 6. Phylogenetic tree construction</a></li>
   <li><a href="#pca-and-population-structure-analysis" id="toc-pca-and-population-structure-analysis" class="nav-link" data-scroll-target="#pca-and-population-structure-analysis"><span class="header-section-number">8.3</span> 7. PCA and population structure analysis</a></li>
   <li><a href="#admixture-analysis" id="toc-admixture-analysis" class="nav-link" data-scroll-target="#admixture-analysis"><span class="header-section-number">8.4</span> 8. Admixture analysis</a></li>
+  <li><a href="#identity-by-descent-ibd-analysis" id="toc-identity-by-descent-ibd-analysis" class="nav-link" data-scroll-target="#identity-by-descent-ibd-analysis"><span class="header-section-number">8.5</span> 9. Identity by descent (IBD) analysis</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/phylogenomics/phylogenetics_exercise.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -455,7 +456,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="explore-the-input-data" class="level3" data-number="8.0.2">
 <h3 data-number="8.0.2" class="anchored" data-anchor-id="explore-the-input-data"><span class="header-section-number">8.0.2</span> 2. Explore the input data</h3>
-<p>All the required input data can be <a href="https://drive.google.com/drive/folders/1IXuN2NUr6zb6HYCNqQeSD6rlqH9C30OC?usp=sharing">downloaded from Google Drive</a>. These data will contain all the input fastq files, the reference genome and the metadata required to run the exercise below. The metadata is an important file that contains information about the samples, such as the sample ID, the location where the sample was collected, the date of collection, and other relevant information. This information can be used to interpret the results of the analyses and to understand the context of the samples. This file will contain important information about the samples, such as their origin, collection date, and any other relevant details that may be useful for your analyses or for visualisation.</p>
+<p>All the required input data can be <a href="https://drive.google.com/drive/folders/1IXuN2NUr6zb6HYCNqQeSD6rlqH9C30OC?usp=sharing">downloaded from Google Drive</a>.</p>
+<p>These data will contain all the input fastq files, the reference genome and the metadata required to run the exercise below. The metadata is an important file that contains information about the samples, such as the sample ID, the location where the sample was collected, the date of collection, and other relevant information. This information can be used to interpret the results of the analyses and to understand the context of the samples. This file will contain important information about the samples, such as their origin, collection date, and any other relevant details that may be useful for your analyses or for visualisation.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -603,7 +605,12 @@ Tip
 <li>create a directory to store the output of the GATK variant calling</li>
 <li>create a sequence dictionary for the reference genome using GATK, and index the reference genome using SAMtools and GATK IndexFeatureFile.</li>
 <li>run GATK HaplotypeCaller on the aligned reads to call variants. Make sure to use GVCF output format. Save the output to a .g.vcf file.</li>
-<li>combine all gvcf files into a GenomicsDB using GATK GenomicsDBImport</li>
+<li>combine all gvcf files into one multi-sample GVCF file. There are two options:
+<ul>
+<li>Option 1: using the GATK <code>GenomicsDBImport</code> approach. This is the recommended approach by GATK. However, it is more complicated. You will need to create a mapping file and an interval file, and subsequently create the database.</li>
+<li>Option 2: using the <code>CombineGVCFs</code> option where you specify each <code>.g.vcf</code> using the <code>--variant</code> option. As you will need to print this variant option for all 42 GVCF files, you should prevent doing this manually but rather automate this using a command like: <code>gatk CombineGVCFs -R ${ref_genome} $(for f in ${results_dir}/gatk/*.g.vcf.gz; do echo --variant $f; done) -O ${results_dir}/gatk/combined.old_way.g.vcf.gz</code>.</li>
+</ul></li>
+<li>perform joint genotyping across all samples using GATK GenotypeGVCFs to generate a multi-sample VCF file (i.e.&nbsp;a multi-sample VCF file contains the variant calls for all samples in a single vcf file).</li>
 <li>perform joint genotyping across all samples using GATK GenotypeGVCFs to generate a multi-sample VCF file (i.e.&nbsp;a multi-sample VCF file contains the variant calls for all samples in a single vcf file).</li>
 <li>extract the SNPs with a quality (QUAL) higher than 30 from the multi-sample VCF file using <code>bcftools view</code> and save the output to a new VCF file that only contains the quality filtered SNPs.</li>
 <li>check the effect of the quality filtering by comparing the number of variants in the original multi-sample VCF file and the filtered VCF file using <code>bcftools stats</code> to get statistics about the variants in each file, and to make sure that indels have been removed from the filtered VCF file.</li>
@@ -820,6 +827,46 @@ Tip
 <li>when running Admixture (command: <code>admixture</code>), you can use the <code>--cv</code> option to perform cross-validation and to calculate the cross-validation error for each K-value. This can help you to determine the optimal K-value for the data based on the cross-validation error.</li>
 <li>to get the CV error, best is to use the <code>grep</code> command in the terminal to extract the line that contains the CV error from the output of Admixture.</li>
 <li>when visualizing the admixture proportions in R, you can use the <code>ggplot2</code> package to create a bar plot of the admixture proportions for each sample. You can read in the output file from Admixture using the <code>read.table</code> function in R, and then use the <code>ggplot</code> function from the <code>ggplot2</code> package to create a bar plot that shows the proportion of ancestry from each inferred cluster for each sample. You can also use the <code>facet_wrap</code> function from <code>ggplot2</code> to create separate panels for each cluster, which can help to visualize the admixture proportions more clearly.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="identity-by-descent-ibd-analysis" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="identity-by-descent-ibd-analysis"><span class="header-section-number">8.5</span> 9. Identity by descent (IBD) analysis</h2>
+<p>Identity by descent (IBD) analysis is a method that can be used to identify segments of the genome that are shared between samples due to recent common ancestry. In this exercise, you will use the PLINK tool to perform IBD analysis on the SNP data. PLINK provides several tools for IBD analysis, such as the <code>--make-king-table</code> option, which calculates pairwise IBD estimates between samples based on the SNP data. When running PLINK for IBD analysis, you will need to specify the appropriate parameters for the analysis, such as the input PLINK files and the output file for the IBD estimates. After running PLINK for IBD analysis, you can visualize the results using a tool such as R or Python to create heatmaps of the pairwise IBD estimates between samples, which can help you to interpret the results in the context of the sample information and the phylogenetic tree that you constructed in the previous steps.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>use PLINK to perform IBD analysis on the filtered PLINK files using the <code>--make-king-table</code> option. This will calculate pairwise IBD estimates between samples based on the SNP data and will output a file that contains the IBD estimates for each pair of samples.</li>
+<li>visualize the results of the IBD analysis using a graph in R. You can read in the output file from PLINK using the <code>read.table</code> function in R, and then use the <code>ggplot2</code> package to create a heatmap of the pairwise IBD estimates between samples.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>for visualisation of the network in R you can use the igraph package to create a network graph of the pairwise IBD estimates between samples. You can read in the output file from PLINK using the <code>read.table</code> function in R, and then use the <code>graph_from_data_frame</code> function from the <code>igraph</code> package to create a graph object that represents the pairwise IBD estimates between samples. In the graph_from_data_frame function, you will need to specify define the edges of the graph like: <code>edges &lt;- data.frame(from = ibd_filtered$IID1, to = ibd_filtered$IID2, weight = ibd_filtered$KINSHIP)</code></li>
+<li>You can then use the <code>plot</code> function from the <code>igraph</code> package to visualize the graph, and you can customize the appearance of the graph using various parameters such as vertex size, edge width, and color.</li>
+<li>Optionally, you can color the graph according to the <code>Leish_group</code> extracted from the metadata file, which can help you to interpret the results in the context of the sample information and the phylogenetic tree that you constructed in the previous steps.</li>
 </ul>
 </div>
 </div>
