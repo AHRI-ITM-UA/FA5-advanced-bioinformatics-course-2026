@@ -76,8 +76,8 @@ book:
     - content/phylogenomics/phylogenetics_exercise.qmd
     - part: "Bacterial genomics"
       chapters:
-        - content/bacterial_genomics/assembly_AMR.qmd
         - content/bacterial_genomics/outbreak_phylo.qmd
+        - content/bacterial_genomics/assembly_AMR.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd
     - content/references.qmd
     # https://quarto.org/docs/books/book-structure.html#parts-appendices
