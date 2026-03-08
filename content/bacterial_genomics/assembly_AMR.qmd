@@ -10,7 +10,7 @@ In this chapter, we will investigate how to identify AMR genes in genome assembl
 
 This integrated approach allows us to assess the potential clinical implications of genomic findings and to better understand the mechanisms underlying antimicrobial resistance in these isolates.
 
-# Objectives
+## Objectives
 
 The objectives of this tutorial are:
 
@@ -355,7 +355,7 @@ Now that we have identified the presence of AMR genes in the assemblies, we can 
 
 
 
-Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates included in the Ethiopia course. AMP = ampicillin; SXT = trimethoprim/sulfamethoxazole; CHL = chloramphenicol; CRO = ceftriaxone; CIP = ciprofloxacin; AZM = azithromycin; CAZ/AVI = ceftazidime/avibactam; C/T = ceftolozane/tazobactam; CST = colistin; MER/VAB = meropenem/vaborbactam; TZP = piperacillin/tazobactam; TEM = temocillin; TGC = tigecycline; MEM = meropenem. R = resistant; S = susceptible {#tbl-isolate-AST}
+Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates included in the Ethiopia course. AMP = ampicillin; SXT = trimethoprim/sulfamethoxazole; CHL = chloramphenicol; CRO = ceftriaxone; CIP = ciprofloxacin; AZM = azithromycin; CAZ/AVI = ceftazidime/avibactam; C/T = ceftolozane/tazobactam; CST = colistin; MER/VAB = meropenem/vaborbactam; TZP = piperacillin/tazobactam; TEM = temocillin; TGC = tigecycline; MEM = meropenem. R = resistant; S = susceptible. {#tbl-isolate-AST}
 | sequencing_ID  | AMP | SXT | CHL | CRO | CIP | AZM | CAZ_AVI | C_T | CST | MER_VAB | TZP | TEM | TGC | MEM |
 |:---------------|:---:|:---:|:---:|:---:|:---:|:---:|:-------:|:---:|:---:|:-------:|:---:|:---:|:---:|:---:|
 | SRS4345282     | S | S | S | S | S | S | S | S | S | S | S | S | S | S |
@@ -372,7 +372,7 @@ Table: Phenotypic antimicrobial susceptibility profiles (R/S) for isolates inclu
 
 ::: {.callout-note title="Exercise 4: genotype-phenotype association"}
 
-In this exercise, you will compare the AMR genes detected in the genome assemblies with the phenotypic antimicrobial susceptibility testing (AST) results shown in @tbl:isolate-AST.
+In this exercise, you will compare the AMR genes detected in the genome assemblies with the phenotypic antimicrobial susceptibility testing (AST) results shown in @tbl-isolate-AST.
 
 The goal is to evaluate concordance between genotype and phenotype and to interpret discrepancies in a biologically meaningful way.
 
