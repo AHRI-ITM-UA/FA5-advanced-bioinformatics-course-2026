@@ -611,6 +611,24 @@ Table&nbsp;9.1: Overview of isolates included in the course, showing short-read 
 <td style="text-align: left;">stool</td>
 <td style="text-align: left;">Ethiopia</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">FD01848716</td>
+<td style="text-align: left;">GR536</td>
+<td style="text-align: left;">ERR3636805</td>
+<td style="text-align: left;">Ethiopia</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">blood</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FD01848803</td>
+<td style="text-align: left;">GR450</td>
+<td style="text-align: left;">ERR3636847</td>
+<td style="text-align: left;">Ethiopia</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">stool</td>
+<td style="text-align: left;">None</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -632,25 +650,27 @@ Table&nbsp;9.1: Overview of isolates included in the course, showing short-read 
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ERR9516323</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ERR9516355</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ERR9516255</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="va">)</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="va">CPUS</span><span class="op">=</span>16</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ERR3636805</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ERR3636847</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="va">)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> fastq_illumina</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="va">CPUS</span><span class="op">=</span>16</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> run <span class="kw">in</span> <span class="st">"</span><span class="va">${runs</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="ex">fasterq-dump</span> <span class="st">"</span><span class="va">$run</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">--threads</span> <span class="st">"</span><span class="va">$CPUS</span><span class="st">"</span> <span class="dt">\</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">--split-files</span> <span class="dt">\</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">--progress</span> <span class="dt">\</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outdir</span> fastq_illumina</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> fastq_illumina</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> run <span class="kw">in</span> <span class="st">"</span><span class="va">${runs</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="ex">fasterq-dump</span> <span class="st">"</span><span class="va">$run</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">--threads</span> <span class="st">"</span><span class="va">$CPUS</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">--split-files</span> <span class="dt">\</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">--progress</span> <span class="dt">\</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outdir</span> fastq_illumina</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fastq_illumina</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ex">pigz</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$CPUS</span><span class="st">"</span> <span class="pp">*</span>.fastq </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fastq_illumina</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ex">pigz</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$CPUS</span><span class="st">"</span> <span class="pp">*</span>.fastq </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="qc-mapping-and-variant-calling" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="qc-mapping-and-variant-calling"><span class="header-section-number">9.4</span> QC, mapping, and variant calling</h2>
@@ -740,6 +760,27 @@ Table&nbsp;9.1: Overview of isolates included in the course, showing short-read 
 </li>
 <li>which output files are generated</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>For this project, we will use a reference genome that was generated using PacBio long-read sequencing. The genome originates from a Salmonella Concord isolate recovered from a stool sample of a young Ethiopian adoptee who was treated for gastroenteritis at the Institute of Tropical Medicine in Antwerp, Belgium, in 2008.</p>
+<p>Using a suitable reference genome is an important step in bacterial genomics analyses. Many analyses, such as read mapping, SNP detection, and phylogenetic reconstruction, depend on aligning sequencing reads to a reference. When the reference genome is closely related to the isolates under study, reads map more accurately and fewer regions are incorrectly interpreted as variation.</p>
+<p>This is particularly important for Salmonella. Although isolates within a serovar can be highly similar, their genomes may still contain substantial variation due to mobile genetic elements such as plasmids, genomic islands, and prophages. If a distant reference genome is used, parts of the genome may fail to map or may produce misleading signals of variation. A reference that is closely related to the study population therefore improves the reliability of downstream analyses.</p>
+<p>You can download the this reference genome as follows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://zenodo.org/records/18813829/files/reference_str1309.fasta<span class="pp">?</span>download=1 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Now you are all set for the next excercise!</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: mapping, variant calling">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
