@@ -54,6 +54,8 @@ In this exercise, you will integrate both.
 | SRS5777896  | 850890     | SRR10604677 | UK              | 2019 | human | NA |
 | 32640_1_296 | 0508H45184 | ERR9516323  | Denmark         | 2005 | stool | Ethiopia |
 | 32640_1_364 | 70366      | ERR9516355  | USA             | 2007 | stool | Ethiopia |
+| FD01848716  | GR536      | ERR3636805  | Ethiopia        | 2006 | blood | None |
+| FD01848803  | GR450      | ERR3636847  | Ethiopia        | 2006 | stool | None |
 
 Table: Overview of isolates included in the course, showing short-read run accessions and key epidemiological metadata. {#tbl-isolate-overview}
 
@@ -76,6 +78,8 @@ SRR10604677
 ERR9516323
 ERR9516355
 ERR9516255
+ERR3636805
+ERR3636847
 )
 
 
@@ -187,6 +191,21 @@ Carefully read the documentation and determine:
 - how to specify the reference genome  
 - which output files are generated  
 
+::: {.callout-tip collapse="false"}
+For this project, we will use a reference genome that was generated using PacBio long-read sequencing. The genome originates from a Salmonella Concord isolate recovered from a stool sample of a young Ethiopian adoptee who was treated for gastroenteritis at the Institute of Tropical Medicine in Antwerp, Belgium, in 2008.
+
+Using a suitable reference genome is an important step in bacterial genomics analyses. Many analyses, such as read mapping, SNP detection, and phylogenetic reconstruction, depend on aligning sequencing reads to a reference. When the reference genome is closely related to the isolates under study, reads map more accurately and fewer regions are incorrectly interpreted as variation.
+
+This is particularly important for Salmonella. Although isolates within a serovar can be highly similar, their genomes may still contain substantial variation due to mobile genetic elements such as plasmids, genomic islands, and prophages. If a distant reference genome is used, parts of the genome may fail to map or may produce misleading signals of variation. A reference that is closely related to the study population therefore improves the reliability of downstream analyses.
+
+You can download the this reference genome as follows: 
+
+```bash
+wget https://zenodo.org/records/18813829/files/reference_str1309.fasta?download=1 
+```
+:::
+
+Now you are all set for the next excercise!
 
 ::: {.callout-note title="Exercise 2: mapping, variant calling"}
 
