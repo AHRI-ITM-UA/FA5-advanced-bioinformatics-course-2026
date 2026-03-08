@@ -23,7 +23,8 @@ By analyzing this data, you will gain hands-on experience in SNP calling, phylog
 
 ### 2. Explore the input data
 All the required input data can be [downloaded from Google Drive](https://drive.google.com/drive/folders/1IXuN2NUr6zb6HYCNqQeSD6rlqH9C30OC?usp=sharing).
- These data will contain all the input fastq files, the reference genome and the metadata required to run the exercise below. The metadata is an important file that contains information about the samples, such as the sample ID, the location where the sample was collected, the date of collection, and other relevant information. This information can be used to interpret the results of the analyses and to understand the context of the samples. This file will contain important information about the samples, such as their origin, collection date, and any other relevant details that may be useful for your analyses or for visualisation.
+
+These data will contain all the input fastq files, the reference genome and the metadata required to run the exercise below. The metadata is an important file that contains information about the samples, such as the sample ID, the location where the sample was collected, the date of collection, and other relevant information. This information can be used to interpret the results of the analyses and to understand the context of the samples. This file will contain important information about the samples, such as their origin, collection date, and any other relevant details that may be useful for your analyses or for visualisation.
 
 ::: {.callout-caution title="Exercise"}
 * create a directory in your home folder and download the file to that directory
@@ -101,7 +102,10 @@ After mapping the reads to the reference genome, the next step is to call varian
 * create a directory to store the output of the GATK variant calling
 * create a sequence dictionary for the reference genome using GATK, and index the reference genome using SAMtools and GATK IndexFeatureFile.
 * run GATK HaplotypeCaller on the aligned reads to call variants. Make sure to use GVCF output format. Save the output to a .g.vcf file.
-* combine all gvcf files into a GenomicsDB using GATK GenomicsDBImport
+* combine all gvcf files into one multi-sample GVCF file. There are two options:
+    * Option 1: using the GATK `GenomicsDBImport` approach. This is the recommended approach by GATK. However, it is more complicated. You will need to create a mapping file and an interval file, and subsequently create the database.
+    * Option 2: using the `CombineGVCFs` option where you specify each `.g.vcf` using the `--variant` option. As you will need to print this variant option for all 42 GVCF files, you should prevent doing this manually but rather automate this using a command like: `gatk CombineGVCFs -R ${ref_genome} $(for f in ${results_dir}/gatk/*.g.vcf.gz; do echo --variant $f; done) -O ${results_dir}/gatk/combined.old_way.g.vcf.gz`.
+* perform joint genotyping across all samples using GATK GenotypeGVCFs to generate a multi-sample VCF file (i.e. a multi-sample VCF file contains the variant calls for all samples in a single vcf file).
 * perform joint genotyping across all samples using GATK GenotypeGVCFs to generate a multi-sample VCF file (i.e. a multi-sample VCF file contains the variant calls for all samples in a single vcf file).
 * extract the SNPs with a quality (QUAL) higher than 30 from the multi-sample VCF file using `bcftools view` and save the output to a new VCF file that only contains the quality filtered SNPs.
 * check the effect of the quality filtering by comparing the number of variants in the original multi-sample VCF file and the filtered VCF file using `bcftools stats` to get statistics about the variants in each file, and to make sure that indels have been removed from the filtered VCF file.
@@ -207,4 +211,18 @@ Admixture analysis is a method that can be used to identify distinct genetic clu
 * when running Admixture (command: `admixture`), you can use the `--cv` option to perform cross-validation and to calculate the cross-validation error for each K-value. This can help you to determine the optimal K-value for the data based on the cross-validation error.
 * to get the CV error, best is to use the `grep` command in the terminal to extract the line that contains the CV error from the output of Admixture.
 * when visualizing the admixture proportions in R, you can use the `ggplot2` package to create a bar plot of the admixture proportions for each sample. You can read in the output file from Admixture using the `read.table` function in R, and then use the `ggplot` function from the `ggplot2` package to create a bar plot that shows the proportion of ancestry from each inferred cluster for each sample. You can also use the `facet_wrap` function from `ggplot2` to create separate panels for each cluster, which can help to visualize the admixture proportions more clearly.
+:::
+
+## 9. Identity by descent (IBD) analysis
+Identity by descent (IBD) analysis is a method that can be used to identify segments of the genome that are shared between samples due to recent common ancestry. In this exercise, you will use the PLINK tool to perform IBD analysis on the SNP data. PLINK provides several tools for IBD analysis, such as the `--make-king-table` option, which calculates pairwise IBD estimates between samples based on the SNP data. When running PLINK for IBD analysis, you will need to specify the appropriate parameters for the analysis, such as the input PLINK files and the output file for the IBD estimates. After running PLINK for IBD analysis, you can visualize the results using a tool such as R or Python to create heatmaps of the pairwise IBD estimates between samples, which can help you to interpret the results in the context of the sample information and the phylogenetic tree that you constructed in the previous steps.
+
+::: {.callout-caution title="Exercise"}
+* use PLINK to perform IBD analysis on the filtered PLINK files using the `--make-king-table` option. This will calculate pairwise IBD estimates between samples based on the SNP data and will output a file that contains the IBD estimates for each pair of samples.
+* visualize the results of the IBD analysis using a graph in R. You can read in the output file from PLINK using the `read.table` function in R, and then use the `ggplot2` package to create a heatmap of the pairwise IBD estimates between samples.
+:::
+
+::: {.callout-tip collapse="true"}
+* for visualisation of the network in R you can use the igraph package to create a network graph of the pairwise IBD estimates between samples. You can read in the output file from PLINK using the `read.table` function in R, and then use the `graph_from_data_frame` function from the `igraph` package to create a graph object that represents the pairwise IBD estimates between samples. In the graph_from_data_frame function, you will need to specify define the edges of the graph like: `edges <- data.frame(from = ibd_filtered$IID1, to = ibd_filtered$IID2, weight = ibd_filtered$KINSHIP)`
+* You can then use the `plot` function from the `igraph` package to visualize the graph, and you can customize the appearance of the graph using various parameters such as vertex size, edge width, and color.
+* Optionally, you can color the graph according to the `Leish_group` extracted from the metadata file, which can help you to interpret the results in the context of the sample information and the phylogenetic tree that you constructed in the previous steps.
 :::

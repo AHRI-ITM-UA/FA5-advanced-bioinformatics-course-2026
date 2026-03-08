@@ -8,34 +8,39 @@ book:
   subtitle: "Advanced bioinformatics course - FA5 2026"
 
   author:
-    - name: Pieter Moris
-      orcid: 0000-0003-4242-4939
-      url: https://pmoris.github.io
-      email: pmoris@itg.be
-      affiliations:
-        - name: Institute of Tropical Medicine Antwerp
-          url: https://www.itg.be
-    - name: Wim Cuypers
-      orcid: 0000-0002-1895-3526
-      email: wim.cuypers@uantwerpen.be
-      affiliations:
-        - name: University of Antwerp
-          url: https://www.uantwerpen.be/en
-    - name: Pieter Monsieurs
-      orcid: 0000-0003-2214-6652
-      email: pmonsieurs@itg.be
-      affiliations:
-        - name: Institute of Tropical Medicine Antwerp
-          url: https://www.itg.be
     - name: Bethlehem Adnew
       orcid: 0000-0002-6108-9534
       email: bethlehem.adnew@ahri.gov.et
       affiliations:
         - name: Armauer Hansen Research Institute
           url: https://ahri.gov.et/
+    - name: Eline Turcksin
+      email: eline.turcksin@uantwerpen.be
+      affiliations:
+        - name: University of Antwerp
+          url: https://www.uantwerpen.be/en
+    - name: Katlijn De Meulenaere
+      orcid: 0000-0003-0723-9009
+      email: kdemeulenaere@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
     - name: Oren Tzfadia
       orcid: 0000-0002-7096-8063
       email: otzfadia@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Pieter Monsieurs
+      orcid: 0000-0003-2214-6652
+      email: pmonsieurs@itg.be
+      affiliations:
+        - name: Institute of Tropical Medicine Antwerp
+          url: https://www.itg.be
+    - name: Pieter Moris
+      orcid: 0000-0003-4242-4939
+      url: https://pmoris.github.io
+      email: pmoris@itg.be
       affiliations:
         - name: Institute of Tropical Medicine Antwerp
           url: https://www.itg.be
@@ -45,14 +50,9 @@ book:
       affiliations:
         - name: Institute of Tropical Medicine Antwerp
           url: https://www.itg.be
-    - name: Katlijn De Meulenaere
-      orcid: 0000-0003-0723-9009
-      email: kdemeulenaere@itg.be
-      affiliations:
-        - name: Institute of Tropical Medicine Antwerp
-          url: https://www.itg.be
-    - name: Eline Turcksin
-      email: eline.turcksin@uantwerpen.be
+    - name: Wim Cuypers
+      orcid: 0000-0002-1895-3526
+      email: wim.cuypers@uantwerpen.be
       affiliations:
         - name: University of Antwerp
           url: https://www.uantwerpen.be/en
@@ -67,42 +67,18 @@ book:
     - content/refresher.qmd
     - part: "From reads to variants"
       chapters:
-        - content/genomics/setup.qmd
         - content/genomics/pipeline-overview.qmd
         - content/genomics/tools-and-formats.qmd
         - content/genomics/qc.qmd
         - content/genomics/mapping.qmd
         - content/genomics/variant-calling.qmd
+        - content/genomics/annotation.qmd
     - content/phylogenomics/phylogenetics_exercise.qmd
-    - content/bacterial_genomics/outbreak_phylo.qmd
-    - content/bacterial_genomics/assembly_AMR.qmd
+    - part: "Bacterial genomics"
+      chapters:
+        - content/bacterial_genomics/outbreak_phylo.qmd
+        - content/bacterial_genomics/assembly_AMR.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd
-
-    #   - part: "Bioinformatics file formats and tools"
-    #   # chapters:
-    #     # - content/bioinf/bioinf-file-formats.qmd
-    # - part: "Malaria Molecular Surveillance"
-    #   chapters:
-    #       - content/mms/mms_usecases
-    #       - content/mms/molecular_markers
-    #       - content/mms/practical_variants_of_interest
-    #       - content/mms/genetic_diversity
-    # - part: "Population genetics"
-    #   chapters:
-    #       - content/popgen/population_genetics
-    #       - content/popgen/micro_evolution
-    #       - content/popgen/practical_LD
-    #       - content/popgen/visualisation
-    #       - content/popgen/practical_PCA
-    #       - content/popgen/relatedness
-    #       - content/popgen/multilocus
-    #       - content/popgen/ibd
-    #       - content/popgen/population_structure
-    #       - content/popgen/practical_ibd
-    # - part: "Case studies"
-    # - content/population-genetics.qmd
-    # - content/phylogenetics.qmd
-    # - part: "Computational literacy" # aka things that ~can~ will go wrong aka what I wish I had known
     - content/references.qmd
     # https://quarto.org/docs/books/book-structure.html#parts-appendices
     # parts can either be a stand-alone file with intro
@@ -189,3 +165,6 @@ editor: source
 # https://quarto.org/docs/publishing/github-pages.html#freezing-computations
 execute:
   freeze: auto
+
+language:
+  title-block-author-plural: "Teaching team and organising committee"

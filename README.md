@@ -18,7 +18,7 @@ Everything you find in this git repository and on the course website is licensed
 
 Please make sure to also provide proper attribution to the primary sources that we cite ourselves, whenever this is applicable.
 
-## Teaching team
+## Teaching team and organising committee
 
 This organisation and teaching of this course were made possible by a cross-institute team of researchers. Authors of specific modules are acknowledged at the top of the respective chapters.
 

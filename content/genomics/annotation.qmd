@@ -1,0 +1,270 @@
+---
+author:
+  - name: Pieter Moris
+    orcid: 0000-0003-4242-4939
+    url: https://pmoris.github.io
+    email: pmoris@itg.be
+    affiliations:
+      - name: Institute of Tropical Medicine Antwerp
+        url: https://www.itg.be
+---
+
+# Variant annotation {#sec-variant-annotation}
+
+The final step in our pipeline is to annotate all the variants that were called in the previous step. For this, a tool like [snpEff](http://pcingola.github.io/SnpEff/) can be used.
+
+<!-- TODO variants to table
+https://www.melbournebioinformatics.org.au/tutorials/tutorials/variant_calling_gatk1/variant_calling_gatk1/#1-variantstotable
+https://gatk.broadinstitute.org/hc/en-us/articles/21904953853595-VariantsToTable
+-->
+
+## snpEff configuration
+
+SnpEff expects that all of its required are stored in a specific location and with specific filenames, which should the names used in the genome database section of a `snpEff.config` file. Briefly, you will need:
+
+- A copy of the reference genome placed in `./data/snpEff_database/<reference-name>/sequences.fa` (a symlink also works)
+- A gene annotation file placed in `./data/snpEff_database/<reference-name>/genes.gff`
+- An optional CDS fasta file placed in: `./data/snpEff_database/<reference-name>/cds.fa`
+- An optional protein fasta file placed in: `./data/snpEff_database/<reference-name>/protein.fa`
+
+Note that these files should all be decompressed (no `.gz` files allowed). Afterwards, you will need to run the `snpEff build` command to construct a snpEff database. You can read more about how to do this in the [snpEff documentation](https://pcingola.github.io/SnpEff/snpeff/build_db/). It is also useful to know that snpEff provides pre-built databases for various organisms too.
+
+The `generate_snpEff.sh` script below can take care of all of these steps for you. First, you will need to modify the script and set the filepaths to your reference genomes' location on your system.
+
+::: {.callout-caution}
+This script expects that each of your reference genomes are stored in a separate directory, with the fasta, annotation and cds/protein files together.
+
+It also makes some rather stringent assumptions about what the file names of the CDS and protein fasta files are. In this case, it expects the naming conventions used by [PlasmoDB](https://plasmodb.org/plasmo/app/downloads/Current_Release/Pfalciparum3D7/), but you can modify these lines of code yourself, or even comment them out and add these two files manually.
+
+If the CDS or protein fasta files are missing for your reference genome of interest, or in case there are problems with the names in the annotation file, you can skip these files by adding the flags `-noCheckCds -noCheckProtein` to your `snpEff build` command to skip these checks. In this case, the protein check was disabled.
+
+Lastly, it does not copy or move files, but instead makes use of symlinks. These are nothing more than smart shortcuts that can refer to the same file using a different filepath, saving space. For more info on symlinks, you can check out this [tutorial](https://uomresearchit.github.io/shell-programming-course/08-symlinks/index.html).
+:::
+
+```bash
+#!/usr/bin/env bash
+
+# set output directory if given as argument, default to current working directory
+if [ ! -z $1 ]
+then
+    output_dir=$1
+else
+    # get file path of script and set it to output directory
+    output_dir=$(pwd)/
+fi
+
+# add the paths to your reference genomes here
+declare -a genome_array=(
+    "/path/to/references/plasmodium_falciparum/PlasmoDB-release-68/PlasmoDB-68_Pfalciparum3D7_Genome.fasta"
+    "/path/to/references/human/Homo_sapiens.GRCh38.p14.GENCODE.release45/GRCh38.primary_assembly.genome.fa.gz"
+)
+
+snpeff_dir="${output_dir}/snpEff"
+snpeff_db="${snpeff_dir}/snpEff_database"
+snpeff_config="${snpeff_dir}/snpEff.config"
+mkdir -p "${snpeff_dir}"
+mkdir -p "${snpeff_db}"
+
+# create snpeff.config file
+cat > "${snpeff_config}" << EOF
+#---------------------------------------
+# Custom snpEff configuration
+#---------------------------------------
+
+data.dir = ${snpeff_db}
+
+#-------------------------------------------------------------------------------
+# Codon tables
+#
+# Format:	It's a comma separated "codon/aminoAcid[+*]" list
+# 			Where 'codon' is in uppper case, aminoAcid is a one letter
+#			code, '+' denotes start codon and '*' denotes stop codon.
+#
+# References:	http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
+#				ftp://ftp.ncbi.nih.gov/entrez/misc/data/gc.prt
+#-------------------------------------------------------------------------------
+
+codon.Standard								: TTT/F , TTC/F , TTA/L , TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Vertebrate_Mitochondrial				: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/M+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/* , AGG/* , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Yeast_Mitochondrial					: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/T , CTC/T , CTA/T , CTG/T , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/M+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Mold_Mitochondrial					: TTT/F , TTC/F , TTA/L+, TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Protozoan_Mitochondrial				: TTT/F , TTC/F , TTA/L+, TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Coelenterate							: TTT/F , TTC/F , TTA/L+, TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Mitochondrial							: TTT/F , TTC/F , TTA/L+, TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Mycoplasma							: TTT/F , TTC/F , TTA/L+, TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Spiroplasma							: TTT/F , TTC/F , TTA/L+, TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Invertebrate_Mitochondrial			: TTT/F , TTC/F , TTA/L , TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/M+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/S , AGG/S , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Ciliate_Nuclear						: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/Q , TAG/Q , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Dasycladacean_Nuclear					: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/Q , TAG/Q , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Hexamita_Nuclear						: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/Q , TAG/Q , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Echinoderm_Mitochondrial				: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/N , AAG/K , AGT/S , AGC/S , AGA/S , AGG/S , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Flatworm_Mitochondrial				: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/N , AAG/K , AGT/S , AGC/S , AGA/S , AGG/S , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Euplotid_Nuclear						: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/C , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Bacterial_and_Plant_Plastid			: TTT/F , TTC/F , TTA/L , TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I+, ATA/I+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Alternative_Yeast_Nuclear				: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/S+, CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Ascidian_Mitochondrial				: TTT/F , TTC/F , TTA/L , TTG/L+, TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/M+, ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/G , AGG/G , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Alternative_Flatworm_Mitochondrial	: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/Y , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/N , AAG/K , AGT/S , AGC/S , AGA/S , AGG/S , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Blepharisma_Macronuclear				: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/Q , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Chlorophycean_Mitochondrial			: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/L , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Trematode_Mitochondrial				: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/W , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/M , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/N , AAG/K , AGT/S , AGC/S , AGA/S , AGG/S , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Scenedesmus_obliquus_Mitochondrial	: TTT/F , TTC/F , TTA/L , TTG/L , TCT/S , TCC/S , TCA/* , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/L , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I , ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V , GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+codon.Thraustochytrium_Mitochondrial		: TTT/F , TTC/F , TTA/* , TTG/L , TCT/S , TCC/S , TCA/S , TCG/S , TAT/Y , TAC/Y , TAA/* , TAG/* , TGT/C , TGC/C , TGA/* , TGG/W , CTT/L , CTC/L , CTA/L , CTG/L , CCT/P , CCC/P , CCA/P , CCG/P , CAT/H , CAC/H , CAA/Q , CAG/Q , CGT/R , CGC/R , CGA/R , CGG/R , ATT/I+, ATC/I , ATA/I , ATG/M+, ACT/T , ACC/T , ACA/T , ACG/T , AAT/N , AAC/N , AAA/K , AAG/K , AGT/S , AGC/S , AGA/R , AGG/R , GTT/V , GTC/V , GTA/V , GTG/V+, GCT/A , GCC/A , GCA/A , GCG/A , GAT/D , GAC/D , GAA/E , GAG/E , GGT/G , GGC/G , GGA/G , GGG/G
+
+EOF
+
+for genome in "${genome_array[@]}"; do
+    echo "Creating snpEff database for ${genome}..."
+    if [[ ! -f "${genome}" ]]; then
+        echo "ERROR: Genome file not found: ${genome}"
+        exit 1
+    fi
+
+    # fetch genome
+    genome_filename="$(basename "${genome}")"
+    genome_parent="$(dirname "${genome}")"
+    genome_dir="${snpeff_db}/${genome_filename}"
+    genome_dir="${genome_dir%_Genome.fasta}"
+    genome_dir="${genome_dir%.fa.gz}"
+    genome_dir="${genome_dir%.fa}"
+    mkdir -p "${genome_dir}"
+
+    db_name="$(basename "${genome_dir}")"
+
+    if file --mime-type "${genome}" | grep -q gzip$; then
+        ln -sf "${genome}" "${genome_dir}/sequences.fa.gz"
+    else
+        ln -sf "${genome}" "${genome_dir}/sequences.fa"
+    fi
+
+    # fetch annotation
+    annotation=""
+    type=""
+
+    # Look for GFF first
+    for f in "$genome_parent"/*.gff*; do
+        if [[ -f "$f" ]]; then
+            annotation="$f"
+            type="gff"
+            break
+        fi
+    done
+
+    # If no GFF found, look for GTF
+    if [[ -z "$annotation" ]]; then
+        for f in "$genome_parent"/*.gtf*; do
+            if [[ -f "$f" ]]; then
+                annotation="$f"
+                type="gtf"
+                break
+            fi
+        done
+    fi
+
+    if [[ -z "$annotation" ]]; then
+        echo "ERROR: No GFF or GTF found in $genome_parent"
+        exit 1
+    fi
+
+    echo "Found annotation: ${annotation} (${type})"
+
+    if file --mime-type "${annotation}" | grep -q gzip$; then
+        ln -sf "${annotation}" "${genome_dir}/genes.${type}.gz"
+    else
+        ln -sf "${annotation}" "${genome_dir}/genes.${type}"
+    fi
+
+    # fetch CDS
+    cds="${genome%_Genome.fasta}_AnnotatedCDSs.fasta"
+    ln -sf ${cds} "${genome_dir}/cds.fa"
+
+    # fetch protein
+    # protein="${genome%_Genome.fasta}_AnnotatedProteins.fasta"
+    # ln -sf ${protein} "${genome_dir}/protein.fa"
+
+    # append genome to config file
+    echo "# ${db_name} genome configuration" >> "${snpeff_config}"
+    echo "${db_name}.genome : ${db_name}" >> "${snpeff_config}"
+    echo "" >> "${snpeff_config}"
+
+    # optional: adjust codon table
+    bed="$(ls "${genome_parent}"/*.bed 2>/dev/null | head -n 1 || true)"
+
+    if [[ -n "${bed}" ]]; then
+        echo "Found BED file: ${bed}"
+
+        MITO_CONTIGS=$(awk '$1 ~ /[Mm][Ii][Tt]/ {print $1}' "${bed}" | sort -u)
+        API_CONTIGS=$(awk '$1 ~ /[Aa][Pp][Ii]/ {print $1}' "${bed}" | sort -u)
+
+        if [[ -n "${MITO_CONTIGS}" ]]; then
+            echo "# Mitochondrial codon table configuration" >> "${snpeff_config}"
+            for contig in ${MITO_CONTIGS}; do
+                echo "${db_name}.${contig}.codonTable : Protozoan_Mitochondrial" >> "${snpeff_config}"
+            done
+            echo "" >> "${snpeff_config}"
+        fi
+
+        if [[ -n "${API_CONTIGS}" ]]; then
+            echo "# Apicoplast codon table configuration" >> "${snpeff_config}"
+            for contig in ${API_CONTIGS}; do
+                echo "${db_name}.${contig}.codonTable : Bacterial_and_Plant_Plastid" >> "${snpeff_config}"
+            done
+            echo "" >> "${snpeff_config}"
+        fi
+    fi
+
+    # build database
+    echo "Building snpEff databases for ${genome}..."
+    if [ ! "${type}" == "gtf" ]; then
+        snpEff build -c "${snpeff_config}" -dataDir "${snpeff_db}" -gff3 -v -noCheckProtein $(basename ${genome_dir})
+    else
+        snpEff build -c "${snpeff_config}" -dataDir "${snpeff_db}" -gtf22 -v -noCheckProtein $(basename ${genome_dir})
+    fi
+done
+```
+
+After running the script, you might still need to modify the `./config/snpEff.config` file somewhat.
+
+For example, you can change the following line:
+
+`data.dir = ./snpEff_database/`, to point to the location of your newly created database directory.
+
+It's best to set this to the absolute path on your system. Alternatively, you can omit this line from the config file and use the flag `-dataDir` when  calling snpEff. Keep in mind that all the paths that were defined earlier should be relative to this config file, not to the working directory where snpEff is called from (this is in contrast to how most other tools work).
+
+Additionally, if your reference genome includes a mitochondrial (or apicoplast in the case of _Plasmodium) contig, you will need to modify its codon table to make sure variants are translated into the correct amino acid.
+
+## Annotation
+
+To annotate your VCF files, you can now run the following command, where `database_name` should match one of the names you defined in your config file/one of the subdirectories in the snpeff database directory (e.g. `PlasmoDB-68_Pfalciparum3D7`):
+
+```bash
+# NOTE: dataDir is relative to snpEff.config when provided as a relative path
+snpEff ann \\
+    -config /path/to/snpeff.config \\
+    -dataDir /path/to/snpeff_database \\
+    -csvStats spneff_annotation.csv \\
+    -stats snpeff_annotation.html \\
+    ${args} \\
+    <database_name> \\
+    ${vcf} \\
+    > snps.ann.vcf
+```
+
+::: {.callout-note}
+Similar to the `gatk` commands we saw earlier, various java flags can be passed to `snpeff` in order to, for example, set the maximum amount of memory that can be used `-Xmx$8g`.
+:::
+
+::: {.callout-caution}
+## Exercises
+
+Run `snpeff` on your own data and explore the output files. You can refer to the [documentation pages](https://pcingola.github.io/SnpEff/snpeff/outputsummary/) to learn more about the different outputs.
+:::
+
+## MultiQC
+
+At the end of your pipeline, you will likely end up with a directory filled with various outputs: log files, alignment and qc stats, etc. This is where the `multiqc` becomes a lifesaver. It can search through a directory with these types of outputs and summarise the results for all the tools that it knows about. Fortunately, it is backed by an extensive database of compatible tools and outputs. Running it is as simple as `multiqc <results_directory>`. For more info, we refer to its [extensive documentation](https://docs.seqera.io/multiqc).
+
+::: {.callout-tip}
+You can explore an example report [here](https://seqera.io/examples/wgs/multiqc_report.html).
+:::
+
+<!-- TODO multiqc -->
