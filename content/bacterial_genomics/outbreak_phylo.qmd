@@ -202,6 +202,7 @@ You can download the this reference genome as follows:
 
 ```bash
 wget https://zenodo.org/records/18813829/files/reference_str1309.fasta?download=1 
+mv -v reference_str1309.fasta?download=1 concord_str1309.fasta
 ```
 :::
 
