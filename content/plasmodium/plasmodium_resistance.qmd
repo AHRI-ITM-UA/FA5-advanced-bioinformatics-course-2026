@@ -65,6 +65,10 @@ RiFA focuses on key resistance-associated loci:
 - *pfdhps* — sulfadoxine resistance
 - *cytb* — atovaquone resistance (cytochrome b)
 
+### Pipeline overview 
+
+![Overview of the RiFA pipeline](content/assets/pipeline_overview.jpeg)
+
 ### Getting Started
 
 1. Visit the official repository:  
