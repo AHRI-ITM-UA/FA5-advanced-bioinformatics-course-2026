@@ -1,3 +1,12 @@
+---
+author:
+    - name: Wim Cuypers
+      orcid: 0000-0002-1895-3526
+      email: wim.cuypers@uantwerpen.be
+      affiliations:
+        - name: University of Antwerp
+          url: https://www.uantwerpen.be/en
+---
 # The Salmonella Concord mystery: reconstructing transmission across borders
 
 Several young patients in Ethiopia presented with severe gastrointestinal disease in the early 200's. Stool cultures yielded *Salmonella*, raising concerns about a possible localized outbreak. At first glance, the cases appeared epidemiologically linked: similar symptoms, similar age group, and temporal proximity.
