@@ -549,7 +549,7 @@ Share via <strong>GitHub</strong>, <strong>GitLab</strong>, or <strong>Zenodo</s
 <h3 data-number="12.4.2" class="anchored" data-anchor-id="pipeline-overview"><span class="header-section-number">12.4.2</span> Pipeline overview</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="content/assets/pipeline_overview.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Overview of the RiFA pipeline"><img src="content/assets/pipeline_overview.jpeg" class="img-fluid figure-img" alt="Overview of the RiFA pipeline"></a></p>
+<p><a href="../assets/pipeline_overview.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Overview of the RiFA pipeline"><img src="../assets/pipeline_overview.jpeg" class="img-fluid figure-img" alt="Overview of the RiFA pipeline"></a></p>
 <figcaption>Overview of the RiFA pipeline</figcaption>
 </figure>
 </div>
@@ -563,15 +563,13 @@ Share via <strong>GitHub</strong>, <strong>GitLab</strong>, or <strong>Zenodo</s
 <li><p>Clone the repository:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/BettyAC/RiFA.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> RiFA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Create and run the environment</p></li>
-</ol>
+<li><p>Create and run the environment</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and activate the environment (file name may vary — check README)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rifa-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="4" type="1">
-<li>Run the pipeline</li>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rifa-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Run the pipeline</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--use-conda</span> <span class="at">--cores</span> 8 <span class="at">--rerun-incomplete</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--use-conda</span> <span class="at">--cores</span> 8 <span class="at">--rerun-incomplete</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Expected Outputs:</p>
 <ul>
 <li>Annotated variant table (CSV/TSV) with resistance mutations, allele frequencies, and quality metrics</li>
