@@ -1,3 +1,13 @@
+---
+author:
+    - name: Wim Cuypers
+      orcid: 0000-0002-1895-3526
+      email: wim.cuypers@uantwerpen.be
+      affiliations:
+        - name: University of Antwerp
+          url: https://www.uantwerpen.be/en
+---
+
 # The *Salmonella* Concord mystery: antimicrobial resistance (AMR)
 
 In the previous chapter, we focused on phylogenetic inference and outbreak investigation. In this chapter, we shift our attention to the genomic features of the *Salmonella* Concord isolates, with particular emphasis on antimicrobial resistance (AMR).
