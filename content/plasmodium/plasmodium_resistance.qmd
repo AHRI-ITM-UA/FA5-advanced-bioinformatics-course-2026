@@ -67,7 +67,7 @@ RiFA focuses on key resistance-associated loci:
 
 ### Pipeline overview 
 
-![Overview of the RiFA pipeline](content/assets/pipeline_overview.jpeg)
+![Overview of the RiFA pipeline](../assets/pipeline_overview.jpeg)
 
 ### Getting Started
 
@@ -76,21 +76,25 @@ RiFA focuses on key resistance-associated loci:
    → Read the full **README**, installation guide, and example usage.
 
 2. Clone the repository:
+
    ```bash
    git clone https://github.com/BettyAC/RiFA.git
    cd RiFA
    ```
 
 3. Create and run the environment
-  ```bash
-  # Create and activate the environment (file name may vary — check README)
-  conda env create -f environment.yml
-  conda activate rifa-env
-  ```
+
+    ```bash
+    # Create and activate the environment (file name may vary — check README)
+    conda env create -f environment.yml
+    conda activate rifa-env
+    ```
+
 4. Run the pipeline
-  ```bash
-  snakemake --use-conda --cores 8 --rerun-incomplete
-  ```
+
+    ```bash
+    snakemake --use-conda --cores 8 --rerun-incomplete
+    ```
 
 Expected Outputs:
 
