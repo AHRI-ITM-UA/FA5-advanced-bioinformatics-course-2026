@@ -78,17 +78,18 @@ RiFA focuses on key resistance-associated loci:
    ```
 
 3. Create and run the environment
-```bash
-# Create and activate the environment (file name may vary — check README)
-conda env create -f environment.yml
-conda activate rifa-env
-```
+  ```bash
+  # Create and activate the environment (file name may vary — check README)
+  conda env create -f environment.yml
+  conda activate rifa-env
+  ```
 4. Run the pipeline
-```bash
-snakemake --use-conda --cores 8 --rerun-incomplete
-```
+  ```bash
+  snakemake --use-conda --cores 8 --rerun-incomplete
+  ```
 
-Expected Outputs
+Expected Outputs:
+
 - Annotated variant table (CSV/TSV) with resistance mutations, allele frequencies, and quality metrics
 - MultiQC report summarizing QC and coverage
 - Visual summaries (coverage plots, mutation heatmaps, frequency bar charts)
