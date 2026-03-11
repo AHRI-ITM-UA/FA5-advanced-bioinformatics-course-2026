@@ -2,54 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/index.html</loc>
-    <lastmod>2026-03-08T19:28:31.683Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.286Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/refresher.html</loc>
-    <lastmod>2026-03-08T19:28:31.682Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.285Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/genomics/pipeline-overview.html</loc>
-    <lastmod>2026-03-08T19:28:31.681Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.284Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/genomics/tools-and-formats.html</loc>
-    <lastmod>2026-03-08T19:28:31.681Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.284Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/genomics/qc.html</loc>
-    <lastmod>2026-03-08T19:28:31.681Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.284Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/genomics/mapping.html</loc>
-    <lastmod>2026-03-08T19:28:31.681Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.284Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/genomics/variant-calling.html</loc>
-    <lastmod>2026-03-08T19:28:31.681Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.284Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/genomics/annotation.html</loc>
-    <lastmod>2026-03-08T19:28:31.679Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.283Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/phylogenomics/phylogenetics_exercise.html</loc>
-    <lastmod>2026-03-08T19:28:31.682Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.285Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/bacterial_genomics/outbreak_phylo.html</loc>
-    <lastmod>2026-03-08T19:28:31.667Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.271Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/bacterial_genomics/assembly_AMR.html</loc>
-    <lastmod>2026-03-08T19:28:31.665Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.270Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/chimera/snp_mapping_chimera_alphafold.html</loc>
-    <lastmod>2026-03-08T19:28:31.679Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.283Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/plasmodium/plasmodium_resistance.html</loc>
+    <lastmod>2026-03-11T07:59:17.285Z</lastmod>
   </url>
   <url>
     <loc>https://AHRI-ITM-UA.github.io/FA5-advanced-bioinformatics-course-2026/content/references.html</loc>
-    <lastmod>2026-03-08T19:28:31.682Z</lastmod>
+    <lastmod>2026-03-11T07:59:17.285Z</lastmod>
   </url>
 </urlset>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Refresher and other resources – Pathogen genomics workshop</title>
+<title>12&nbsp; Automating Pipelines: RiFA – Resistance in Plasmodium falciparum Amplicon Sequences – Pathogen genomics workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,53 +20,68 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../content/genomics/pipeline-overview.html" rel="next">
-<link href="../index.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2418816cb7aa1a900dcc46a169108a2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-409e9ce872a8606aafcf920a7ec6082e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-2418816cb7aa1a900dcc46a169108a2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../content/references.html" rel="next">
+<link href="../../content/chimera/snp_mapping_chimera_alphafold.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2418816cb7aa1a900dcc46a169108a2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-409e9ce872a8606aafcf920a7ec6082e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-2418816cb7aa1a900dcc46a169108a2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -269,7 +284,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/refresher.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Refresher and other resources</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/plasmodium/plasmodium_resistance.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Automating Pipelines: RiFA – Resistance in <em>Plasmodium falciparum</em> Amplicon Sequences</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -284,7 +299,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Pathogen genomics workshop</a> 
+      <a href="../../">Pathogen genomics workshop</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -305,13 +320,13 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/refresher.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../content/refresher.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Refresher and other resources</span></span></a>
   </div>
 </li>
@@ -326,37 +341,37 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/pipeline-overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/genomics/pipeline-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/tools-and-formats.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/genomics/tools-and-formats.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bioinformatics tools and file formats</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/qc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/genomics/qc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quality control and trimming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/mapping.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/genomics/mapping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Alignment to reference genome</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/variant-calling.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/genomics/variant-calling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variant calling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/genomics/annotation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/genomics/annotation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variant annotation</span></span></a>
   </div>
 </li>
@@ -364,7 +379,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/phylogenomics/phylogenetics_exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/phylogenomics/phylogenetics_exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Genomics &amp; phylogenomics exercise</span></span></a>
   </div>
 </li>
@@ -379,13 +394,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bacterial_genomics/outbreak_phylo.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/bacterial_genomics/outbreak_phylo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The Salmonella Concord mystery: reconstructing transmission across borders</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/bacterial_genomics/assembly_AMR.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/bacterial_genomics/assembly_AMR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The <em>Salmonella</em> Concord mystery: antimicrobial resistance (AMR)</span></span></a>
   </div>
 </li>
@@ -393,19 +408,19 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/chimera/snp_mapping_chimera_alphafold.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/plasmodium/plasmodium_resistance.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/plasmodium/plasmodium_resistance.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Automating Pipelines: RiFA – Resistance in <em>Plasmodium falciparum</em> Amplicon Sequences</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -419,11 +434,23 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#unix-command-line-and-bash-scripting" id="toc-unix-command-line-and-bash-scripting" class="nav-link active" data-scroll-target="#unix-command-line-and-bash-scripting"><span class="header-section-number">1.1</span> Unix command line and bash scripting</a></li>
-  <li><a href="#whole-genome-sequencing-pipelines" id="toc-whole-genome-sequencing-pipelines" class="nav-link" data-scroll-target="#whole-genome-sequencing-pipelines"><span class="header-section-number">1.2</span> Whole-genome sequencing pipelines</a></li>
-  <li><a href="#computational-thinking-best-practices-and-reproducibility" id="toc-computational-thinking-best-practices-and-reproducibility" class="nav-link" data-scroll-target="#computational-thinking-best-practices-and-reproducibility"><span class="header-section-number">1.3</span> Computational thinking, best practices and reproducibility</a></li>
+  <li><a href="#what-are-workflow-pipelines" id="toc-what-are-workflow-pipelines" class="nav-link active" data-scroll-target="#what-are-workflow-pipelines"><span class="header-section-number">12.1</span> What Are Workflow Pipelines?</a>
+  <ul>
+  <li><a href="#why-pipelines-matter-in-bioinformatics" id="toc-why-pipelines-matter-in-bioinformatics" class="nav-link" data-scroll-target="#why-pipelines-matter-in-bioinformatics"><span class="header-section-number">12.1.1</span> Why Pipelines Matter in Bioinformatics</a></li>
+  <li><a href="#classic-amplicon-sequencing-pipeline-example" id="toc-classic-amplicon-sequencing-pipeline-example" class="nav-link" data-scroll-target="#classic-amplicon-sequencing-pipeline-example"><span class="header-section-number">12.1.2</span> Classic Amplicon Sequencing Pipeline Example</a></li>
+  </ul></li>
+  <li><a href="#popular-workflow-managers-engines" id="toc-popular-workflow-managers-engines" class="nav-link" data-scroll-target="#popular-workflow-managers-engines"><span class="header-section-number">12.2</span> Popular Workflow Managers / Engines</a>
+  <ul>
+  <li><a href="#where-can-pipelines-run" id="toc-where-can-pipelines-run" class="nav-link" data-scroll-target="#where-can-pipelines-run"><span class="header-section-number">12.2.1</span> Where Can Pipelines Run?</a></li>
+  </ul></li>
+  <li><a href="#key-benefits-of-workflow-pipelines" id="toc-key-benefits-of-workflow-pipelines" class="nav-link" data-scroll-target="#key-benefits-of-workflow-pipelines"><span class="header-section-number">12.3</span> Key Benefits of Workflow Pipelines</a></li>
+  <li><a href="#hands-on-exercise-run-the-rifa-pipeline" id="toc-hands-on-exercise-run-the-rifa-pipeline" class="nav-link" data-scroll-target="#hands-on-exercise-run-the-rifa-pipeline"><span class="header-section-number">12.4</span> Hands-on Exercise: Run the RiFA Pipeline</a>
+  <ul>
+  <li><a href="#target-genes-in-rifa" id="toc-target-genes-in-rifa" class="nav-link" data-scroll-target="#target-genes-in-rifa"><span class="header-section-number">12.4.1</span> Target Genes in RiFA</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">12.4.2</span> Getting Started</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/refresher.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/plasmodium/plasmodium_resistance.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -431,7 +458,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Refresher and other resources</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Automating Pipelines: RiFA – Resistance in <em>Plasmodium falciparum</em> Amplicon Sequences</span></h1>
 </div>
 
 
@@ -448,73 +475,95 @@ div.csl-indent {
 </header>
 
 
-<p>On this page we link to a few resources on what the pre-requisite knowledge for the rest of this course.</p>
-<section id="unix-command-line-and-bash-scripting" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="unix-command-line-and-bash-scripting"><span class="header-section-number">1.1</span> Unix command line and bash scripting</h2>
+<p><strong>RiFA</strong> (Resistance in Falciparum Amplicon) is a bioinformatics workflow designed to detect <strong>drug resistance mutations</strong> in targeted amplicon sequencing data from <em>Plasmodium falciparum</em>, the primary cause of severe malaria. It focuses on key genes linked to resistance against major antimalarial drugs such as artemisinin, chloroquine, sulfadoxine-pyrimethamine, and others.</p>
+<p>This pipeline automates processing of amplicon reads → quality control → alignment → variant calling → resistance mutation annotation — making it efficient, reproducible, and scalable for molecular surveillance of antimalarial resistance.</p>
+<section id="what-are-workflow-pipelines" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="what-are-workflow-pipelines"><span class="header-section-number">12.1</span> What Are Workflow Pipelines?</h2>
+<p>A <strong>workflow pipeline</strong> is a sequence of automated computational steps that process and analyze data in a structured, reproducible way.</p>
+<section id="why-pipelines-matter-in-bioinformatics" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="why-pipelines-matter-in-bioinformatics"><span class="header-section-number">12.1.1</span> Why Pipelines Matter in Bioinformatics</h3>
 <ul>
-<li><a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html">Introduction to the CLI</a></li>
+<li>Efficiently handle <strong>large datasets</strong> (hundreds/thousands of samples)</li>
+<li>Minimize <strong>manual errors</strong> and inconsistencies</li>
+<li>Enable <strong>reproducible research</strong> — run the same analysis tomorrow or years later with identical results</li>
+<li>Automate <strong>complex multi-step analyses</strong> that would otherwise be time-consuming</li>
 </ul>
-<p>Be sure to check out the various other resources linked on <a href="https://pmoris.github.io/FiMAB-bioinformatics/content/unix/1-unix-intro.html#resources">this page</a>.</p>
-<p>For a more interactive learning experience, you can try <a href="https://sandbox.bio/">https://sandbox.bio/</a>.</p>
 </section>
-<section id="whole-genome-sequencing-pipelines" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="whole-genome-sequencing-pipelines"><span class="header-section-number">1.2</span> Whole-genome sequencing pipelines</h2>
-<p>We have collected a number of related resources below, which have served as an inspiration while preparing our own course. We hope they’ll be useful to you for further learning as well.</p>
-<ul>
-<li><a href="https://genomics.sschmeier.com/">https://genomics.sschmeier.com/</a></li>
-<li><a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/">https://training.galaxyproject.org/training-material/topics/sequence-analysis/</a></li>
-<li><a href="https://mbite.mdhs.unimelb.edu.au/tutorials/variant_calling_gatk1/variant_calling_gatk1/">https://mbite.mdhs.unimelb.edu.au/tutorials/variant_calling_gatk1/variant_calling_gatk1/</a></li>
-<li><a href="https://speciationgenomics.github.io/">https://speciationgenomics.github.io/</a></li>
-<li><a href="https://ngs-course.readthedocs.io/en/praha-november-2023/">https://ngs-course.readthedocs.io/en/praha-november-2023/</a></li>
-<li><a href="https://people.duke.edu/~ccc14/duke-hts-2018/index.html">https://people.duke.edu/~ccc14/duke-hts-2018/index.html</a></li>
-<li><a href="https://biomedicalhub.github.io/genomics/">https://biomedicalhub.github.io/genomics/</a></li>
-<li><a href="https://github.com/hbctraining/main?tab=readme-ov-file#current-topics-in-bioinformatics-series">https://github.com/hbctraining/main?tab=readme-ov-file#current-topics-in-bioinformatics-series</a></li>
-<li><a href="https://datacarpentry.org/wrangling-genomics/">https://datacarpentry.org/wrangling-genomics/</a></li>
-<li><a href="https://mmbdtp.github.io/modules/sequencing/week-2-programme/">https://mmbdtp.github.io/modules/sequencing/week-2-programme/</a></li>
-<li><a href="https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html">https://eriqande.github.io/eca-bioinf-handbook/overview-of-bioinformatic-analyses.html</a></li>
-<li><a href="https://rnnh.github.io/bioinfo-notebook/#contents">https://rnnh.github.io/bioinfo-notebook/#contents</a></li>
-<li><a href="https://learn.gencore.bio.nyu.edu/">https://learn.gencore.bio.nyu.edu/</a></li>
-<li><a href="https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html">https://conmeehan.github.io/PathogenDataCourse/PathogenCourse.html</a></li>
-</ul>
-<p>The video below by Tobias Rausch @ EMBL-EBI <span class="citation" data-cites="rausch_EMBL-EBI_2022">(<a href="references.html#ref-rausch_EMBL-EBI_2022" role="doc-biblioref">Rausch 2022</a>)</span> also provides an excellent overview of various topics that come up in genomic variant calling, but it is broader in scope than just AmpliSeq or molecular surveillance of parasites:</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/zO9WCOaq3aQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="classic-amplicon-sequencing-pipeline-example" class="level3" data-number="12.1.2">
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="classic-amplicon-sequencing-pipeline-example"><span class="header-section-number">12.1.2</span> Classic Amplicon Sequencing Pipeline Example</h3>
 </section>
-<section id="computational-thinking-best-practices-and-reproducibility" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="computational-thinking-best-practices-and-reproducibility"><span class="header-section-number">1.3</span> Computational thinking, best practices and reproducibility</h2>
+</section>
+<section id="popular-workflow-managers-engines" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="popular-workflow-managers-engines"><span class="header-section-number">12.2</span> Popular Workflow Managers / Engines</h2>
 <ul>
-<li>Track software versions</li>
-<li>Use “good” file and variable names</li>
-<li>Keep track of order of analysis and how each file was produced</li>
-<li>Structure scripts/data in clear directories</li>
-<li>Avoid manually tweaking things</li>
-<li>Add readmes and/or comments for complex steps</li>
-<li>(Track/version your own code on git)</li>
-<li>(for pipelining / complex scripts: try everything on small test data before starting a long-running analysis)</li>
-<li>(general bash safety / best practices - no sudo, doublecheck every rm and mv command, etc.)</li>
+<li><strong>Snakemake</strong> — Python-based, rule-based, great for dependency management</li>
+<li><strong>Nextflow</strong> — DSL-based, highly portable (local, HPC, cloud)</li>
 </ul>
-<p>Further reading:</p>
+<p>Workflow managers help you:</p>
 <ul>
-<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285">Ten Simple Rules for Reproducible Computational Research</a>:</p></li>
-<li><p><a href="https://link.springer.com/article/10.1186/s13059-015-0850-7">Five selfish reasons to work reproducibly</a></p></li>
-<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005871">Ten simple rules for biologists learning to program</a></p></li>
-<li><p><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008645">Ten simple rules for getting started with command-line bioinformatics</a></p></li>
-<li><p><a href="https://openscpca.readthedocs.io/en/stable/ensuring-repro/managing-software/">Managing software dependencies</a></p></li>
-<li><p>Project folder organisation:</p>
-<ul>
-<li><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424">A Quick Guide to Organizing Computational Biology Projects</a></li>
-<li><a href="https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/organizing-your-project.html">Organizing your project by The Johns Hopkins Data Science Lab</a></li>
-<li><a href="https://alexanderlabwhoi.github.io/BVCNReproducibility/02/2/organizing.html">BVCN Reproducibility Challenge by The Reproducibility Challenge Team</a></li>
-</ul></li>
-<li><p><a href="https://rdatatoolbox.github.io/">Reproducible Research in Computational Ecology</a> - covers a wide array of related topics</p></li>
-<li><p><a href="https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/">Bioinformatics for the terrified</a></p></li>
+<li>Define clear <strong>steps</strong> and their <strong>dependencies</strong></li>
+<li>Execute tasks automatically in the <strong>correct order</strong></li>
+<li><strong>Parallelize</strong> jobs across cores / nodes to accelerate analysis</li>
+<li>Handle <strong>software environments</strong> via Conda, Docker, or Singularity</li>
 </ul>
+<section id="where-can-pipelines-run" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="where-can-pipelines-run"><span class="header-section-number">12.2.1</span> Where Can Pipelines Run?</h3>
+<ul>
+<li>Personal laptop / workstation</li>
+<li><strong>High-Performance Computing</strong> (HPC) clusters</li>
+<li>Cloud platforms (AWS Batch, Google Cloud Life Sciences, Azure Batch)</li>
+</ul>
+</section>
+</section>
+<section id="key-benefits-of-workflow-pipelines" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="key-benefits-of-workflow-pipelines"><span class="header-section-number">12.3</span> Key Benefits of Workflow Pipelines</h2>
+<p><strong>Efficiency</strong><br>
+Automates repetitive tasks → frees researchers for interpretation rather than clicking.</p>
+<p><strong>Reproducibility</strong><br>
+Version-controlled pipelines ensure others (or future you) can reproduce results exactly.</p>
+<p><strong>Scalability</strong><br>
+Process 10 samples or 10,000 samples with minimal changes.</p>
+<p><strong>Collaboration &amp; Sharing</strong><br>
+Share via <strong>GitHub</strong>, <strong>GitLab</strong>, or <strong>Zenodo</strong> → colleagues worldwide can reuse, adapt, and cite your work.</p>
+</section>
+<section id="hands-on-exercise-run-the-rifa-pipeline" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="hands-on-exercise-run-the-rifa-pipeline"><span class="header-section-number">12.4</span> Hands-on Exercise: Run the RiFA Pipeline</h2>
+<p>In this exercise, you will use the <strong>RiFA pipeline</strong> to identify drug resistance mutations in <em>Plasmodium falciparum</em> amplicon sequences.</p>
+<section id="target-genes-in-rifa" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="target-genes-in-rifa"><span class="header-section-number">12.4.1</span> Target Genes in RiFA</h3>
+<p>RiFA focuses on key resistance-associated loci:</p>
+<ul>
+<li><em>pfcrt</em> — chloroquine resistance transporter</li>
+<li><em>pfmdr1</em> — multidrug resistance protein 1</li>
+<li><em>pfk13</em> (kelch13) — artemisinin partial resistance</li>
+<li><em>pfdhfr</em> — pyrimethamine resistance</li>
+<li><em>pfdhps</em> — sulfadoxine resistance</li>
+<li><em>cytb</em> — atovaquone resistance (cytochrome b)</li>
+</ul>
+</section>
+<section id="getting-started" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">12.4.2</span> Getting Started</h3>
+<ol type="1">
+<li><p>Visit the official repository:<br>
+<strong><a href="https://github.com/BettyAC/RiFA">https://github.com/BettyAC/RiFA</a></strong><br>
+→ Read the full <strong>README</strong>, installation guide, and example usage.</p></li>
+<li><p>Clone the repository:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/BettyAC/RiFA.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> RiFA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Create and run the environment</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and activate the environment (file name may vary — check README)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rifa-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li>Run the pipeline</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--use-conda</span> <span class="at">--cores</span> 8 <span class="at">--rerun-incomplete</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected Outputs - Annotated variant table (CSV/TSV) with resistance mutations, allele frequencies, and quality metrics - MultiQC report summarizing QC and coverage - Visual summaries (coverage plots, mutation heatmaps, frequency bar charts) - Resistance profile summary per sample</p>
+<p>Note: This pipeline is part of efforts like the Ethiopian Malaria Genomics Network (EMAGEN) and similar surveillance projects. Always check the repository for the latest version, example datasets, and any required reference files.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-rausch_EMBL-EBI_2022" class="csl-entry" role="listitem">
-Rausch, Tobias. 2022. <span>“Methods in Genomic Variant Calling.”</span> EMBL-EBI. <a href="https://doi.org/10.6019/TOL.GenomicVariantCalling-w.2022.00001.1 ">https://doi.org/10.6019/TOL.GenomicVariantCalling-w.2022.00001.1 </a>.
-</div>
-</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -933,13 +982,13 @@ Rausch, Tobias. 2022. <span>“Methods in Genomic Variant Calling.”</span> EMB
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="About">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About</span>
+      <a href="../../content/chimera/snp_mapping_chimera_alphafold.html" class="pagination-link" aria-label="Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mapping SNPs onto 3D Protein Structures with Chimera and AlphaFold</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/genomics/pipeline-overview.html" class="pagination-link" aria-label="Pipeline overview">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pipeline overview</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../content/references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -951,7 +1000,7 @@ Rausch, Tobias. 2022. <span>“Methods in Genomic Variant Calling.”</span> EMB
 </div>   
     <div class="nav-footer-center">
 <p>Source available on <a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026">GitHub</a></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/refresher.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/plasmodium/plasmodium_resistance.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

@@ -749,6 +749,56 @@
     ]
   },
   {
+    "objectID": "content/plasmodium/plasmodium_resistance.html",
+    "href": "content/plasmodium/plasmodium_resistance.html",
+    "title": "12  Automating Pipelines: RiFA – Resistance in Plasmodium falciparum Amplicon Sequences",
+    "section": "",
+    "text": "12.1 What Are Workflow Pipelines?\nRiFA (Resistance in Falciparum Amplicon) is a bioinformatics workflow designed to detect drug resistance mutations in targeted amplicon sequencing data from Plasmodium falciparum, the primary cause of severe malaria. It focuses on key genes linked to resistance against major antimalarial drugs such as artemisinin, chloroquine, sulfadoxine-pyrimethamine, and others.\nThis pipeline automates processing of amplicon reads → quality control → alignment → variant calling → resistance mutation annotation — making it efficient, reproducible, and scalable for molecular surveillance of antimalarial resistance.\nA workflow pipeline is a sequence of automated computational steps that process and analyze data in a structured, reproducible way.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Automating Pipelines: RiFA – Resistance in *Plasmodium falciparum* Amplicon Sequences</span>"
+    ]
+  },
+  {
+    "objectID": "content/plasmodium/plasmodium_resistance.html#what-are-workflow-pipelines",
+    "href": "content/plasmodium/plasmodium_resistance.html#what-are-workflow-pipelines",
+    "title": "12  Automating Pipelines: RiFA – Resistance in Plasmodium falciparum Amplicon Sequences",
+    "section": "",
+    "text": "12.1.1 Why Pipelines Matter in Bioinformatics\n\nEfficiently handle large datasets (hundreds/thousands of samples)\nMinimize manual errors and inconsistencies\nEnable reproducible research — run the same analysis tomorrow or years later with identical results\nAutomate complex multi-step analyses that would otherwise be time-consuming\n\n\n\n12.1.2 Classic Amplicon Sequencing Pipeline Example",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Automating Pipelines: RiFA – Resistance in *Plasmodium falciparum* Amplicon Sequences</span>"
+    ]
+  },
+  {
+    "objectID": "content/plasmodium/plasmodium_resistance.html#popular-workflow-managers-engines",
+    "href": "content/plasmodium/plasmodium_resistance.html#popular-workflow-managers-engines",
+    "title": "12  Automating Pipelines: RiFA – Resistance in Plasmodium falciparum Amplicon Sequences",
+    "section": "12.2 Popular Workflow Managers / Engines",
+    "text": "12.2 Popular Workflow Managers / Engines\n\nSnakemake — Python-based, rule-based, great for dependency management\nNextflow — DSL-based, highly portable (local, HPC, cloud)\n\nWorkflow managers help you:\n\nDefine clear steps and their dependencies\nExecute tasks automatically in the correct order\nParallelize jobs across cores / nodes to accelerate analysis\nHandle software environments via Conda, Docker, or Singularity\n\n\n12.2.1 Where Can Pipelines Run?\n\nPersonal laptop / workstation\nHigh-Performance Computing (HPC) clusters\nCloud platforms (AWS Batch, Google Cloud Life Sciences, Azure Batch)",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Automating Pipelines: RiFA – Resistance in *Plasmodium falciparum* Amplicon Sequences</span>"
+    ]
+  },
+  {
+    "objectID": "content/plasmodium/plasmodium_resistance.html#key-benefits-of-workflow-pipelines",
+    "href": "content/plasmodium/plasmodium_resistance.html#key-benefits-of-workflow-pipelines",
+    "title": "12  Automating Pipelines: RiFA – Resistance in Plasmodium falciparum Amplicon Sequences",
+    "section": "12.3 Key Benefits of Workflow Pipelines",
+    "text": "12.3 Key Benefits of Workflow Pipelines\nEfficiency\nAutomates repetitive tasks → frees researchers for interpretation rather than clicking.\nReproducibility\nVersion-controlled pipelines ensure others (or future you) can reproduce results exactly.\nScalability\nProcess 10 samples or 10,000 samples with minimal changes.\nCollaboration & Sharing\nShare via GitHub, GitLab, or Zenodo → colleagues worldwide can reuse, adapt, and cite your work.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Automating Pipelines: RiFA – Resistance in *Plasmodium falciparum* Amplicon Sequences</span>"
+    ]
+  },
+  {
+    "objectID": "content/plasmodium/plasmodium_resistance.html#hands-on-exercise-run-the-rifa-pipeline",
+    "href": "content/plasmodium/plasmodium_resistance.html#hands-on-exercise-run-the-rifa-pipeline",
+    "title": "12  Automating Pipelines: RiFA – Resistance in Plasmodium falciparum Amplicon Sequences",
+    "section": "12.4 Hands-on Exercise: Run the RiFA Pipeline",
+    "text": "12.4 Hands-on Exercise: Run the RiFA Pipeline\nIn this exercise, you will use the RiFA pipeline to identify drug resistance mutations in Plasmodium falciparum amplicon sequences.\n\n12.4.1 Target Genes in RiFA\nRiFA focuses on key resistance-associated loci:\n\npfcrt — chloroquine resistance transporter\npfmdr1 — multidrug resistance protein 1\npfk13 (kelch13) — artemisinin partial resistance\npfdhfr — pyrimethamine resistance\npfdhps — sulfadoxine resistance\ncytb — atovaquone resistance (cytochrome b)\n\n\n\n12.4.2 Getting Started\n\nVisit the official repository:\nhttps://github.com/BettyAC/RiFA\n→ Read the full README, installation guide, and example usage.\nClone the repository:\ngit clone https://github.com/BettyAC/RiFA.git\ncd RiFA\nCreate and run the environment\n\n# Create and activate the environment (file name may vary — check README)\nconda env create -f environment.yml\nconda activate rifa-env\n\nRun the pipeline\n\nsnakemake --use-conda --cores 8 --rerun-incomplete\nExpected Outputs - Annotated variant table (CSV/TSV) with resistance mutations, allele frequencies, and quality metrics - MultiQC report summarizing QC and coverage - Visual summaries (coverage plots, mutation heatmaps, frequency bar charts) - Resistance profile summary per sample\nNote: This pipeline is part of efforts like the Ethiopian Malaria Genomics Network (EMAGEN) and similar surveillance projects. Always check the repository for the latest version, example datasets, and any required reference files.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Automating Pipelines: RiFA – Resistance in *Plasmodium falciparum* Amplicon Sequences</span>"
+    ]
+  },
+  {
     "objectID": "content/references.html",
     "href": "content/references.html",
     "title": "References",
