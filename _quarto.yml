@@ -79,6 +79,7 @@ book:
         - content/bacterial_genomics/outbreak_phylo.qmd
         - content/bacterial_genomics/assembly_AMR.qmd
     - content/chimera/snp_mapping_chimera_alphafold.qmd
+    - content/plasmodium/plasmodium_resistance.qmd
     - content/references.qmd
     # https://quarto.org/docs/books/book-structure.html#parts-appendices
     # parts can either be a stand-alone file with intro
