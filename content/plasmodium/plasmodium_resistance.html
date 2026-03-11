@@ -82,6 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-2418816cb7aa1a900dcc46a169108a2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-409e9ce872a8606aafcf920a7ec6082e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../site_libs/bootstrap/bootstrap-2418816cb7aa1a900dcc46a169108a2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -447,7 +450,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#hands-on-exercise-run-the-rifa-pipeline" id="toc-hands-on-exercise-run-the-rifa-pipeline" class="nav-link" data-scroll-target="#hands-on-exercise-run-the-rifa-pipeline"><span class="header-section-number">12.4</span> Hands-on Exercise: Run the RiFA Pipeline</a>
   <ul>
   <li><a href="#target-genes-in-rifa" id="toc-target-genes-in-rifa" class="nav-link" data-scroll-target="#target-genes-in-rifa"><span class="header-section-number">12.4.1</span> Target Genes in RiFA</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">12.4.2</span> Getting Started</a></li>
+  <li><a href="#pipeline-overview" id="toc-pipeline-overview" class="nav-link" data-scroll-target="#pipeline-overview"><span class="header-section-number">12.4.2</span> Pipeline overview</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">12.4.3</span> Getting Started</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/blob/main/content/plasmodium/plasmodium_resistance.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/AHRI-ITM-UA/FA5-advanced-bioinformatics-course-2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -541,8 +545,17 @@ Share via <strong>GitHub</strong>, <strong>GitLab</strong>, or <strong>Zenodo</s
 <li><em>cytb</em> — atovaquone resistance (cytochrome b)</li>
 </ul>
 </section>
-<section id="getting-started" class="level3" data-number="12.4.2">
-<h3 data-number="12.4.2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">12.4.2</span> Getting Started</h3>
+<section id="pipeline-overview" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="pipeline-overview"><span class="header-section-number">12.4.2</span> Pipeline overview</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="content/assets/pipeline_overview.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Overview of the RiFA pipeline"><img src="content/assets/pipeline_overview.jpeg" class="img-fluid figure-img" alt="Overview of the RiFA pipeline"></a></p>
+<figcaption>Overview of the RiFA pipeline</figcaption>
+</figure>
+</div>
+</section>
+<section id="getting-started" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">12.4.3</span> Getting Started</h3>
 <ol type="1">
 <li><p>Visit the official repository:<br>
 <strong><a href="https://github.com/BettyAC/RiFA">https://github.com/BettyAC/RiFA</a></strong><br>
@@ -1012,6 +1025,38 @@ Share via <strong>GitHub</strong>, <strong>GitLab</strong>, or <strong>Zenodo</s
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
