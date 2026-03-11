@@ -1,3 +1,13 @@
+---
+author:
+    - name: Bethlehem Adnew
+      orcid: 0000-0002-6108-9534
+      email: bethlehem.adnew@ahri.gov.et
+      affiliations:
+        - name: Armauer Hansen Research Institute
+          url: https://ahri.gov.et/
+---
+
 # Automating Pipelines: RiFA – Resistance in *Plasmodium falciparum* Amplicon Sequences
 
 **RiFA** (Resistance in Falciparum Amplicon) is a bioinformatics workflow designed to detect **drug resistance mutations** in targeted amplicon sequencing data from *Plasmodium falciparum*, the primary cause of severe malaria. It focuses on key genes linked to resistance against major antimalarial drugs such as artemisinin, chloroquine, sulfadoxine-pyrimethamine, and others.
